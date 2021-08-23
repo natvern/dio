@@ -1,0 +1,72 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+
+\usepackage{xcolor}
+\newcommand{\bluenote}[1]{\color{blue}{ \em #1 }\color{black}}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper, %letterpaper,
+ total={17cm,22.8cm},
+ margin=24mm,
+ top=22.4mm,
+ bottom=25.4mm
+ }
+ 
+% Times new roman
+\usepackage{mathptmx}
+
+\usepackage[T1]{fontenc}
+
+\thispagestyle{empty} 
+
+\setlength{\parindent}{0pt}
+
+
+\begin{document}
+
+\date{}
+
+\title{Draft Abstract}
+
+
+\maketitle 
+
+\section{Questions?}
+\begin{itemize}
+    \item Can a RL agent learn symbolically? 
+    \item How can a safe controller \cite{vnc20} ensure the safe deployment of RL in the physical world [Safe set property]?
+    \item Would a RL whose rewards are adapted to the safe sets given by the controller converge to the same safe sets? 
+\end{itemize}
+
+\section{What?}
+\begin{itemize}
+    \item Combining a car platooning safe controller w/ soft contraints and RL as to optimize the speed values that minimize the gap between vehicles
+    \item Exploring different combinations: 
+            \begin{itemize}
+                \item Constraining actions given the controller constraints as to ensure that safety properties are respected [efficiency + structure algorithm]
+                \item Adapt rewards given the controller constraints, as to investigate the convergence towards optimal policy [faster learning? can expect a crash before it happens?]
+            \end{itemize}
+    \item Controller to act as action governor of the RL agent.
+\end{itemize}
+\section{Why?}
+\begin{itemize}
+    \item From AI side: Importance of developing methods to make it acceptably safe to embed reinforcement learning controllers in
+          a real life physical environment.
+    \item From Controller side: Optimizing final values given in the range as to minimize gap. 
+\end{itemize}
+
+\section{How?}
+\textcolor{red}{???????}
+
+\bibliographystyle{unsrt}
+\bibliography{biblio.bib}
+
+\end{document}

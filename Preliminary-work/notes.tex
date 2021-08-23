@@ -1,0 +1,96 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+
+\usepackage{xcolor}
+\newcommand{\bluenote}[1]{\color{blue}{ \em #1 }\color{black}}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper, %letterpaper,
+ total={17cm,22.8cm},
+ margin=24mm,
+ top=22.4mm,
+ bottom=25.4mm
+ }
+ 
+% Times new roman
+\usepackage{mathptmx}
+
+\usepackage[T1]{fontenc}
+
+\thispagestyle{empty} 
+
+\setlength{\parindent}{0pt}
+
+
+\begin{document}
+
+\date{}
+
+\title{Random notes (for now)}
+
+
+\maketitle 
+
+\section{Neurosymbolic AI}
+Makes use of \textbf{Logical Neural Networks} i.e. neurons model a notion of weighted real-value logic. Combines DL and symbolic logic, basically bring domain-knowledge.
+
+\subsection{Logical Neural Networks \cite{riegel2020logical}}
+\begin{itemize}
+    \item LNN inference is deterministic and provably convergent in finite steps.
+    \item Every neuron represents an element in a clause [concept OR logical connective] w/ weights on the connecting edges. 
+    \item Network structure is compositional and modular. 
+\end{itemize}
+In practice, a LNN is a recurrent neural network w/ a 1-to-1 correspondence to a set of logical formulas in which evaluation = logical inference. A neuron activation function is constrained to 
+account for the truth functions of the logical operations they represent. The input is the initial truth value bounds for each of the neurons in the network. Additional input can represent queries. 
+Outputs are the final computed truth value bounds at one or more neurons (SAT?). \textcolor{blue}{The LNN graph pretty much looks like a syntax tree.} \newline
+All neurons return pairs of values in the range [0,1] representing lower and upper bounds on the truth values of their corresponding subformulas and propositions. They defined a threshold of truth. 
+Call NL = Neurons Logical connective and NP = neurons propositions. NL input is the output of neurons corresponding to their operands and have activation functions configured to match the connectives' truth functions [?].
+NP input is the output of neurons established as proofs of bounds on the propositions truth value and have activation function configured to aggregate the tightest such bounds. 
+
+\subsubsection{Activation functions for NL}
+i.e. min(x,y) for a real-valued conjunction. Basically, neural activation functions to accomodate the classical truth functions of logical connective. \textcolor{red}{Look into how they do it for FOL.} Only requirement is monoticity \textcolor{red}{[Why?]}. 
+Basically, conjunction and disjunction must increase monotonically with respect toi each operand and implication must decrease w/ respect to the antecedent and increase with respect to the consequent. 
+Doesn't necessarily require DeMorgan laws to hold.
+
+\subsubsection{Weighted real-valued logics}
+Real-valued logics, like Godel, Product and Lukasiewicz [Triangular norms]. They take the t-norm and the t-conorm and the residuum, defined as follows in Lukasiezcw. 
+\[
+F_\otimes(x,y) = max(0, x+y-1)
+\]
+\[
+F_\oplus(x,y) = min(1, x+y)
+\]
+For a weighted nonlinear logic, they define,
+\[
+f(x) = max(0, min(1, x))
+\]
+\[
+^\beta(x_1^{\otimes w_1} \otimes x_2^{\otimes w_2}) = f(\beta - w_1(1-x_1) + w_2(1-x_2))    
+\]
+
+The norms are obtained when all weights are equal to $\beta$ equal to 1. Not sure how the choice was made to interpret weights as the above. 
+
+\subsubsection{Activation functions for NP}
+Require activation functions that aggregate truth values found for the varous computations identified as proofs of the atom. 
+Different means to do so. (1) Return best bounds proven (2) Employ importance weighting via weighted nonlinear logic, substituting OR for max in the lower bound computation, 
+and AND for min in the upper bound.  
+
+\subsubsection{Experimenting}
+\textcolor{red}{To re-read. Was hard to understand the purpose? Though, there is an emphasis that less contradictions are learnt by the LNN relaxing axioms.}
+
+\section{Neurosymbolic AI: The 3rd Wave \cite{garcez2020neurosymbolic}}
+Why didn't I start with this..
+
+
+\bibliographystyle{unsrt}
+\bibliography{biblio.bib}
+
+\end{document}

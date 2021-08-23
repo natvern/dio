@@ -1,0 +1,143 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+
+\usepackage{xcolor}
+\newcommand{\bluenote}[1]{\color{blue}{ \em #1 }\color{black}}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper, %letterpaper,
+ total={17cm,22.8cm},
+ margin=24mm,
+ top=22.4mm,
+ bottom=25.4mm
+ }
+ 
+% Times new roman
+\usepackage{mathptmx}
+
+\usepackage[T1]{fontenc}
+
+\thispagestyle{empty} 
+
+\setlength{\parindent}{0pt}
+
+
+\author{%
+%  \fontsize{10}{12}\selectfont
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    Samar Rahmouni \\ srahmoun@andrew.cmu.edu
+  \end{minipage}
+  \and
+  %
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    Advisor: Prof. Giselle Reis \\ giselle@cmu.edu
+  \end{minipage}%
+  \vspace*{2ex}
+}
+
+
+\date{}
+
+\title{{\Large\sc Senior Thesis 2021-22\\[2ex]}{\LARGE\bf Abstract and Problem Statement\vspace*{3ex}}}
+
+
+\begin{document}
+
+\maketitle 
+
+
+Implementing autonomous agent controllers that can robustly and efficiently adapt to different dynamic
+and complex scenarios is still an open challenge in robotics and AI. For instance, it is a challenge that
+self-driving vehicles and humanoid robots face because of a continuously changing real-world. Thus, autonomous
+agents have to face multiple sources of stochasticity once deployed.
+Precisely, in the case of Reinforcement Learning, autonomous car trained by trial-and-error is bound to learn how to drive. 
+In practice, this cannot be an option, considering that the AI needs to crash to learn that crashing is not desirable. In other words, 
+actions that lead to crashing can only be learnt once the crash happens. This makes RL near to impossible to deploy in the real world. 
+We investigate both the security and the interpretability aspect of reinforcement learning in a cooperative adaptive cruise control inspired from \cite{vnc20},
+in the aim of finding how formal security frameworks can guide the representation, robustness and extrapolation of knowledge in Reinforcement
+Learning agents. 
+
+\section{Problem Statement}
+Implementing a robust adaptive controller that is effective in terms of precision, time, and quality of decision
+when facing dynamic and uncertain scenarios, has always been a central challenge in AI and robotics.
+As autonomous cars are deployed, IoT is popularized, and human-robot interactions are more complex, we
+are more and more confronted with the need for robotic agents that can effectively and continually adapt
+to their surroundings, not only in simulation, but also in practice, when deployed as a cyber-physical system. 
+Since we are unable to provide a repertoire of all possible scenarios and actions,
+our agents need to be able to autonomously predict and adapt to new changes. RL is an approach that
+supports developing these capabilities, it is also the solution that AlphaGo, Deepmind AlphaStar, and OpenAI Five have
+adopted \cite{li2019reinforcement} and found success in. 
+However, as RL is a trial-and-error process, a car trained using RL is bound to crash to learn not to crash again. Safe Reinforcement Learning is then crucial 
+to investigate in order to be able to deploy it in larger scales, but also out of simulation. 
+
+\medskip
+
+One of the many ways, safety has been approached is by formalization and symbolic reasoning. 
+In the case of artificial intelligence, recent work propose Neurosymbolic integration. 
+Neurosymbolic integration has been an ongoing work in the last years towards a combination of Deep Learning and Symbolic Reasoning.
+The work has been a response to critics of DL, precisely, the lack of formal semantics and intuitive explanation and the lack of expert knowledge towards guiding machine learning models. 
+Key questions the field targets are identifying the necessary and sufficient building blocks of AI \cite{garcez2020neurosymbolic}, namely, how can we provide the semantics of knowledge, 
+and work towards meta-learning? Meta-learning in reinforcement learning is the problem of learning-to-learn, which is about efficiently
+adapting a learned policy to conditions and tasks that were not encountered in the past. In RL, metalearning
+involves adapting the learning parameters, balancing exploration and exploitation to direct the
+agent interaction \cite{gupta_meta-reinforcement_2018,schweighofer_meta-learning_2003}. Meta-Learning is a central problem in AI, since an agent that can solve more
+and more problems it has not seen before, approaches the ideal of a general-purpose AI. \newline
+Current Neurosymbolic AI trends are concerned with knowledge representation and reasoning, namely, they investigate computational-logic systems, 
+and representation to precede learning in order to provide some form of incremental update, e.g. a meta-network to group two sub-neural networks. \cite{Besold2017NeuralSymbolicLA}
+This leads to neurosymbolic AI finding various applications including vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
+vision analogy-making \cite{Reed2015DeepVA}, or learning communication protocols \cite{Foerster2016LearningTC}.
+However, such representation has not been yet investigated in tabular reinforcement learning algorithms. Precisely, the problem of knowledge extraction and interpretability of RL architecture is yet to be tackled. 
+Approches that can be considered include state representation in the form of classical planning and ways to build hybrid architecture to include a symbolic module. 
+
+\medskip
+
+
+
+In the following thesis, we investigate different ways formal methods can be used in an adaptive cruise control scenario. Precisely, we look into a combination of Reinforcement Learning
+and Symbolic Reasoning that allow us to ensure given safety properties, i.e. a Safe RL architecture. 
+
+\medskip
+
+
+The problem of safe reinforcement learning has been approached in previous work \cite{Garca2015ACS} in two ways. 
+
+First was changing the optimization criteria \cite{rockafellar2000}, precisely by incorporating risk into the performance of the policy.
+Namely, either considering the worst case scenario and constraining on it, reducing the variance to be more sensitive or applying constraints i.e. only update the policy if the action is in a safe set. 
+This does not however guarantee safety, but tends to minimize the probability of risk, hence not allowing RL systems to be deployed in the physical world. 
+Second was to consider the exploration process, either by incorporating external knowledge i.e. learning from demonstration \cite{Siebel2007EvolutionaryRL} or adopting a risk directed exploration \cite{law2005}. These approaches can be considered rigid, 
+as requiring more data and expert knowledge that needs to be proven safe and sound, or in the latter, decreasing the efficiency and requiring more time for the learning process. 
+In particular, in these previous two approaches, work that makes use of formal security frameworks is yet to be investigated. 
+
+\medskip
+
+Some of the more recent work that does investigate a hybrid architecture (i.e. RL and symbolic reasoning) makes use of
+set-theoretic techniques and constraint satisfaction problems to optimize from the constraints \cite{Li2021SafeRL}, or proposes a reactive system called a shield \cite{alshiekh2017} to either constraint the actions given by the environment or adapt them once the RL module chooses one. 
+In both cases, the added safety controller is described by its specifications, rather than being an independent existing controller. 
+
+\medskip
+We propose two ways to combine the controller specified in \cite{vnc20} and Reinforcement Learning in order to ensure safety properties. 
+(1) Similar to the previous work, given the range of safe speeds the controller returns, we investigate the use of  RL in finding the best value that minimizes the gap between the vehicles. 
+(2) Given the safety sets given by the controller, we are able to adapt the rewards, i.e. an action that leads to crashing can be punished before the crashing happens, hence investigating whether the safety sets learnt
+by the RL agent converges to those given by the controller. 
+
+Precisely, the first part highlights the use of RL in optimizing a safe controller, while formally ensuring the safety properties. The second part is at the aim of answering
+whether a formal reward system inspired from a safe controller can either minimizes risks or ensure the convergence of safety. 
+However, towards answering both these questions, the symbolic reasoning of Reinforcement Learning i.e. in the way neurosymbolic AI is investigated, needs to be formalized. 
+
+
+\bibliographystyle{unsrt}
+\bibliography{biblio.bib}
+
+
+
+\end{document}
