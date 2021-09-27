@@ -1,0 +1,134 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+
+\usepackage{xcolor}
+\newcommand{\bluenote}[1]{\color{blue}{ \em #1 }\color{black}}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper, %letterpaper,
+ total={17cm,22.8cm},
+ margin=24mm,
+ top=22.4mm,
+ bottom=25.4mm
+ }
+ 
+% Times new roman
+\usepackage{mathptmx}
+
+\usepackage[T1]{fontenc}
+
+\thispagestyle{empty} 
+
+\setlength{\parindent}{0pt}
+
+
+\author{%
+%  \fontsize{10}{12}\selectfont
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    Samar Rahmouni \\ srahmoun@andrew.cmu.edu
+  \end{minipage}
+  \and
+  %
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    Advisor: Prof. Giselle Reis \\ giselle@cmu.edu
+  \end{minipage}%
+  \vspace*{2ex}
+}
+
+
+\date{}
+
+\title{{\Large\sc Senior Thesis 2021-22\\[2ex]}{\LARGE\bf Prospectus\vspace*{3ex}}}
+
+
+\begin{document}
+
+\maketitle 
+
+\section{Description of the Problem}
+Take from proposal, adapt. 
+
+\section{Significance}
+Take from proposal, adapt. 
+
+
+\section{Background and Related Work}
+Take from proposal, adapt.
+\begin{itemize}
+  \item Hybrid architecture becoming more popular [DIFFERENTIATION OF BLACKBOX COMBINATORIAL SOLVERS]
+  \item Explains how most approaches so far only consider Neural networks 
+  [A Review of Formal Methods applied to Machine Learning] [why is it always the french in formal methods]
+  \item Kurd and Kelly verifications goals G4 and G5, robustness to disturbance to inputs and ensuring that outputs are not hazardous. 
+        Both are ensured in RL, a change to the reward scheme can change all conclusions. 
+  \item SMT-based formal methods [CSP problems]
+  \item MILP-based [mixed integer linear problem]
+  \item Abstract Interpretation based. 
+  \item Interesting note: very little work in formal methods for data preparation. One cool work that deals with this 
+        uses static analysis to infer assumptions on the input data. 
+  \item Talk about developing approaches to determine constraints on the training process that enforce a certain behavior. 
+\end{itemize}
+
+Artificial intelligence has moved away in the past years from symbolic to data-driven. 
+Data-driven AI have proven both efficient and their algorithms easy to reuse. However, 
+we are facing the limitations of such AI today whether 
+in its incapability of developing abstract relations between components, or in the consistent problem of meta-learning in extrapolating learned knowledge 
+in one environment to another, or finally, the safety properties that are harder to reason about and furthermore ensure. 
+In the light of such limitations, hybrid architectures are becoming increasingly popular. \textcolor{red}{[Add some of the examples]}. 
+\newline 
+Most approaches so far only considered neural networks. In \textcolor{red}{[Add ref]}, they present multiple formal methods that have been investigate 
+and applied to Machine Learning, these include SMT-based and MILP-based formal methods which use constraint satisfaction and mixed-integer linear problems to solve a subproblem of ML. \textcolor{red}{Add further how they use them.}
+Our approach is novel as it (1) focuses on tabular reinforcement learning rather than neural networks and (2) investigates a translation from  
+symbolic compositional state representation in RL to logic-based inference. \newline 
+\textcolor{red}{[Add what verification goals are from Kurd and Kelly and why RL does not uphold them, and how our proposed approach can help.]}
+
+\section{Research Contribution}
+\begin{itemize}
+    \item Provides a framework to incorporate a safety controller into a RL architecture. 
+    \item Compositional modeling of the states of a RL controller. 
+    \item Incorporate rule knowledge into decision making of a tabular RL in a deterministic environment. 
+    \item Investigate balance between optimization and safety in (1) Basic Reinforcement Learning, (2) Reinforcement Learning with a safe controller and (3) Logic-based inference Reinforcement Learning.
+\end{itemize}
+
+
+\section{Evaluation Plan & Timeline}
+The project will proceed in two phases. The first focuses on the implementation of the reinforcement learning controller along with 
+connecting the safe controller. Precisely, we proceed with the following. 
+\begin{enumerate}
+  \item Formalizing the car platooning scenario as an optimization problem for the RL agent. [7th October] 
+  \item Concretizing the architecture and describe the relations between components. [8th October]
+  \item Implementation of the RL controller independently of the safe controller. [20th October]
+  \item Modeling the states as a propositional formula in the lines of classical planning in order to match the safe controller specifications. [26th October]
+  \item Implementation of the framework to map from Maude to Python, after feeding the state representation into the safe controller. [10th November]
+  \item Experimenting and testing the optimization results of the RL controller with and without the safety guarantees of the safe controller. [20th November]
+\end{enumerate}
+
+The second phase focuses on the possible inferences of safety properties in a deterministic environment given a compositional propositional formulas
+state representation. 
+\begin{enumerate}
+  \item Investigate learning inference rules [state given action] in a deterministic environment. 
+  \item Incorporate rule knowledge into decision making of a tabular RL precisely by looking into a hybrid architecture that makes use of 
+        symbolic AI to adapt the Q-values table and/or the epsilon-greedy algorithm. 
+  \item Develop a mapping from compositional state representation to reward schemes given safe controller outputs. \textcolor{red}{To work out.}
+  \item Experimenting and testing the optimization and safety results of the RL controller with modified rewards. 
+\end{enumerate}
+
+Given these two implementations, we want to compare both approaches into balancing between safety guarantees and optimization. 
+Both phases will use the car platooning as a main scenario for implementation and testing. 
+
+
+\bibliographystyle{unsrt}
+\bibliography{biblio.bib}
+
+
+
+\end{document}
