@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: prospectus.aux
+The style file: unsrt.bst
+Database file #1: biblio.bib
+Warning--empty institution in li2019reinforcement
+Warning--empty booktitle in kurdkelly2003
+Warning--empty booktitle in vinyals2015
+Warning--empty booktitle in karpathy2015
+Warning--empty journal in law2005
+Warning--empty journal in alshiekh2017
+You've used 18 entries,
+            1791 wiz_defined-function locations,
+            545 strings with 6363 characters,
+and the built_in function-call counts, 4274 in all, are:
+= -- 336
+> -- 226
+< -- 7
++ -- 82
+- -- 64
+* -- 266
+:= -- 671
+add.period$ -- 53
+call.type$ -- 18
+change.case$ -- 18
+chr.to.int$ -- 0
+cite$ -- 24
+duplicate$ -- 210
+empty$ -- 414
+format.name$ -- 64
+if$ -- 973
+int.to.chr$ -- 0
+int.to.str$ -- 18
+missing$ -- 16
+newline$ -- 92
+num.names$ -- 18
+pop$ -- 74
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 122
+stack$ -- 0
+substring$ -- 192
+swap$ -- 62
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 6
+while$ -- 32
+width$ -- 20
+write$ -- 188
+(There were 6 warnings)

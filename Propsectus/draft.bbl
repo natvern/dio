@@ -1,0 +1,100 @@
+\begin{thebibliography}{10}
+
+\bibitem{vnc20}
+Yuri~Gil Dantas, Vivek Nigam, and Carolyn Talcott.
+\newblock A formal security assessment framework for cooperative adaptive
+  cruise control.
+\newblock In {\em 2020 IEEE Vehicular Networking Conference (VNC)}, pages 1--8,
+  2020.
+
+\bibitem{li2019reinforcement}
+Yuxi Li.
+\newblock Reinforcement {Learning} {Applications}.
+\newblock Technical Report arXiv:1908.06973, August 2019.
+
+\bibitem{kurdkelly2003}
+Zeshan Kurd and Tim Kelly.
+\newblock Establishing safety criteria for artificial neural networks.
+\newblock volume 2773, pages 163--169, 09 2003.
+
+\bibitem{garcez2020neurosymbolic}
+Artur d'Avila Garcez and Luis~C. Lamb.
+\newblock Neurosymbolic ai: The 3rd wave, 2020.
+
+\bibitem{gupta_meta-reinforcement_2018}
+Abhishek Gupta, Russell Mendonca, YuXuan Liu, Pieter Abbeel, and Sergey Levine.
+\newblock Meta-{Reinforcement} {Learning} of {Structured} {Exploration}
+  {Strategies}.
+\newblock In {\em Conference and {Workshop} on {Neural} {Information}
+  {Processing} {Systems} ({NeurIPS})}, page~10, 2018.
+
+\bibitem{schweighofer_meta-learning_2003}
+Nicolas Schweighofer and Kenji Doya.
+\newblock Meta-learning in {Reinforcement} {Learning}.
+\newblock {\em Neural Networks}, 16(1):5--9, January 2003.
+
+\bibitem{Besold2017NeuralSymbolicLA}
+Tarek~R. Besold, A.~Garcez, Sebastian Bader, H.~Bowman, Pedro~M. Domingos,
+  P.~Hitzler, Kai-Uwe K{\"u}hnberger, L.~Lamb, Daniel Lowd, P.~Lima,
+  L.~Penning, Gadi Pinkas, Hoifung Poon, and Gerson Zaverucha.
+\newblock Neural-symbolic learning and reasoning: A survey and interpretation.
+\newblock {\em ArXiv}, abs/1711.03902, 2017.
+
+\bibitem{vinyals2015}
+Oriol Vinyals, Alexander Toshev, Samy Bengio, and Dumitru Erhan.
+\newblock Show and tell: A neural image caption generator.
+\newblock pages 3156--3164, 06 2015.
+
+\bibitem{karpathy2015}
+Andrej Karpathy and Fei Li.
+\newblock Deep visual-semantic alignments for generating image descriptions.
+\newblock pages 3128--3137, 06 2015.
+
+\bibitem{Reed2015DeepVA}
+Scott~E. Reed, Yi~Zhang, Y.~Zhang, and Honglak Lee.
+\newblock Deep visual analogy-making.
+\newblock In {\em NIPS}, 2015.
+
+\bibitem{Foerster2016LearningTC}
+Jakob~N. Foerster, Yannis~M. Assael, N.~D. Freitas, and S.~Whiteson.
+\newblock Learning to communicate to solve riddles with deep distributed
+  recurrent q-networks.
+\newblock {\em ArXiv}, abs/1602.02672, 2016.
+
+\bibitem{urban2021}
+Caterina Urban and Antoine Min'e.
+\newblock A review of formal methods applied to machine learning.
+\newblock {\em ArXiv}, abs/2104.02466, 2021.
+
+\bibitem{Garca2015ACS}
+Javier Garc{\'i}a and F.~Fern{\'a}ndez.
+\newblock A comprehensive survey on safe reinforcement learning.
+\newblock {\em J. Mach. Learn. Res.}, 16:1437--1480, 2015.
+
+\bibitem{rockafellar2000}
+R~Rockafellar and Stan Uryasev.
+\newblock Optimization of conditional value-at-risk.
+\newblock {\em Journal of risk}, 2:21--42, 01 2000.
+
+\bibitem{Siebel2007EvolutionaryRL}
+Nils~T. Siebel and G.~Sommer.
+\newblock Evolutionary reinforcement learning of artificial neural networks.
+\newblock {\em Int. J. Hybrid Intell. Syst.}, 4:171--183, 2007.
+
+\bibitem{law2005}
+Edith Law.
+\newblock Risk-directed exploration in reinforcement learning.
+\newblock 01 2005.
+
+\bibitem{Li2021SafeRL}
+Yutong Li, N.~Li, H.~E. Tseng, A.~Girard, Dimitar Filev, and I.~Kolmanovsky.
+\newblock Safe reinforcement learning using robust action governor.
+\newblock In {\em L4DC}, 2021.
+
+\bibitem{alshiekh2017}
+Mohammed Alshiekh, Roderick Bloem, Rüdiger Ehlers, Bettina Könighofer, Scott
+  Niekum, and Ufuk Topcu.
+\newblock Safe reinforcement learning via shielding.
+\newblock 08 2017.
+
+\end{thebibliography}
