@@ -1,6 +1,6 @@
 # DEADLINES
 - [x] **Abstract and Problem Statement** Aug 27th 
-- [ ] **Prospectus** Oct 1st
+- [x] **Prospectus** Oct 1st
 - [ ] **Mid-Semester Presentation** Oct 18th
 - [ ] **Public Poster Presentation** Dec 8th
 - [ ] **Mid-Year Report** Dec 10th
