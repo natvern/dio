@@ -1,0 +1,7 @@
+- Presentation was confusing. Should explain earlier what is meant by a safe controller 
+and what reinforcement learning actually looks like.
+- Give a more complex scenario for car-platooning. Include uncertainties and adverserial input and why the problem is important
+and moreover complex enough to require optimization. (Not a freshman-year physics problem)
+- Present the differences in scenario representation in SC vs RL earlier cause it helps understand the problem better. 
+- Include some related work and how our work relates vs improves. 
+- Presentation skills -> stop "hm" and spend more time with each slide, went over it too fast. 
