@@ -80,6 +80,17 @@ to find the optimal velocity in the safe range to minimize the distance between 
 where the result of an action given a state is not dependent on any probabilistic event. We approach the problem using inductive reasoning where the goal is to incorporate the learned rule knowledge into the decision making of a tabular Q-learning RL agent. 
 In the given scenario, this will make use of the SC to develop a mapping from the state representation to a reward scheme, i.e. punish before a crash is bound to happen and adapt the Q-value and the epsilon-greedy approach. 
 
+{\color{red}Writing rules (by Giselle Reis):
+\begin{itemize}
+  \item Each sentence must be a natural continuation of the next, reusing
+  the same words and concepts. This ensures a natural reading flow.
+  \item Crucial concepts are emphasized when they appear for the first
+  time.
+  \item Information is given in a \emph{by need} basis. Don't overload
+  the reader with more information than necessary at any given point.
+\end{itemize}
+}
+
 \section{Introduction}
 Implementing a robust adaptive controller that is effective in terms
 of precision, time\giselle{What does time effectiveness mean?}, and quality of decision
@@ -122,7 +133,12 @@ order to achieve these verifications goals\giselle{Which are?}.
 
 
 \subsection{Reinforcement Learning as Trial-and-Error} 
-Reinforcement Learning is a method of learning that maps situations to actions in order to maximize its rewards \cite{sutton2018reinforcement}. 
+Reinforcement Learning is a method of learning that maps situations to
+actions in order to maximize its rewards
+\cite{sutton2018reinforcement}.\giselle{This needs to be explained in
+more detail. The reward function is the crucial measure for these
+algorithms and this needs to be clear for a reader that is not
+familiar with this field.} 
 Compared to data-driven machine learning algorithms, reinforcement learning has the advantage of not requiring a prior dataset as the agent is not told what to do, but rather 
 learns from the effect of its actions on the environment. Consider figure \ref{fig:rl}. 
 \begin{figure}[H]
@@ -133,14 +149,55 @@ learns from the effect of its actions on the environment. Consider figure \ref{f
 \end{figure}
 The following RL routine shown in figure \ref{fig:rl} describes the high-level of how an agent using reinforcement learning can be trained. Precisely, 
 given the current external observation, which in practice are based on the sensors output are used to construct a state vector. This distinction between state and observation 
-is crucial in a RL setting. The underlying assumption of any RL implementation is the \textbf{Markov Property}. In other words, 
+is crucial in a RL setting. The underlying assumption of any RL
+implementation is the \textbf{Markov Property}.\giselle{I don't see
+how this is relevant to the explanation of how a RL algorithm works...} In other words, 
 the current state provides enough information to predict the future state and its associated reward. This needs not to be deterministic. It's the idea that a decision that was made $n$ steps
-in the past should not affect the current step the agent is in. \textcolor{red}{add some notes how this actually works a lot in practice.} Thus, it's only through the state vector that the agent is trained. 
+in the past should not affect the current step the agent is in.
+\textcolor{red}{add some notes how this actually works a lot in
+practice.} Thus, it's only through the state vector that the agent is
+trained.\giselle{This is not relevant at this point. See this
+paragraph rewritten below.} 
 At every timestep, the agent takes in the state vector, and chooses an action. The environment then rewards it accordingly.  
 
-\subsection{Engineering issues with Reinforcement Learning}
+\medskip
+{\color{red}G: Last paragraph rewritten, for example.}
+\medskip
 
-In the routine shown in figure \ref{fig:rl}, we can identify two main engineering issues that are raised once RL is chosen for training. First, in the case of most scenarios, 
+The diagram in Figure~\ref{fig:rl} is a high-level description of how
+an agent using reinforcement learning can be trained.  
+%
+The lower box represents the \emph{environment} as seen by the agent
+according to its sensors.
+%
+The current state of the environment is represented as a \emph{state
+vector}.
+%
+At each iteration, the agent will receive the state vector as input,
+and needs to choose an \emph{action} to take.
+%
+Once the action is taken, the environment is updated to the next state
+and the agent receives a \emph{reward} as feedback.
+%
+This reward is a domain dependent function that represents how
+``good'' the state is.
+%
+The agent's goal is to increase its reward by taking actions that
+reach better states each time.\giselle{This last sentence is like a
+magic box to me. Maybe we need to make it less magic, maybe not.}
+%
+This is achieve by ... {\color{red}Do we want to go there?}
+
+\giselle{As a last paragraph in this section, emphasize how the reward
+function is the crucial aspect of the RL algorithm. The better the
+reward function, the faster the agent learns and with fewer errors.}
+
+\subsection{Engineering issues with Reinforcement Learning}
+\giselle{Why are these called engineering issues? Aren't they just
+issues? It might be better to call them challenges though.}
+
+In the routine shown in figure \ref{fig:rl}, we can identify
+two\giselle{It looks like you mention more than two issues below.} main engineering issues that are raised once RL is chosen for training. First, in the case of most scenarios, 
 a reward function needs to be designed. There are reasonable criteria on how this should be designed. For instance, consider a reinforcement learning agent whose goal is to predict the weather. 
 The closer the prediction, the more reward it should be given. \textcolor{red}{Add some references about how best rewards are chosen.}
 
