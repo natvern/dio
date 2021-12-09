@@ -93,22 +93,103 @@ The survey in \cite{kurdkelly2003} lays the foundations of verifications goals f
 describe the behavior of NNs. The same argument translates to RL. In general, reinforcement learning does not ensure any of the verification conditions in \cite{kurdkelly2003}. 
 The observable behavior of a RL agent is unpredictable (e.g. AlphaGo gamestyle) and will more often than not take hazardous actions since it is a trial-and-error process. Hence, it is important to investigate
 the use of verified safety controller and the interpretability of RL in order to achieve these verifications goals.  
-\textcolor{red}{Add graph of proposed infrastructure.}
 
-\section{Research Contribution}
-We (1) provide a framework to incorporate a verified safety controller into a reinforcement learning architecture, 
-(2) investigate a compositional state representation for reinforcement learning in the lines of classical planning, 
-and (3) incorporate rule knowledge into the decision-making of tabular reinforcement learning in a deterministic environment. 
-The above is done as to test and experiment on the tradeoff of optimization and safety in basic RL, RL with a safe controller, 
-and finally a logic-based inference RL.
 
-\section{Vehicle Platooning : Case Study}
-\textcolor{red}{todo}
+\subsection{Reinforcement Learning as Trial-and-Error} 
+Reinforcement Learning is a method of learning that maps situations to actions in order to maximize its rewards \cite{sutton2018reinforcement}. 
+Compared to data-driven machine learning algorithms, reinforcement learning has the advantage of not requiring a prior dataset as the agent is not told what to do, but rather 
+learns from the effect of its actions on the environment. Consider figure \ref{fig:rl}. 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.6]{rlroutine.png}
+  \caption{Reinforcement Learning Routine}
+  \label{fig:rl}
+\end{figure}
+The following RL routine shown in figure \ref{fig:rl} describes the high-level of how an agent using reinforcement learning can be trained. Precisely, 
+given the current external observation, which in practice are based on the sensors output are used to construct a state vector. This distinction between state and observation 
+is crucial in a RL setting. The underlying assumption of any RL implementation is the \textbf{Markov Property}. In other words, 
+the current state provides enough information to predict the future state and its associated reward. This needs not to be deterministic. It's the idea that a decision that was made $n$ steps
+in the past should not affect the current step the agent is in. \textcolor{red}{add some notes how this actually works a lot in practice.} Thus, it's only through the state vector that the agent is trained. 
+At every timestep, the agent takes in the state vector, and chooses an action. The environment then rewards it accordingly.  
 
-\section{Safe Controller as a Shield} 
-\textcolor{red}{todo}
-\subsection{Architecture}
+\subsection{Engineering issues with Reinforcement Learning}
+
+In the routine shown in figure \ref{fig:rl}, we can identify two main engineering issues that are raised once RL is chosen for training. First, in the case of most scenarios, 
+a reward function needs to be designed. There are reasonable criteria on how this should be designed. For instance, consider a reinforcement learning agent whose goal is to predict the weather. 
+The closer the prediction, the more reward it should be given. \textcolor{red}{Add some references about how best rewards are chosen.}
+
+\medskip
+
+Second, there is a need to choose from the observation what we assume is needed for the state to hold the Markov Property. This can be easy to do for certain scenarios. 
+For instance, \textcolor{red}{add an example here}. However, it becomes more complex as tasks require more sensing. For instance, consider an autonomous vehicle. The observation could be 
+the current fuel, velocity, position, proximity sensors and camera feedback. It is a problem similar to feature extraction in most Machine Learning (ML) settings. \textcolor{red}{How it's usually being done in practice}
+
+
+\medskip
+
+The result of training is a policy, a function to map states to action, thus that maximizes the cumulative rewards. 
+However, several problems come into place when considering the deployment of the trained agent. First, given the mapping from observation to state vector, 
+certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave. 
+This results in an unsafe trained agent, thus constricting reinforcement learning to the realm of simulation. 
+
+\medskip 
+
+Simulation in itself poses multiple issues. The first is again, the need to design and account for how the external real-world environment would behave. 
+This can be hard to do accurately, and usually is the more exhausting part of the implementation process. A best case scenario is to be able to train any agent using RL in the 
+real-world. This can be done if we are able to guarantee some safety properties. Those safety properties need not to be perfect, but should severly decrease the possibility of accidents 
+and dangerous outcomes. 
+
+\subsection{Safety in Reinforcement Learning}
+
+To be able to guarantee some safety properties, we look into a safe controller implementation that acts like an oracle, constricting the possible actions 
+of the RL agent to those it deems "safe". The following work will focus on (1) the integration of this safe controller to 
+the reinforcement learning training process, see section \ref{rlscarchitecture} and (2) the theoretical guarantees of the safe controller and its implementation, see section \ref{scspecs} and finally, (3) testing the hybrid architecture of RL+SC 
+on a vehicle platooning problem done in simulation as to compare its safety and optimality with a basic RL implementation.
+Figure \ref{fig:overviewsol} is an overview of the proposed solution and the high level basis of the work. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.6]{overview.png}
+  \caption{Overview of the proposed solution}
+  \label{fig:overviewsol}
+\end{figure}
+
+Note that (3) is a work in progress. The current formalization of the scenario for the problem of vehicle platooning 
+and its significance is in section \ref{vehicleplat}.
+
+
+\section{RL+SC Architecture} \label{rlscarchitecture}
+Assume for the following that there exists a safe controller (SC) type of oracle that is able to take in the current
+environment as observed by the reinforcement learning agent and decide deterministically on a set of possible safe actions. 
+More on the practical specifications of this safe controller can be found in section \ref{scspecs}. 
+We suppose that the SC can output false positives but never false negatives. In other words, if a safe controller deems 
+a situation safe, then it has to be safe. We allow it to misjudge a situation and be conservative on safety. If that is the case, 
+we want to ensure that the 
+
 \textcolor{red}{Add graphics and description}
+
+Feedback loop between both. 
+
+\section{Safe Controller Specifications} \label{scspecs}
+Expectations and guarantees of the safe controller.
+
+
+\section{Vehicle Platooning : Case Study} \label{vehicleplat}
+To put our approach in practice, we consider the case of vehicle platooning. The setting is as follows: multiple autonomous vehicles 
+are tasked with following each other while ensuring that they minimize the gap between them. 
+As described in \cite{LarssonErik2015Tvpp}, forming a vehicle platoon helps reduce fuel consumption severly. The closer the proximity and faster the speed, the more fuel is saved. 
+Even by assuming no faulty communication between the vehicles, the uncertainties of the road make it a challenge to deploy autonomous vehicles trained using reinforcement learning 
+with that goal in mind. For instance, consider an unexpected construction on the usual route that the vehicles take. 
+As the leader of the platoon will be the first to notice, we would like to communicate as early as possible to the followers that a decelaration needs to happen. 
+In the context of reinforcement learning, there are two cases, (1) the agents have been trained on that occurence, thus they all decrease their velocities, or 
+(2) the agents have never encountered that problem in training, thus are bound to fail. 
+
+\medskip 
+
+
+We don't need to consider all the uncertainties, since we always know what to expect, and anything that goes against 
+that knowledge is an uncertainty that needs to be dealt with. 
+
 \subsection{Preliminary Results}
 \textcolor{red}{todo}
 \subsection{Discussion}
@@ -128,31 +209,7 @@ and more problems it has not seen before, approaches the ideal of a general-purp
 
 \medskip
 
-Current neurosymbolic AI trends are concerned with knowledge representation and reasoning, namely, they investigate computational-logic systems 
-and representation to precede learning in order to provide some form of incremental update, e.g. a meta-network to group two sub-neural networks \cite{Besold2017NeuralSymbolicLA}.
-As a result, neurosymbolic AI has various applications including vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
-vision analogy-making \cite{Reed2015DeepVA}, or learning communication protocols \cite{Foerster2016LearningTC}.
-However, such representation has not yet been investigated in tabular reinforcement learning algorithms. Precisely, the problem of knowledge extraction and interpretability of RL architecture is yet to be tackled.
-
-\medskip
-
-Artificial intelligence has moved away in the past years from symbolic to data-driven. 
-Data-driven AI have proven to be both efficient and their algorithms easy to reuse. However, 
-we are facing the limitations of such AI today whether 
-in its incapability of developing abstract relations between components, or in the consistent problem of meta-learning in extrapolating learned knowledge 
-in one environment to another, or finally, the safety properties that are harder to reason about and furthermore ensure. 
-In the light of such limitations, hybrid architectures are becoming increasingly popular \cite{garcez2020neurosymbolic}. 
-
-\medskip
-
-However, most approaches so far only considered neural networks. In \cite{urban2021}, they present multiple formal methods that have been investigated 
-and applied to Machine Learning, these include SMT-based and MILP-based formal methods which use constraint satisfaction and mixed-integer linear problems. The main idea is to reduce safety properties into a set of 
-constraints. If a solution exists then the property does not hold, else it is safe. 
-These methods, though sound and complete, do not scale for bigger networks.
-
-\medskip
-
-Approaches that were concerned with safe reinforcement learning rather than the above, have approached the problem in previous work \cite{Garca2015ACS} in two ways. First was changing the optimization criteria \cite{rockafellar2000}, precisely by incorporating risk into the performance of the policy.
+Approaches that were concerned with safe reinforcement learning, have approached the problem in previous work \cite{Garca2015ACS} in two ways. First was changing the optimization criteria \cite{rockafellar2000}, precisely by incorporating risk into the performance of the policy.
 Namely, either considering the worst case scenario and constraining on it, reducing the variance to be more sensitive or applying constraints i.e. only update the policy if the action is in a safe set. 
 This does not however guarantee safety, but tends to minimize the probability of risk, hence not allowing RL systems to be deployed in the physical world. 
 Second was to consider the exploration process, either by incorporating external knowledge i.e. learning from demonstration \cite{Siebel2007EvolutionaryRL} or adopting a risk directed exploration \cite{law2005}. These approaches can be considered rigid, 
@@ -164,12 +221,17 @@ In particular, in these previous two approaches, work that makes use of formal s
 Some of the more recent work that does investigate a hybrid architecture (i.e. RL and symbolic reasoning) makes use of
 set-theoretic techniques and constraint satisfaction problems to optimize from the constraints \cite{Li2021SafeRL}, or proposes a reactive system called a shield \cite{alshiekh2017} to either constraint the actions given by the environment or adapt them once the RL module chooses one. 
 In both cases, the added safety controller is described by its specifications, rather than being an independent existing controller. 
-\newline 
-Our approach is novel as it (1) focuses on tabular reinforcement learning rather than neural networks, (2) provides a framework independent of the specifications of either 
-the reinforcement learning controller or the safe controller and (3) investigates a translation from  
-symbolic compositional state representation in RL to logic-based inference. 
+
+\medskip
+
+\textcolor{red}{Partially observable Markov decision process belief system to improve from observation to state vector.}
+
+\medskip
+
+\textcolor{red}{Explain how this idea is novel.}
 
 \section{Conclusions}
+\textcolor{red}{todo.}
 
 \newpage
 

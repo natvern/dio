@@ -1,0 +1,7 @@
+- Remember to add acknowledgments in report 
+- Improve on the reward function for RL to incorporate some 'safety' [basic RL + 'informed' RL] 
+- Explain how SC is able to account for uncertainties when incorporating faulty communication and sensors
+- Explain more on why it is important to allow for RL algorithms to be deployed in the real-world while 
+trying to ensure that their optimal results do not get traded-off 
+- Explain how yes a car that keeps far away ensures safety properties but does not work optimally 
+- Formalize what 
