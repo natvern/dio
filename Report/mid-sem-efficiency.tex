@@ -180,11 +180,11 @@ a situation safe, then it has to be safe. We allow it to misjudge a situation an
   \centering
   \includegraphics[scale=0.55]{rlsc.png}
   \caption{Safe controller integrated in reinforcement learning architecture}
-  \label{fig:rlsc}
+  \label{fig:scinrl}
 \end{figure}
 
 \section{Safe Controller Specifications} \label{scspecs}
-In section \ref{rlscarchitecture}, we assume the existence of a safe controller that acts like an oracle.
+In the previous section, we assume the existence of a safe controller that acts like an oracle.
 In our setting the safe controller takes in the current observation of the environment and 
 returns the state representation and a set of possible actions to the reinforcement learning side. 
 Some conditions need to hold on both the state representation and the set of possible actions to define a 'good' safe controller.
@@ -210,9 +210,41 @@ Given our assumptions, we make those first observations. \newline
 given known step semantics, i.e. $E_t$. Precisely, considering actions are deterministic and the problem is a Markov Decision Problem (MDP), the SC can compute the resulting expected state. \newline
 \textbf{Observation 2:} The SC cannot ensure that the expected will be the next observed. \newline
 \textbf{Observation 3:} Since there is a finite number of sensors, every sensor output can be defined as a proposition associated with a specific value. \newline 
-\textbf{}
+
+\medskip 
+
+By taking our observation 1 and our assumption 2, we can construct the following deterministic approach to compute the state and the set of possible actions. 
 
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{scworlds.png}
+  \caption{SC to compute the state and possible actions}
+  \label{fig:scworld}
+\end{figure}
+
+In the first layer, if we know the distribution of our sensors, we are able to compute the possible worlds and assume the one with the highest probability.
+In the case of figure \ref{fig:scworld}, it is $p_5$. By assuming our state and the possible actions, we can utilize domain specific knowledge into 
+computing the expected possible worlds. Given some fatality conditions, it is possible to assess whether a given world is desirable or should be blocked. 
+
+\textcolor{blue}{There's a lot more than can go on here. A couple of my notes.}
+\begin{itemize}
+  \item Consider history, basically : $[S_t, a, S_{t+1}/E_t]$. We are technically able to compute the level of uncertainty of a result, since
+        we're only dealing with numerical computation. Basically, suppose I never had $sound(e)$ in my observation, I don't know what it is, for all I know, 
+        it could be the worse possible outcome and I have no clue how to react to it. I should be able then to choose my safest action, the one I know to always result 
+        in non fatal conditions. Suppose I survive such an uncertainty, then now I know what the next state was actually compared to what I expected,
+        if I 'normalize' the next state while accounting for uncertainty of sensors and compare it to my expected, I now have a numerical value that 
+        I can embed in my step semantics to adapt for this uncertainty. Inductive reasoning basically. 
+  \item Obviously, the more domain specific knowledge, the less uncertainties to deal with.
+  \item Could also just give the uncertainty decision to the RL, basically randomly try it. It's a sacrifice we're willing to make 
+        for learning. We're still ensuring some aspect of safety so already doing better.
+  \item For a better argument on how the deployment in real life can be fine is a distinction between 
+        undesirable vs fatal. I don't really want to swerve into the road but I also won't exist if I crash into a car. 
+\end{itemize}
+
+\subsection{From SC to verification conditions} 
+\textcolor{red}{todo.}
+ 
 
 \section{Vehicle Platooning : Case Study} \label{vehicleplat}
 To put our approach in practice, we consider the case of vehicle platooning. The setting is as follows: multiple autonomous vehicles 
