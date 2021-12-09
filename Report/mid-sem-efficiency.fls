@@ -507,6 +507,10 @@ INPUT ./rlsc.png
 INPUT rlsc.png
 INPUT ./rlsc.png
 INPUT ./rlsc.png
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/adobe/times/zptmcm7m.vf
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/times/psyro.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT ./mid-sem-efficiency.bbl
 INPUT mid-sem-efficiency.bbl
 INPUT ./mid-sem-efficiency.bbl
