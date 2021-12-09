@@ -186,7 +186,7 @@ The agent's goal is to increase its reward by taking actions that
 reach better states each time.\giselle{This last sentence is like a
 magic box to me. Maybe we need to make it less magic, maybe not.}
 %
-This is achieve by ... {\color{red}Do we want to go there?}
+This is achieved by ... {\color{red}Do we want to go there?}
 
 \giselle{As a last paragraph in this section, emphasize how the reward
 function is the crucial aspect of the RL algorithm. The better the
@@ -197,18 +197,43 @@ reward function, the faster the agent learns and with fewer errors.}
 issues? It might be better to call them challenges though.}
 
 In the routine shown in figure \ref{fig:rl}, we can identify
-two\giselle{It looks like you mention more than two issues below.} main engineering issues that are raised once RL is chosen for training. First, in the case of most scenarios, 
-a reward function needs to be designed. There are reasonable criteria on how this should be designed. For instance, consider a reinforcement learning agent whose goal is to predict the weather. 
-The closer the prediction, the more reward it should be given. \textcolor{red}{Add some references about how best rewards are chosen.}
+two\giselle{It looks like you mention more than two issues below.}
+main engineering issues\giselle{challenges} that are raised once RL is chosen for
+training.\giselle{The issues/challenges are from RL itself, not about
+the figure. You don't need to mention it here.} First, in the case of
+most scenarios\giselle{All scenarios need a reward function, so remove
+this part between the commas.}, 
+a reward function needs to be designed. There are reasonable criteria
+on how this should be designed.\giselle{This is the place where you
+should explain that the reward function is domain dependent, and a
+function on the state vector. To make your case stronger, you need to
+argue that sometimes it is intuitive, sometimes not. Give examples.} For instance, consider a reinforcement learning agent whose goal is to predict the weather. 
+The closer the prediction\giselle{How do you know if the prediction is
+close since it predicts the future?}, the more reward it should be given. \textcolor{red}{Add some references about how best rewards are chosen.}
+
+\medskip
+
+{\color{red}Add a paragraph explaining that this is a search problem
+on a potentially infinite tree, and smart ways to prune this tree
+result in more efficient learning. This tree pruning is done
+indirectly by the reward function.}
 
 \medskip
 
 Second, there is a need to choose from the observation what we assume is needed for the state to hold the Markov Property. This can be easy to do for certain scenarios. 
 For instance, \textcolor{red}{add an example here}. However, it becomes more complex as tasks require more sensing. For instance, consider an autonomous vehicle. The observation could be 
 the current fuel, velocity, position, proximity sensors and camera feedback. It is a problem similar to feature extraction in most Machine Learning (ML) settings. \textcolor{red}{How it's usually being done in practice}
+\giselle{I think we agreed to leave this out. It only complicates the
+problem and it is not a problem you are proposing to solve in your
+work.}
 
 
 \medskip
+
+\giselle{I think the next two paragraphs are not so relevant anymore.
+What you can say is: if a RL algorithm runs into fewer error
+situations, it is safer to be deployed in the real world. But as Prof.
+Gianni mentioned, everything always starts with a simulation.}
 
 The result of training is a policy, a function to map states to action, thus that maximizes the cumulative rewards. 
 However, several problems come into place when considering the deployment of the trained agent. First, given the mapping from observation to state vector, 
