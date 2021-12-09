@@ -30,6 +30,9 @@
 
 \setlength{\parindent}{0pt}
 
+% For comment boxes.
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommand{\giselle}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{G: #1}}
 
 \author{%
 %  \fontsize{10}{12}\selectfont
@@ -78,22 +81,44 @@ where the result of an action given a state is not dependent on any probabilisti
 In the given scenario, this will make use of the SC to develop a mapping from the state representation to a reward scheme, i.e. punish before a crash is bound to happen and adapt the Q-value and the epsilon-greedy approach. 
 
 \section{Introduction}
-Implementing a robust adaptive controller that is effective in terms of precision, time, and quality of decision
-when facing dynamic and uncertain scenarios, has always been a central challenge in AI and robotics.
+Implementing a robust adaptive controller that is effective in terms
+of precision, time\giselle{What does time effectiveness mean?}, and quality of decision
+when facing dynamic and uncertain scenarios, has always been a central
+challenge in AI and robotics.\giselle{This sentence is too long and I
+think it has a lot of information. You need to explain what are each
+of these measures and why they are challenging.}
 As autonomous cars are deployed, IoT is popularized, and human-robot interactions become more complex, we
 are more and more confronted with the need for robotic agents that can effectively and continually adapt
 to their surroundings, not only in simulation, but also in practice, when deployed as a cyber-physical system. 
 Since we are unable to provide a repertoire of all possible scenarios and actions,
-our agents need to be able to autonomously predict and adapt to new changes. RL is an approach that
-supports developing these capabilities, it is also the solution that AlphaGo, Deepmind AlphaStar, and OpenAI Five have
+our agents need to be able to autonomously predict and adapt to new
+changes. RL\giselle{Reinforcement Learning (RL)} is an approach that
+supports developing these capabilities\giselle{What capabilites? Be
+explicit.}, \giselle{This should be another sentence.}it is also the solution that AlphaGo, Deepmind AlphaStar, and OpenAI Five have
 adopted \cite{li2019reinforcement}, respectively for Go, StarCraft II and Dota 2 and found success in. 
 
-However, as RL is a trial-and-error process, a car trained using RL is bound to crash to learn not to crash again. Safe reinforcement learning is then crucial 
-to investigate in order to be able to deploy it in larger scales, but also out of simulation. 
-The survey in \cite{kurdkelly2003} lays the foundations of verifications goals for Artificial Neural Networks (ANNs) to be ensured for safety-critical tasks. The need for this behavioral constraints stems from the inability to analyze and 
-describe the behavior of NNs. The same argument translates to RL. In general, reinforcement learning does not ensure any of the verification conditions in \cite{kurdkelly2003}. 
-The observable behavior of a RL agent is unpredictable (e.g. AlphaGo gamestyle) and will more often than not take hazardous actions since it is a trial-and-error process. Hence, it is important to investigate
-the use of verified safety controller and the interpretability of RL in order to achieve these verifications goals.  
+However, as RL is a trial-and-error process, a car trained using RL is
+bound to crash to learn not to crash again. Safe reinforcement
+learning\giselle{Define what you mean by safe reinforcement learning.
+Is it learning without error?} is then crucial 
+to investigate in order to be able to deploy it in larger scale, but also out of simulation. 
+The survey in \cite{kurdkelly2003} lays the foundations of
+verifications goals for Artificial Neural Networks (ANNs) to be
+ensured for safety-critical tasks\giselle{If this is relevant, explain
+what these verification goals are.}. The need for this behavioral
+constraints\giselle{What do you mean by behavioral constraints?} stems from the inability to analyze and 
+describe the behavior of NNs.\giselle{I don't know what you mean with
+the sentence that ends here.} The same argument translates to RL. In
+general, reinforcement learning does not ensure any of the
+verification conditions\giselle{Which are?} in \cite{kurdkelly2003}. 
+The observable behavior of a RL agent is unpredictable\giselle{Why?}
+(e.g. AlphaGo gamestyle) and will more often than not take hazardous
+actions since it is a trial-and-error process. Hence, it is important
+to investigate
+the use of verified safety controller\giselle{What is a verified
+safety controller?} and the interpretability of RL\giselle{From the
+text above, it is not clear how interpretability plays a role.} in
+order to achieve these verifications goals\giselle{Which are?}.  
 
 
 \subsection{Reinforcement Learning as Trial-and-Error} 
