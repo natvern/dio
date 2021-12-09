@@ -2,7 +2,7 @@
 - [x] **Abstract and Problem Statement** Aug 27th 
 - [x] **Prospectus** Oct 1st
 - [x] **Mid-Semester Presentation** Oct 18th
-- [ ] **Public Poster Presentation** Dec 8th
+- [x] **Public Poster Presentation** Dec 8th
 - [ ] **Mid-Year Report** Dec 10th
 
 --------------------------------------
