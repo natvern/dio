@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.9.16)  8 DEC 2021 19:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.9.16)  8 DEC 2021 23:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -368,20 +368,31 @@ File: overview.png Graphic file (type png)
 <use overview.png>
 Package pdftex.def Info: overview.png  used on input line 152.
 (pdftex.def)             Requested size: 386.64748pt x 247.52666pt.
- [3 <./overview.png>] [4] [5] (./mid-sem-efficiency.bbl) [6] (./mid-sem-efficiency.aux) ) 
+ [3 <./overview.png>]
+<basicrl.png, id=20, 561.09625pt x 435.6275pt>
+File: basicrl.png Graphic file (type png)
+<use basicrl.png>
+Package pdftex.def Info: basicrl.png  used on input line 172.
+(pdftex.def)             Requested size: 308.60388pt x 239.59586pt.
+<rlsc.png, id=21, 561.09625pt x 435.6275pt>
+File: rlsc.png Graphic file (type png)
+<use rlsc.png>
+Package pdftex.def Info: rlsc.png  used on input line 180.
+(pdftex.def)             Requested size: 308.60388pt x 239.59586pt.
+ [4 <./basicrl.png> <./rlsc.png>] [5] [6] (./mid-sem-efficiency.bbl) [7] (./mid-sem-efficiency.aux) ) 
 Here is how much of TeX's memory you used:
- 4534 strings out of 478599
- 61990 string characters out of 5854092
- 372196 words of memory out of 5000000
- 22325 multiletter control sequences out of 15000+600000
+ 4550 strings out of 478599
+ 62208 string characters out of 5854092
+ 372212 words of memory out of 5000000
+ 22339 multiletter control sequences out of 15000+600000
  452252 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,8n,70p,365b,279s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on mid-sem-efficiency.pdf (6 pages, 79774 bytes).
+Output written on mid-sem-efficiency.pdf (7 pages, 98211 bytes).
 PDF statistics:
- 44 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 53 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

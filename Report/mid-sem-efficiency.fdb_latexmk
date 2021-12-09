@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex mid-sem-efficiency"] 1639010890 "mid-sem-efficiency.aux" "mid-sem-efficiency.bbl" "mid-sem-efficiency" 1639010890
+["bibtex mid-sem-efficiency"] 1639024832 "mid-sem-efficiency.aux" "mid-sem-efficiency.bbl" "mid-sem-efficiency" 1639024833
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
   "biblio.bib" 1639006503 10736 2207ddbf6d35181d5bc5e1f8e8db9fea ""
-  "mid-sem-efficiency.aux" 1639010890 2744 e4ff976b4e4824335cfb6fb0d7a94b45 "pdflatex"
+  "mid-sem-efficiency.aux" 1639024832 3115 fd9f2c2a75fa5fa4fea185a5b87e4500 "pdflatex"
   (generated)
-  "mid-sem-efficiency.bbl"
   "mid-sem-efficiency.blg"
-["pdflatex"] 1639010890 "/Users/srahmoun/Documents/Thesis/Report/mid-sem-efficiency.tex" "mid-sem-efficiency.pdf" "mid-sem-efficiency" 1639010890
-  "/Users/srahmoun/Documents/Thesis/Report/mid-sem-efficiency.tex" 1639010889 15939 4626d131a45e1a4dfacb2741cd4c3534 ""
+  "mid-sem-efficiency.bbl"
+["pdflatex"] 1639024832 "/Users/srahmoun/Documents/Thesis/Report/mid-sem-efficiency.tex" "mid-sem-efficiency.pdf" "mid-sem-efficiency" 1639024833
+  "/Users/srahmoun/Documents/Thesis/Report/mid-sem-efficiency.tex" 1639024831 16173 06c055800144f394d6a6fb5a14824518 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/times/psyro.tfm" 1136768653 1544 23a042a74981a3e4b6ce2e350e390409 ""
@@ -83,12 +83,14 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1631832695 4362028 785fb9f49f0885b9b8917d40f83e83f4 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1631832731 2798056 e2d6f92b0916dabde3786c995194bf10 ""
   "/usr/local/texlive/2021/texmf.cnf" 1631832688 577 4c1911a7228e554c6032256d3cf5567d ""
-  "mid-sem-efficiency.aux" 1639010890 2744 e4ff976b4e4824335cfb6fb0d7a94b45 "pdflatex"
-  "mid-sem-efficiency.bbl" 1639010890 2758 c1297da9fae006a3e9a33807535084d9 "bibtex mid-sem-efficiency"
-  "mid-sem-efficiency.tex" 1639010889 15939 4626d131a45e1a4dfacb2741cd4c3534 ""
+  "basicrl.png" 1639024454 13372 f69161ce72a68b0af0b4ee2228a1b61b ""
+  "mid-sem-efficiency.aux" 1639024832 3115 fd9f2c2a75fa5fa4fea185a5b87e4500 "pdflatex"
+  "mid-sem-efficiency.bbl" 1639024832 2758 c1297da9fae006a3e9a33807535084d9 "bibtex mid-sem-efficiency"
+  "mid-sem-efficiency.tex" 1639024831 16173 06c055800144f394d6a6fb5a14824518 ""
   "overview.png" 1639010024 13798 48f5431f3a85ea453f7e021e7fed7a9c ""
   "rlroutine.png" 1639006274 11284 cb96963cbec735bbe3624ec5008c9bdc ""
+  "rlsc.png" 1639024726 17390 d096bc1b2bfd3d628104b0e0b667cf17 ""
   (generated)
+  "mid-sem-efficiency.pdf"
   "mid-sem-efficiency.log"
   "mid-sem-efficiency.aux"
-  "mid-sem-efficiency.pdf"

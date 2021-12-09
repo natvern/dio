@@ -163,12 +163,24 @@ Assume for the following that there exists a safe controller (SC) type of oracle
 environment as observed by the reinforcement learning agent and decide deterministically on a set of possible safe actions. 
 More on the practical specifications of this safe controller can be found in section \ref{scspecs}. 
 We suppose that the SC can output false positives but never false negatives. In other words, if a safe controller deems 
-a situation safe, then it has to be safe. We allow it to misjudge a situation and be conservative on safety. If that is the case, 
-we want to ensure that the 
+a situation safe, then it has to be safe. We allow it to misjudge a situation and be conservative on safety. 
 
-\textcolor{red}{Add graphics and description}
+\medskip 
 
-Feedback loop between both. 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{basicrl.png}
+  \caption{Basic reinforcement learning architecture}
+  \label{fig:basicrl}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{rlsc.png}
+  \caption{Safe controller integrated in reinforcement learning architecture}
+  \label{fig:rlsc}
+\end{figure}
 
 \section{Safe Controller Specifications} \label{scspecs}
 Expectations and guarantees of the safe controller.
