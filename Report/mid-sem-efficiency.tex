@@ -290,10 +290,20 @@ a situation safe, then it has to be safe. We allow it to misjudge a situation an
   \label{fig:scinrl}
 \end{figure}
 
-\section{Safe Controller Specifications} \label{scspecs}
+\section{Safe Controller Specifications} 
+\label{scspecs}
+\giselle{Oracle Specification (possible new title if DIO is not yet
+defined)}
+
 In the previous section, we assume the existence of a safe controller that acts like an oracle.
 In our setting the safe controller takes in the current observation of the environment and 
-returns the state representation and a set of possible actions to the reinforcement learning side. 
+returns the state representation and a set of possible actions to the reinforcement learning side.
+\giselle{This changed. The DIO receives a state as input and outputs
+an evaluation about that state. This evaluation could be a number
+between 0 and 1 or a discrete value. Decide what you are going to use
+and explain that. You can mention other possible measures, but make it
+clear which one you will use because the implementation of a correct
+DIO -- for any domain -- relies on it.}
 Some conditions need to hold on both the state representation and the set of possible actions to define a 'good' safe controller.
 In the following section, we lay down the foundations 
 for such a module, starting by the guarantees we would like for it to have. 
@@ -303,11 +313,20 @@ for such a module, starting by the guarantees we would like for it to have.
   \item The resulting state of any action of the possible set of actions 
         should not include any known fatality conditions, except if necessary. 
 \end{enumerate}
+\giselle{I think this no longer applies, since DIO does not return
+states. Instead you need to explain what a domain expert user needs to
+do to integrate their prolog program into the RL framework. Namely:
+(1) output the values as you have selected before (number in a range
+or discrete set of values); and (2) have a translation from state
+vectors to ground facts.}
 
 We make the following assumptions, (1) actions are deterministic, meaning if an agent chooses to go left, they will go left with certainty, 
 (2) sensors can be faulty and they obey a gaussian distribution for their uncertainty, (3) the world is filled with uncertainties and the safe controller cannot account 
 for all of them. Note that in the following, we will define uncertainty as an evolution of the world given the sensors that is unknown by the safe controller, i.e.
 no known step semantics for the uncertain.
+\giselle{This also no longer applies. The prolog program can take
+uncertainty into account based on specific knowledge of the domain and
+sensors. It is advisable I suppose, but it depends on the programmer.}
 
 \medskip 
 
@@ -316,7 +335,18 @@ Given our assumptions, we make those first observations. \newline
 \textbf{Observation 1:} Though our SC cannot account for all uncertainties, there exists a set of expected information that is informed 
 given known step semantics, i.e. $E_t$. Precisely, considering actions are deterministic and the problem is a Markov Decision Problem (MDP), the SC can compute the resulting expected state. \newline
 \textbf{Observation 2:} The SC cannot ensure that the expected will be the next observed. \newline
-\textbf{Observation 3:} Since there is a finite number of sensors, every sensor output can be defined as a proposition associated with a specific value. \newline 
+\giselle{I think these observations would now be different. DIO can
+have the knowledge of actions and can simulate a couple of steps ahead
+to predict the near future. The more DIO can simulate, the more
+precise is its feedback to the agent. A simple DIO is made up only of
+judgments about states. A smarter DIO simulates the rules of the game
+and take a few steps before judging.}
+
+\textbf{Observation 3:} Since there is a finite number of sensors,
+every sensor output can be defined as a proposition associated with a
+specific value. \newline
+\giselle{That would be an intuitive way to translate state vectors
+into facts, but not the only one. This depends on the domain.}
 
 \medskip 
 
@@ -329,6 +359,7 @@ By taking our observation 1 and our assumption 2, we can construct the following
   \caption{SC to compute the state and possible actions}
   \label{fig:scworld}
 \end{figure}
+\giselle{This is the game tree simulated by a good DIO :) }
 
 In the first layer, if we know the distribution of our sensors, we are able to compute the possible worlds and assume the one with the highest probability.
 In the case of figure \ref{fig:scworld}, it is $p_5$. By assuming our state and the possible actions, we can utilize domain specific knowledge into 
