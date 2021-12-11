@@ -1,6 +1,14 @@
+## List of files to be ignored by git:
+
+# Generated each time during latex compilation
 *.bbl
 *.blg
 *.log
 *.aux
 *.fls
 *.fdb_latexmk
+*.synctex.gz
+
+# pdf for which we have the latex sources
+mid-sem-efficiency.pdf
+mid-sem-appendix.pdf
