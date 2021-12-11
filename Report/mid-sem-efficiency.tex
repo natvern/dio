@@ -284,7 +284,7 @@ to decrease as more \emph{episodes} are completed.
 The result of training is a policy $\pi$, a function to map states to action $\pi : S \rightarrow A$. The learned policy is the one that maximizes the cumulative rewards.
 This training is most often done in simulation, given the lack of safety guarantees of RL. 
 However, several problems come into place when considering the deployment of the trained agent. Considering that an agent has done well in 
-a designed simulation does not imply that it will do as well in the real-world. Overall, it must be that certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave 
+a designated simulation does not imply that it will do as well in the real-world. Overall, it must be that certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave 
 when out of simulation. This problem of adaptation is known as \emph{Meta-learning}. Meta-learning in reinforcement learning is the problem of learning-to-learn, which is about efficiently
 adapting a learned policy to conditions and tasks that were not encountered in the past. In RL, meta-learning
 involves adapting the learning parameters, balancing exploration and exploitation to direct the
@@ -305,7 +305,7 @@ vision analogy-making \cite{Reed2015DeepVA}, or learning communication protocols
 
 \medskip
 Rewards are domain dependent and thus, given domain specific rules, a \emph{domain informed} module can guide a RL agent towards better decisions. This can be done by 
-adapting the reward function by defining which states are desirable, which are to be avoided and which are fatal. Given rules and judgments, a logic programming module 
+adapting the reward function. For instance, we consider defining which states are desirable, which are to be avoided and which are fatal. Given rules and judgments, a logic programming module 
 is able to search the space and send feedback to the reinforcement learning agent. The goal is a systematic method to design a reward function which can ensure faster and more efficient 
 training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma. For instance, if a domain informed module 
 can infer that only one of the possible next states is desirable, then exploration in that specific case is suboptimal.  
@@ -336,6 +336,7 @@ that has previously given a negative reward is suboptimal.
 \subsection{Architecture}
 In this section, we lay the foundations of the architecture that combines the Domain Informed Oracle with 
 reinforcement learning. Note that in our proposed architecture, we suppose Q-learning, a specific method to compute the policy in RL. 
+It does not mean that our solution is specific to Q-learning. 
 
 \medskip 
 
@@ -354,10 +355,10 @@ reinforcement learning. Note that in our proposed architecture, we suppose Q-lea
   \label{fig:diorl}
 \end{figure}
 
-The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more details. The environment, which as we follow a simulation is formalized in the scenario, sends the current state 
-to the Q-Learning algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment that is then 
-updated and the resulting state along its associated reward is computed from the reward function and step function formalized in the scenario. Thus, in the next iteration, the 
-agent receives the reward from its previous action which it uses to improve its policy and continues with its training starting from the next state.  
+The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more details. The environment defined by the scenario sends the current state 
+to the Q-Learning algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
+The resulting state along its associated reward is computed from the reward function and step function formalized in the scenario. Thus, in the next iteration, the 
+agent receives the reward from its previous action which it uses to improve its policy and continues with its training starting from the computed next state.  
 
 \medskip 
 
@@ -381,7 +382,7 @@ independent of the DIO implementation. In the following, we will define $A$ by i
   \item The scenario queries DIO. It sends $(s_t, a)$, the state at time $t$ and the action. It also sends $L : s \rightarrow t$ where $t$ is a sum of types: 
         $t \equiv t_1 + t_2 .. + t_n$. For instance, consider our previous example of the chess game and let the scenario define good openings as "desirable" and random openings as 
         "undesirable". Thus $t \equiv d + ud$ where $d$ is equivalent to desirable and $ud$ to undesirable. 
-  \item The first step of DIO is translation $T : \mathbb{R}^n \rightarrow t_1 \times t_2 \times ... t_n$ that takes in the state vector $s_t$ and returns a conjunction of propositions, let it be $P$. $P$ is equivalent to 
+  \item The first step of DIO is a translation $T : \mathbb{R}^n \rightarrow t_1 \times t_2 \times ... t_n$ that takes in the state vector $s_t$ and returns a conjunction of propositions, let it be $P$. $P$ is equivalent to 
         our set of ground facts.
   \item P is passed alongside the action to the domain specific rules defined in DIO. 
   \item Using step semantics, DIO generates possible worlds up to a given time $t'$. Note that given the stochasticity of the environment, there is not certainty on
@@ -400,11 +401,10 @@ independent of the DIO implementation. In the following, we will define $A$ by i
   \label{fig:diosim}
 \end{figure}
 
-Note how this does not guarantee that the reward function will be informed in a meaningful way.
+Observe how this does not guarantee that the reward function will be informed in a meaningful way.
 To that end, we need to consider (1) what are the specifications of a 'good' reward function, (2) what conditions should be set 
 on the domain specific rules and $L$ provided by the scenario, (3) how to define a systematic way for the scenario to use 
 this information. Those considerations are left for future investigations. 
-
  
 
 \section{Traffic Simulation} \label{traffic}
@@ -429,7 +429,7 @@ Precisely, our action space at time $t$ is a range delimited by the minimum acce
 \end{equation*}
 We define $d$ a function that takes in the initial position $i$ and the current position $p$ and computes the distance travelled. 
 By putting everything together, we can see that the reward is maximized when the agent travels the longest distance in a shortest 
-amount of time while making sure that when an obstacle is detected, acceleration is kept low. 
+amount of time (without colliding at high speed) while making sure that when an obstacle is detected, acceleration is kept low. 
 \subsection{Domain Specific Rules in DIO}
 Note that DIO is a logic programming module that we design in Prolog and 
 carry to Python via PySwip \cite{tekol2020}.
