@@ -152,7 +152,7 @@
   %
   The comparison is based on performance which we define by three
   metrics: time to train, optimality of the learned policy and
-  finally, number of errors through training. 
+  finally, number of errors states reached. 
   
 \end{abstract}
 
@@ -281,16 +281,18 @@ we can ensure a faster and more efficient training, possibly with fewer errors.
 
 \subsection{Challenges in Reinforcement Learning}
 \label{sec:challenges}
-(1) reward shaping, (2) the exploration-exploitation dilemma and (3) meta-learning are main challenges
+
+Reward shaping (1), the exploration-exploitation dilemma (2) and
+meta-learning (3) are main challenges
 that make it harder for RL to be adopted as a solution to more real-world problems. 
 
 \medskip 
 
-(1) refers to the lack of systematic methods to design a reward
+\emph{Reward shaping}~\cite{laud2011} refers to the lack of systematic methods to design a reward
   function that ensures fast and efficient learning. This generation of an appropriate 
-reward function for a given problem is still an open challenge \cite{kober2013}. This problem is known as \textit{Reward Shaping} \cite{laud2011}.  
+reward function for a given problem is still an open challenge~\cite{kober2013}.
 Ideally, rewards would be given by the real-world, i.e. \textit{native rewards}. For instance, recent work investigates dynamically generating a reward 
-using a user verbal feedback to the autonomous agent \cite{gonzalez2010}. However, most RL agents 
+using a user verbal feedback to the autonomous agent~\cite{gonzalez2010}. However, most RL agents 
 can only stay in simulation due to the lack of safety guarantees. This is because of the trial-and-error nature of the RL training. 
 Thus, there exists a need for \textit{shaping rewards} instead. There are reasonable criteria on how this should be done, those are \emph{standard practices}. For instance, 
 rewards that can be continuously harvested speed up convergence
@@ -307,7 +309,7 @@ function. A consequence of finding a systematic method to shaping rewards handle
 
 \medskip
 
-(2) is the question of whether to always exploit what the
+The \emph{exploration vs. exploitation dilemma} is the question of whether to always exploit what the
 agent knows or explore in the hope that an unexplored state might
 result in better rewards. This dilemma of \emph{exploration} vs. \emph{exploitation} is a central issue of RL. Consider this problem. An agent is at an intersection. It has the choice of going either right or left. 
 It does not yet know the outcome of either. It chooses right at a given point and receives a reward $r=1$. The question is "When faced with the same decision, should it keep going right?" There are two issues to consider. 
@@ -323,7 +325,7 @@ acquired knowledge and resolving the conflict when necessary. More interestingly
 
 \medskip
 
-(3) is the problem of deploying an agent trained in a simulation to
+\emph{Meta-learning} is the problem of deploying an agent trained in a simulation to
 the real-world, or possibly another simulation, where it encounters
 state configurations it did not during its training. The goal is to
 be able to efficiently adapt to those configurations. The problem of meta-learning in RL stems from the uncertainties of the world. 
@@ -331,13 +333,14 @@ Consider the result of training: It is a policy $\pi$, a function to map states 
 This training is most often done in simulation, given the lack of safety guarantees of RL. 
 However, several problems come into place when considering the deployment of the trained agent. Considering that an agent has done well in 
 a designated simulation does not imply that it will do as well in the real-world. Overall, it must be that certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave 
-when out of simulation. This problem of adaptation is known as \emph{Meta-learning}. Meta-learning in reinforcement learning is the problem of learning-to-learn, which is about efficiently
+when out of simulation. Meta-learning in reinforcement learning is the problem of learning-to-learn, which is about efficiently
 adapting a learned policy to conditions and tasks that were not encountered in the past. In RL, meta-learning
 involves adapting the learning parameters, balancing exploration and exploitation to direct the
 agent interaction \cite{gupta_meta-reinforcement_2018,schweighofer_meta-learning_2003}. Meta-learning is a central problem in AI, since an agent that can solve more
 and more problems it has not seen before, approaches the ideal of a general-purpose AI. However, as noted previously, a solution to (2) implies 
 a continuous adaptation to knowledge. Since the conflict of exploration and exploitation is resolved, the agent adapts accordingly to tasks it encountered in the past (exploiting), but also 
-tasks it encounters for the first time (exploring). Thus, from (2) one can have a significant impact on (3)
+tasks it encounters for the first time (exploring). Thus, from (2) one
+can have a significant impact on (3).
 
 
 \section{Symbolic Reasoning for Reinforcement Learning} 
@@ -355,7 +358,7 @@ A key question the field targets is identifying the necessary and
 sufficient building blocks of AI~\cite{garcez2020neurosymbolic},
 namely, how can we provide the semantics of knowledge, and work
 towards meta-learning? 
-
+%
 Current Neurosymbolic AI trends are concerned with knowledge representation and reasoning, namely, they investigate computational-logic systems 
 and representation to precede learning in order to provide some form of incremental update, e.g. a meta-network to group two sub-neural networks. \cite{Besold2017NeuralSymbolicLA}
 This leads to neurosymbolic AI finding various applications including vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
@@ -440,8 +443,10 @@ independent of the DIO implementation. In the following, we will define $A$ by i
   \item The scenario queries DIO. It sends $(s_t, a)$, the state at time $t$ and the action. It also sends $L : s \rightarrow t$ where $t$ is a sum of types: 
         $t \equiv t_1 + t_2 .. + t_n$. For instance, consider our previous example of the chess game and let the scenario define good openings as "desirable" and random openings as 
         "undesirable". Thus $t \equiv d + ud$ where $d$ is equivalent to desirable and $ud$ to undesirable. 
-  \item The first step of DIO is a translation $T : \mathbb{R}^n \rightarrow t_1 \times t_2 \times ... t_n$ that takes in the state vector $s_t$ and returns a conjunction of propositions, let it be $P$. $P$ is equivalent to 
-        our set of ground facts.
+  \item The first step of DIO is a translation $T : \mathbb{R}^n
+  \rightarrow t_1 \times t_2 \times ... t_n$ that takes in the state
+  vector $s_t$ and returns a conjunction of propositions $P = A_1 \wedge
+  A_2 \wedge ... \wedge A_n$. This is our set of ground facts.
   \item P is passed alongside the action to the domain specific rules defined in DIO. 
   \item Using step semantics, DIO generates possible worlds up to a given time $t'$. Note that given the stochasticity of the environment, there is not certainty on
         whether the worlds expected by DIO will necessarily happen. Consider Figure \ref{fig:diosim}.
@@ -465,7 +470,9 @@ on the domain specific rules and $L$ provided by the scenario, (3) how to define
 this information. Those considerations are left for future investigations. 
  
 
-\section{Traffic Simulation} \label{traffic}
+\section{Traffic Simulation} 
+\label{traffic}
+
 Given the definition of our DIO architecture, the performance as shown in Figure \ref{fig:overview} will be judged on a Traffic Simulation. 
 Precisely, we make use of the OpenSource code of Carla \cite{Dosovitskiy17} to put our implementation in practice. 
 \subsection{Scenario in Reinforcement Learning}
@@ -488,7 +495,9 @@ Precisely, our action space at time $t$ is a range delimited by the minimum acce
 We define $d$ a function that takes in the initial position $i$ and the current position $p$ and computes the distance travelled. 
 By putting everything together, we can see that the reward is maximized when the agent travels the longest distance in a shortest 
 amount of time (without colliding at high speed) while making sure that when an obstacle is detected, acceleration is kept low. 
+
 \subsection{Domain Specific Rules in DIO}
+
 Note that DIO is a logic programming module that we design in Prolog and 
 carry to Python via PySwip \cite{tekol2020}.
 The first step of DIO is to consider the translation. 
@@ -518,7 +527,8 @@ guarantee time efficiency. While we hypothesize that the RL would learn faster b
 domain knowledge, we are expecting iterations to take longer as the feedback loop incorporates DIO's computation. This part is an ongoing work. 
 
 \section{Related Work}
-As discussed previously in section \ref{symrl}, neurosymbolic AI trends show promising results in improving ML algorithms, whether that is from 
+
+As discussed previously in Section \ref{symrl}, neurosymbolic AI trends show promising results in improving ML algorithms, whether that is from 
 an interpretability aspect or an optimization one. More recent works take this trend and incorporate symbolic reasoning and 
 domain knowledge in reinforcement learning settings \cite{Driessens2010,Romero2020,achiam2017,marek2010}. \cite{marek2010,Romero2020} use the general idea of \textit{reward shaping} and \textit{epsilon adaptation} respectively 
 to incorporate procedural knowledge into a RL algorithm. Both introduce this combination as a successful strategy to guide the exploration and exploitation tradeoff in RL. They both show promising results. While 
@@ -531,6 +541,7 @@ While \cite{Romero2020,Driessens2010} both present promising rewards, they lack 
 we are hopeful that symbolic reasoning and RL integration could provide a solution for reward shaping, meta-learning and the exploration-exploitation dilemma. 
 
 \section{Conclusions}
+
 In conclusion, as RL faces the issues of reward shaping, meta-learning and the exploration-exploitation dilemma, domain knowledge show promising results in 
 improving reinforcement learning methods. The main challenge is to make such an integration seamless, and independent of the AI implementation. 
 As we start incorporating our modules into one architecture to test on our Traffic Simulator in Section \ref{traffic}, we will be able to show preliminary 
@@ -543,6 +554,8 @@ results. Similarly, we look further into the specifications of DIO to ensure tha
 
 % Commenting this in/out to include/exclude the appendix
 \newpage
+
+\appendix
 \input{appendix}
 
 \end{document}
