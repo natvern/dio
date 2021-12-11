@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{url}
+\usepackage{proof}
 
 \usepackage{xcolor}
 \newcommand{\bluenote}[1]{\color{blue}{ \em #1 }\color{black}}
@@ -60,40 +61,27 @@
 
 \maketitle 
 
-\textcolor{red}{To redo, don't read.}
-\begin{abstract} Reinforcement learning (RL), though a powerful and simple trial-and-error procedure that found a lot of success in games like Go, cannot be deployed in the real world 
-because of the lack of security guarantees. For instance, though an autonomous car trained with reinforcement learning is bound to learn how to drive, the AI needs to crash 
-to learn that crashing is not desirable. 
+\begin{abstract} Reinforcement learning (RL) is a powerful AI method that does not require pre-gathered data but 
+  relies on a trial-and-error process for the agent to learn. This is made possible through a reward function that associates 
+  current state configurations to a numerical value. The agent's goal is then to maximize its cumulative reward over its lifetime. 
+  Unfortunately, RL suffers multiple challenges: (1) reward shaping, (2) meta-learning and (3) the exploration-exploitation dilemma. 
+  (1) refers to the lack of systematics methods to design a reward function that ensures fast and efficient learning. (2) is the problem of 
+  deploying a trained agent in one simulation to the real-world or possibly another simulation where it encounters 
+  state configurations it did not during its training. The goal is to be able to efficiently adapt to those configurations. Finally, (3) 
+  is the question of whether to always exploit what the agent knows or explore in the hope that an unexplored state 
+  might result in better rewards. 
 
-\medskip
+  \medskip 
 
-In the context of the proposed thesis, we investigate both the security and the interpretability aspect of reinforcement learning in a cooperative adaptive cruise control inspired from \cite{vnc20},
-in the aim of finding how formal security frameworks can guide the representation, robustness and extrapolation of knowledge in reinforcement
-learning agents. We do so by experimenting and comparing both the optimization and security of three different RL implementations. 
-
-\medskip
-
-The first is a basic tabular Q-learning where we expect no security guarantees. The second is a hybrid architecture that incorporates the safe controller in \cite{vnc20} in a RL architecture. 
-The safe controller (SC) computes a range of safe velocities given the current state of the environment in the car platooning scenario. Precisely, for multiple vehicles following each other, platooning aims to reduce the distance between them, hence taking less space on the road 
-and allowing more vehicles to occupy highways, for instance. In the RL architecture, the SC then constricts the possible actions of the RL continuously at every given time step and the role of the RL is purely 
-to find the optimal velocity in the safe range to minimize the distance between the cars. The third is what we will define as a logic-based inference RL. We investigate learning inferences rules in a deterministic environment 
-where the result of an action given a state is not dependent on any probabilistic event. We approach the problem using inductive reasoning where the goal is to incorporate the learned rule knowledge into the decision making of a tabular Q-learning RL agent. 
-In the given scenario, this will make use of the SC to develop a mapping from the state representation to a reward scheme, i.e. punish before a crash is bound to happen and adapt the Q-value and the epsilon-greedy approach. 
+  We propose a \emph{Domain Informed Oracle (DIO)} based on domain specific rules and judgments to provide 
+  an informed decision to the reward function, thus permitting to dynamically adapt the rewards. DIO is incorporated 
+  in a RL architecture and is defined by its behavior in relation to the input given by the reward function. 
+  Our implementation is tested on a Traffic Simulator scenario and compared to a basic uninformed RL algorithm. The comparison 
+  is based around Performance which we define by three metrics: time to train, optimality of the learned policy and finally, number of errors through training. 
+  
 \end{abstract}
 
 
-{\color{red}Writing rules (by Giselle Reis):
-\begin{itemize}
-  \item Each sentence must be a natural continuation of the next, reusing
-  the same words and concepts. This ensures a natural reading flow.
-  \item Crucial concepts are emphasized when they appear for the first
-  time.
-  \item Information is given in a \emph{by need} basis. Don't overload
-  the reader with more information than necessary at any given point.
-\end{itemize}
-}
-
-\newpage
 
 \section{Introduction}
 Implementing a robust adaptive controller that is effective in terms
@@ -190,7 +178,10 @@ reward function for a given problem is still an open challenge \cite{kober2013}.
 Ideally, rewards would be given by the real-world, i.e. \textit{native rewards}. For instance, recent work investigates dynamically generating a reward 
 using a user verbal feedback to the autonomous agent \cite{gonzalez2010}. However, most RL agents 
 can only stay in simulation due to the lack of safety guarantees. This is because of the trial-and-error nature of the RL training. 
-Thus, there exists a need for \textit{shaping rewards} instead. There are reasonable criteria on how this should be done: \emph{standard practices}. \textcolor{red}{describe those practices}
+Thus, there exists a need for \textit{shaping rewards} instead. There are reasonable criteria on how this should be done, those are \emph{standard practices}. For instance, 
+rewards that can be continuously harvested speed up convergence compared to rewards that can only be harvested at 'the end' (i.e. the chess example). Similarly, one should avoid only 
+negative rewards as that results in unwanted behavior. Furthermore, if dealing with a continuous state space, it helps to have a polynomial differential function as the reward function 
+as it is shown to help the agent learn faster. Finally, one can normalize rewards at the end as to not end up with too many discrepancies. 
 However, there still exists a lack of a systematic method to design a reward function.
 
 \subsection{Exploration vs. Exploitation}
@@ -214,7 +205,7 @@ agent interaction \cite{gupta_meta-reinforcement_2018,schweighofer_meta-learning
 and more problems it has not seen before, approaches the ideal of a general-purpose AI. 
 
 
-\section{Symbolic Reasoning for Reinforcement Learning}
+\section{Symbolic Reasoning for Reinforcement Learning} \label{symrl}
 As to tackle the challenges from section 3, we are inspired from current Neurosymbolic AI trends. Precisely, neurosymbolic integration has been an ongoing work in the last years towards a combination of deep learning (DL) and symbolic reasoning.
 The work has been a response to criticism of DL on its lack of formal semantics and intuitive explanation and the lack of expert knowledge towards guiding machine learning models. 
 Key questions the field targets are identifying the necessary and sufficient building blocks of AI \cite{garcez2020neurosymbolic}, namely, how can we provide the semantics of knowledge, 
@@ -229,12 +220,13 @@ vision analogy-making \cite{Reed2015DeepVA}, or learning communication protocols
 Rewards are domain dependent and thus, given domain specific rules, a \emph{domain informed} module can guide a RL agent towards better decisions. This can be done by 
 adapting the reward function by defining which states are desirable, which are to be avoided and which are fatal. Given rules and judgments, a logic programming module 
 is able to search the space and send feedback to the reinforcement learning agent. The goal is a systematic method to design a reward function which can ensure faster and more efficient 
-training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma, \textcolor{red}{how tho}
-We will call the propose module a \emph{Domain Informed Oracle (DIO)}. 
+training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma. For instance, if a domain informed module 
+can infer that only one of the possible next states is desirable, then exploration in that specific case is suboptimal.  
+We will call the proposed module a \emph{Domain Informed Oracle (DIO)}. 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.6]{overview.png}
+  \includegraphics[scale=0.5]{overview.png}
   \caption{Overview of the proposed solution}
   \label{fig:overview}
 \end{figure}
@@ -262,7 +254,7 @@ reinforcement learning. Note that in our proposed architecture, we suppose Q-lea
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.55]{basicrl.png}
+  \includegraphics[scale=0.41]{basicrl.png}
   \caption{Reinforcement learning architecture}
   \label{fig:basicrl}
 \end{figure}
@@ -270,7 +262,7 @@ reinforcement learning. Note that in our proposed architecture, we suppose Q-lea
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.55]{dio.png}
+  \includegraphics[scale=0.42]{dio.png}
   \caption{Dio+RL architecture}
   \label{fig:diorl}
 \end{figure}
@@ -302,16 +294,24 @@ independent of the DIO implementation. In the following, we will define $A$ by i
   \item The scenario queries DIO. It sends $(s_t, a)$, the state at time $t$ and the action. It also sends $L : s \rightarrow t$ where $t$ is a sum of types: 
         $t \equiv t_1 + t_2 .. + t_n$. For instance, consider our previous example of the chess game and let the scenario define good openings as "desirable" and random openings as 
         "undesirable". Thus $t \equiv d + ud$ where $d$ is equivalent to desirable and $ud$ to undesirable. 
-  \item The first step of DIO is translation $T : \mathbb{R}^n \rightarrow t_1 \times t_2 \times ... t_n$ that takes in the state vector $s_t$ and returns a conjunction of propositions, let it be $P$. 
+  \item The first step of DIO is translation $T : \mathbb{R}^n \rightarrow t_1 \times t_2 \times ... t_n$ that takes in the state vector $s_t$ and returns a conjunction of propositions, let it be $P$. $P$ is equivalent to 
+        our set of ground facts.
   \item P is passed alongside the action to the domain specific rules defined in DIO. 
   \item Using step semantics, DIO generates possible worlds up to a given time $t'$. Note that given the stochasticity of the environment, there is not certainty on
-        whether the worlds expected by DIO will necessarily happen. 
+        whether the worlds expected by DIO will necessarily happen. Consider Figure \ref{fig:diosim}.
   \item Those possible worlds, equivalent to states, can be transformed using $L$ to $t$. 
   \item At the last step, DIO ends up with a set $S$ of $t$ that defines the labels of all the possible worlds.
   \item The last step is left as an inference depending on how the the judgment for deciding a final $A$ from $S$ 
         is formulated. For instance, we can consider a rule where if most of the possible worlds are undesirable, then let $A$ be undesirable.
   \item Finally, $A$ is passed to the scenario. Note then that $A : t$. 
 \end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{scworlds.png}
+  \caption{Game Tree Simulation by DIO}
+  \label{fig:diosim}
+\end{figure}
 
 Note how this does not guarantee that the reward function will be informed in a meaningful way.
 To that end, we need to consider (1) what are the specifications of a 'good' reward function, (2) what conditions should be set 
@@ -321,23 +321,82 @@ this information. Those considerations are left for future investigations.
  
 
 \section{Traffic Simulation} \label{traffic}
+Given the definition of our DIO architecture, the performance as shown in Figure \ref{fig:overview} will be judged on a Traffic Simulation. 
+Precisely, we make use of the OpenSource code of Carla \cite{Dosovitskiy17} to put our implementation in practice. 
+\subsection{Scenario in Reinforcement Learning}
+Our autonomous agent is one vehicle on the road. The road is populated with other vehicles, walkers and traffic signs and lights. 
+The goal of the agent is to get from point $A$ to point $B$ on the map in the fastest time possible. Carla defines \emph{sensors} to collect 
+data from the world. From the sensors, we collect \textbf{collision detector}, \textbf{obstacle detector}, \textbf{IMU} (which defines the internal state of the vehicle that includes acceleration)
+and finally \textbf{position} data to incorporate into our state representation. Thus, 
+\begin{equation*}
+  S_t = [t, p, c, o, a]
+\end{equation*} 
+In other words, the state at time $t$ is defined by $t$ the time, $p$ the position and $a$ the acceleration. $c$ and $o$ are both flags (-1/1) that indicate 
+respectively whether there is a collision or an obstacle detected. (-1) is equivalent to detected while (1) is equivalent to non-detected. Furthermore, 
+\begin{equation*}
+  A_t = ](a_t)-min, (a_t)+max[
+\end{equation*}
+Precisely, our action space at time $t$ is a range delimited by the minimum acceleration possible and the maximum acceleration possible. Finally, 
+\begin{equation*}
+  R_t(s_t) = c * (d(i, p)/t) + (o * a)
+\end{equation*}
+We define $d$ a function that takes in the initial position $i$ and the current position $p$ and computes the distance travelled. 
+By putting everything together, we can see that the reward is maximized when the agent travels the longest distance in a shortest 
+amount of time while making sure that when an obstacle is detected, acceleration is kept low. 
+\subsection{Domain Specific Rules in DIO}
+Note that DIO is a logic programming module that we design in Prolog and 
+carry to Python via PySwip \cite{tekol2020}.
+The first step of DIO is to consider the translation. 
+\[
+  \infer[T_1]{[t, p, -1, 1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                \wedge \text{Acc}(a) \wedge
+                              \text{Collision}}
+   \qquad
+   \infer[T_2]{[t, p, -1, -1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                  \wedge \text{Acc}(a) \wedge
+                                  \text{Collision} \wedge \text{Obstacle}}
+\]
 
+\[
+  \infer[T_3]{[t, p, 1, 1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                \wedge \text{Acc}(a)
+                            }
+   \qquad
+   \infer[T_4]{[t, p, 1, -1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                  \wedge \text{Acc}(a) \wedge \text{Obstacle}}
+\]
+
+The domain specific rules will follow the same idea, taking in the ground facts and the action, 
+and infering the next set of ground facts. Thus, DIO searchs for configurations of ground facts given the step semantics, 
+to return the set of labels. The main challenge is pruning the search space as we want to 
+guarantee time efficiency. While we hypothesize that the RL would learn faster by incorporating 
+domain knowledge, we are expecting iterations to take longer as the feedback loop incorporates DIO's computation. This part is an ongoing work. 
 
 \section{Related Work}
-
-take related work from prof. giselle notes
+As discussed previously in section \ref{symrl}, neurosymbolic AI trends show promising results in improving ML algorithms, whether that is from 
+an interpretability aspect or an optimization one. More recent works take this trend and incorporate symbolic reasoning and 
+domain knowledge in reinforcement learning settings \cite{Driessens2010,Romero2020,achiam2017,marek2010}. \cite{marek2010,Romero2020} use the general idea of \textit{reward shaping} and \textit{epsilon adaptation} respectively 
+to incorporate procedural knowledge into a RL algorithm. Both introduce this combination as a successful strategy to guide the exploration and exploitation tradeoff in RL. They both show promising results. While 
+\cite{marek2010} focuses on providing formal specifications for reward shaping, it lacks practical 
+consequences to the implementation of most RL to make use of its formal methods conclusions. On the other hand, \cite{Romero2020} proposes a method to adapt $\epsilon$ based on domain knowledge, the method is specifically applied to "Welding Sequence Optimization".  
+To do so, the RL algorithm is modified in itself, similarly to what was done in \cite{Driessens2010}. Precisely, in \cite{Driessens2010}, the RL algorithm itself is 
+modified to deal with states that are model-based as opposed to vectors. They defined their method as Relational RL. 
+Furthermore, they conclude that by using more expressive representation language for the RL scenario, their method can be potentially offer a solution to the problem of meta-learning. 
+While \cite{Romero2020,Driessens2010} both present promising rewards, they lack the modularity necessary for scaling the proposed methods to further RL implementations. Those by taking their results into consideration, 
+we are hopeful that symbolic reasoning and RL integration could provide a solution for reward shaping, meta-learning and the exploration-exploitation dilemma. 
 
 \section{Conclusions}
-\textcolor{red}{todo.}
+In conclusion, as RL faces the issues of reward shaping, meta-learning and the exploration-exploitation dilemma, domain knowledge show promising results in 
+improving reinforcement learning methods. The main challenge is to make such an integration seamless, and independent of the AI implementation. 
+As we start incorporating our modules into one architecture to test on our Traffic Simulator in Section \ref{traffic}, we will be able to show preliminary 
+results. Similarly, we look further into the specifications of DIO to ensure that it informs the scenario in a meaningful way as discussed in Section \ref{scspecs}. 
 
 \newpage
 
 \bibliographystyle{unsrt}
 \bibliography{biblio.bib}
 
-\newpage
 
-\section{Appendix}
 
 
 
