@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.24">
-<info created="D:20211208233405" modified="D:20211210210902"/>
+<info created="D:20211210124919" modified="D:20211210124919"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -312,110 +312,75 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="1 0 0 1 0 -4" stroke="black">
-128 784 m
-128 752 l
-448 752 l
-448 784 l
-h
+<path layer="alpha" stroke="black">
+16 0 0 16 112 624 e
+</path>
+<path stroke="black" fill="black">
+16 0 0 16 240 624 e
 </path>
 <path stroke="black">
-136 776 m
-136 760 l
-240 760 l
-240 776 l
-h
+16 0 0 16 240 672 e
 </path>
 <path stroke="black">
-352 776 m
-352 760 l
-440 760 l
-440 776 l
-h
+16 0 0 16 240 720 e
 </path>
-<path matrix="1 0 0 1 0 -68" stroke="black">
-160 616 m
-160 592 l
-384 592 l
-384 616 l
-h
-</path>
-<text matrix="1 0 0 1 56 -68" transformations="translations" pos="184 600" stroke="black" type="label" width="59.665" height="6.808" depth="0" valign="baseline">Environment </text>
-<text matrix="1 0 0 1 52 -4" transformations="translations" pos="352 792" stroke="black" type="label" width="39.878" height="6.808" depth="0" valign="baseline">Scenario
-</text>
-<text matrix="1 0 0 1 24 -76" transformations="translations" pos="208 536" stroke="black" type="label" width="104.47" height="6.926" depth="1.93" valign="baseline">Policy : State to Action</text>
-<text matrix="1 0 0 1 8 -4" transformations="translations" pos="144 768" stroke="black" type="label" width="75.439" height="6.918" depth="0" valign="baseline">Reward function
-</text>
-<text matrix="1 0 0 1 4 -4" transformations="translations" pos="264 768" stroke="black" type="label" width="49.315" height="6.815" depth="1.93" valign="baseline">State space</text>
-<text matrix="1 0 0 1 4 -4" transformations="translations" pos="360 768" stroke="black" type="label" width="59.001" height="6.815" depth="1.93" valign="baseline">Action space
-</text>
-<path matrix="1 0 0 1 0 -68" stroke="black" rarrow="normal/normal">
-280 544 m
-280 576 l
-</path>
-<path matrix="1 0 0 1 -128 -68" stroke="black">
-320 688 m
-320 640 l
-416 640 l
-416 688 l
-h
-</path>
-<path matrix="1 0 0 1 -80 -68" stroke="black" rarrow="normal/normal">
-336 640 m
-336 616 l
-</path>
-<text matrix="1 0 0 1 -128 -68" transformations="translations" pos="336 664" stroke="black" type="label" width="49.426" height="6.815" depth="1.93" valign="baseline">Q-Learning</text>
-<text matrix="1 0 0 1 -80 -68" transformations="translations" pos="344 624" stroke="black" type="label" width="33.098" height="6.918" depth="0" valign="baseline">Reward</text>
-<text matrix="1 0 0 1 -52 -16" transformations="translations" pos="400 600" stroke="black" type="label" width="29.058" height="6.808" depth="0" valign="baseline">Action</text>
-<text matrix="1 0 0 1 0 -68" transformations="translations" pos="224 624" stroke="black" type="label" width="22.693" height="6.808" depth="0" valign="baseline">State</text>
-<path matrix="1 0 0 1 0 -68" stroke="black" rarrow="normal/normal">
-212 640 m
-212 616 l
-</path>
-<path matrix="1 0 0 1 0 -68" stroke="black" rarrow="normal/normal">
-352 616 m
-352 672
-288 672 c
-</path>
-<path matrix="1 0 0 1 0 -68" stroke="black">
-144 704 m
-144 576 l
-400 576 l
-400 704 l
-h
-</path>
-<text matrix="1 0 0 1 -172 -16" transformations="translations" pos="444 688" stroke="black" type="label" width="108.399" height="6.918" depth="0" valign="baseline">Domain Informed Oracle</text>
-<path matrix="1 0 0 1 -148 0" stroke="black">
-416 704 m
-416 648 l
-532 648 l
-532 704 l
-h
-</path>
-<text matrix="1 0 0 1 -124 -76" transformations="translations" pos="300 736" stroke="black" type="label" width="88.363" height="7.473" depth="2.49" valign="baseline">Query(state, action)</text>
-<path stroke="black" rarrow="normal/normal">
-160 752 m
-160 636 l
-</path>
-<path stroke="black" rarrow="normal/normal">
-268 672 m
-208 672
-208 760 c
-</path>
-<path stroke="black" rarrow="normal/normal">
-224 760 m
-224 688
-268 688 c
-</path>
-<text matrix="1 0 0 1 -4 -8" transformations="translations" pos="240 720" stroke="black" type="label" width="7.472" height="6.808" depth="0" valign="baseline">A</text>
-<text matrix="1 0 0 1 12 24" transformations="translations" pos="84 692" stroke="black" type="label" width="60.412" height="7.473" depth="2.49" valign="baseline">Query(reward</text>
-<text matrix="1 0 0 1 8 24" transformations="translations" pos="84 680" stroke="black" type="label" width="66.75" height="7.473" depth="2.49" valign="baseline">and next-state)</text>
 <path stroke="black">
-248 776 m
-248 760 l
-344 760 l
-344 776 l
-h
+16 0 0 16 240 576 e
 </path>
+<path stroke="black">
+16 0 0 16 240 528 e
+</path>
+<path fill="darkred">
+16 0 0 16 368 672 e
+</path>
+<path stroke="black">
+16 0 0 16 368 624 e
+</path>
+<path stroke="black">
+16 0 0 16 368 576 e
+</path>
+<path stroke="black" rarrow="normal/normal">
+224 672 m
+128 624 l
+</path>
+<path stroke="black" rarrow="normal/normal">
+224 720 m
+128 624 l
+</path>
+<path matrix="1 0 0 1 4 0" stroke="black" rarrow="normal/normal">
+224 624 m
+128 624 l
+</path>
+<path stroke="black" rarrow="normal/normal">
+224 576 m
+128 624 l
+</path>
+<path stroke="black" rarrow="normal/normal">
+224 528 m
+128 624 l
+</path>
+<path stroke="black" rarrow="normal/normal">
+352 672 m
+256 624 l
+</path>
+<path stroke="black" rarrow="normal/normal">
+352 624 m
+256 624 l
+</path>
+<path stroke="black" rarrow="normal/normal">
+352 576 m
+256 624 l
+</path>
+<text matrix="1 0 0 1 20 0" transformations="translations" pos="64 592" stroke="black" type="label" width="52.387" height="6.918" depth="0" valign="baseline">Observation</text>
+<text matrix="1 0 0 1 20 20" transformations="translations" pos="176 688" stroke="black" type="label" width="9.482" height="4.297" depth="1.93" valign="baseline" style="math">p_1</text>
+<text matrix="1 0 0 1 20 12" transformations="translations" pos="176 656" stroke="black" type="label" width="9.482" height="4.297" depth="1.93" valign="baseline" style="math">p_2</text>
+<text matrix="1 0 0 1 4 8" transformations="translations" pos="192 624" stroke="black" type="label" width="9.482" height="4.297" depth="1.93" valign="baseline">$p_3$</text>
+<text matrix="1 0 0 1 4 4" transformations="translations" pos="192 592" stroke="black" type="label" width="9.482" height="4.297" depth="1.93" valign="baseline">$p_4$</text>
+<text matrix="1 0 0 1 20 -4" transformations="translations" pos="176 560" stroke="black" type="label" width="9.482" height="4.297" depth="1.93" valign="baseline">$p_5$</text>
+<text matrix="1 0 0 1 20 12" transformations="translations" pos="304 656" stroke="black" type="label" width="9.736" height="4.294" depth="1.49" valign="baseline">$a_1$</text>
+<text matrix="1 0 0 1 20 -12" transformations="translations" pos="304 640" stroke="black" type="label" width="9.736" height="4.294" depth="1.49" valign="baseline">$a_2$</text>
+<text matrix="1 0 0 1 20 0" transformations="translations" pos="304 592" stroke="black" type="label" width="9.736" height="4.294" depth="1.49" valign="baseline">$a_3$</text>
+<text transformations="translations" pos="212 752" stroke="black" type="label" width="66.196" height="6.918" depth="0" valign="baseline">Possible worlds</text>
+<text matrix="1 0 0 1 -8 -8" transformations="translations" pos="348 704" stroke="black" type="label" width="72.506" height="6.926" depth="1.93" valign="baseline">Resulting worlds</text>
 </page>
 </ipe>

@@ -33,6 +33,7 @@
 % For comment boxes.
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommand{\giselle}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{G: #1}}
+\newcommand{\samar}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=red]{S: #1}}
 
 \author{%
 %  \fontsize{10}{12}\selectfont
@@ -59,9 +60,8 @@
 
 \maketitle 
 
-\section{Abstract}
 \textcolor{red}{To redo, don't read.}
-Reinforcement learning (RL), though a powerful and simple trial-and-error procedure that found a lot of success in games like Go, cannot be deployed in the real world 
+\begin{abstract} Reinforcement learning (RL), though a powerful and simple trial-and-error procedure that found a lot of success in games like Go, cannot be deployed in the real world 
 because of the lack of security guarantees. For instance, though an autonomous car trained with reinforcement learning is bound to learn how to drive, the AI needs to crash 
 to learn that crashing is not desirable. 
 
@@ -79,6 +79,8 @@ and allowing more vehicles to occupy highways, for instance. In the RL architect
 to find the optimal velocity in the safe range to minimize the distance between the cars. The third is what we will define as a logic-based inference RL. We investigate learning inferences rules in a deterministic environment 
 where the result of an action given a state is not dependent on any probabilistic event. We approach the problem using inductive reasoning where the goal is to incorporate the learned rule knowledge into the decision making of a tabular Q-learning RL agent. 
 In the given scenario, this will make use of the SC to develop a mapping from the state representation to a reward scheme, i.e. punish before a crash is bound to happen and adapt the Q-value and the epsilon-greedy approach. 
+\end{abstract}
+
 
 {\color{red}Writing rules (by Giselle Reis):
 \begin{itemize}
@@ -91,55 +93,50 @@ In the given scenario, this will make use of the SC to develop a mapping from th
 \end{itemize}
 }
 
+\newpage
+
 \section{Introduction}
 Implementing a robust adaptive controller that is effective in terms
-of precision, time\giselle{What does time effectiveness mean?}, and quality of decision
+of precision, time, and quality of decision
 when facing dynamic and uncertain scenarios, has always been a central
-challenge in AI and robotics.\giselle{This sentence is too long and I
-think it has a lot of information. You need to explain what are each
-of these measures and why they are challenging.}
+challenge in AI and robotics. Precisely, as we want our autonomous agents to be deployed 
+in the real world, we want to ensure that they are able to adapt to unforeseen scenarios, as well as 
+keep their efficiency. This efficiency is measured in terms of their optimality and time taken to produce a decision. 
+%
 As autonomous cars are deployed, IoT is popularized, and human-robot interactions become more complex, we
 are more and more confronted with the need for robotic agents that can effectively and continually adapt
 to their surroundings, not only in simulation, but also in practice, when deployed as a cyber-physical system. 
 Since we are unable to provide a repertoire of all possible scenarios and actions,
 our agents need to be able to autonomously predict and adapt to new
-changes. RL\giselle{Reinforcement Learning (RL)} is an approach that
-supports developing these capabilities\giselle{What capabilites? Be
-explicit.}, \giselle{This should be another sentence.}it is also the solution that AlphaGo, Deepmind AlphaStar, and OpenAI Five have
+changes. Reinforcement Learning (RL) is an approach that
+supports dynamically adapting to new input. It is also the solution that AlphaGo, Deepmind AlphaStar, and OpenAI Five have
 adopted \cite{li2019reinforcement}, respectively for Go, StarCraft II and Dota 2 and found success in. 
 
-However, as RL is a trial-and-error process, a car trained using RL is
-bound to crash to learn not to crash again. Safe reinforcement
-learning\giselle{Define what you mean by safe reinforcement learning.
-Is it learning without error?} is then crucial 
-to investigate in order to be able to deploy it in larger scale, but also out of simulation. 
-The survey in \cite{kurdkelly2003} lays the foundations of
-verifications goals for Artificial Neural Networks (ANNs) to be
-ensured for safety-critical tasks\giselle{If this is relevant, explain
-what these verification goals are.}. The need for this behavioral
-constraints\giselle{What do you mean by behavioral constraints?} stems from the inability to analyze and 
-describe the behavior of NNs.\giselle{I don't know what you mean with
-the sentence that ends here.} The same argument translates to RL. In
-general, reinforcement learning does not ensure any of the
-verification conditions\giselle{Which are?} in \cite{kurdkelly2003}. 
-The observable behavior of a RL agent is unpredictable\giselle{Why?}
-(e.g. AlphaGo gamestyle) and will more often than not take hazardous
-actions since it is a trial-and-error process. Hence, it is important
-to investigate
-the use of verified safety controller\giselle{What is a verified
-safety controller?} and the interpretability of RL\giselle{From the
-text above, it is not clear how interpretability plays a role.} in
-order to achieve these verifications goals\giselle{Which are?}.  
+\medskip
+
+Reinforcement Learning is a powerful tool as it does not require pre-gathered data as most Machine Learning (ML) 
+techniques do. The general idea of RL is a trial-and-error process. In other words, a car trained using RL is bound to 
+crash to learn not to crash again. This learning is based around a \textit{domain dependent} reward function. For example, say we want to teach an autonomous car to stop at a STOP sign. We will 
+punish it via a negative reward when it does not, otherwise, we will reward it. Thus, through multiple iterations, 
+and with the goal to maximize its rewards, a reinforcement learning trained agent will learn to stop at a STOP sign. 
+%
+
+\medskip
+
+The task of choosing a reward function that ensures optimality is thus crucial. In the following work, we propose a Domain Informed Oracle (DIO) to
+inform a reinforcement learning . Precisely, we propose a systematic way to encode domain specific rules into a reward function for RL. We argue that such a combination will ensure 
+a faster and more efficient RL trained agent in terms of optimality. The proposed combination is then tested on a traffic simulation. The results are compared with 
+a RL implementation that makes use of standard practices to design a reward function. 
 
 
-\subsection{Reinforcement Learning as Trial-and-Error} 
+
+\section{Reinforcement Learning} 
 Reinforcement Learning is a method of learning that maps situations to
 actions in order to maximize its rewards
-\cite{sutton2018reinforcement}.\giselle{This needs to be explained in
-more detail. The reward function is the crucial measure for these
-algorithms and this needs to be clear for a reader that is not
-familiar with this field.} 
-Compared to data-driven machine learning algorithms, reinforcement learning has the advantage of not requiring a prior dataset as the agent is not told what to do, but rather 
+\cite{sutton2018reinforcement}. Rewards are numerical values associated to a state and action. Precisely, one defines a reward function 
+$R : (S * A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
+of the environment and the action refers to the action chosen by the RL agent. By defining this reward function and the scenario of the problem the agent is trying to solve, 
+reinforcement learning has the advantage of not requiring a prior dataset. Indeed, the agent is not told what to do, but rather 
 learns from the effect of its actions on the environment. Consider figure \ref{fig:rl}. 
 \begin{figure}[H]
   \centering
@@ -147,22 +144,7 @@ learns from the effect of its actions on the environment. Consider figure \ref{f
   \caption{Reinforcement Learning Routine}
   \label{fig:rl}
 \end{figure}
-The following RL routine shown in figure \ref{fig:rl} describes the high-level of how an agent using reinforcement learning can be trained. Precisely, 
-given the current external observation, which in practice are based on the sensors output are used to construct a state vector. This distinction between state and observation 
-is crucial in a RL setting. The underlying assumption of any RL
-implementation is the \textbf{Markov Property}.\giselle{I don't see
-how this is relevant to the explanation of how a RL algorithm works...} In other words, 
-the current state provides enough information to predict the future state and its associated reward. This needs not to be deterministic. It's the idea that a decision that was made $n$ steps
-in the past should not affect the current step the agent is in.
-\textcolor{red}{add some notes how this actually works a lot in
-practice.} Thus, it's only through the state vector that the agent is
-trained.\giselle{This is not relevant at this point. See this
-paragraph rewritten below.} 
-At every timestep, the agent takes in the state vector, and chooses an action. The environment then rewards it accordingly.  
 
-\medskip
-{\color{red}G: Last paragraph rewritten, for example.}
-\medskip
 
 The diagram in Figure~\ref{fig:rl} is a high-level description of how
 an agent using reinforcement learning can be trained.  
@@ -184,202 +166,166 @@ This reward is a domain dependent function that represents how
 %
 The agent's goal is to increase its reward by taking actions that
 reach better states each time.\giselle{This last sentence is like a
-magic box to me. Maybe we need to make it less magic, maybe not.}
+magic box to me. Maybe we need to make it less magic, maybe not.}\samar{I think it's fine to 
+keep it as a black box. It will involve mentioning Bayesian and Markov decision process and 
+I didn't need those in the latter half.} 
 %
-This is achieve by ... {\color{red}Do we want to go there?}
-
-\giselle{As a last paragraph in this section, emphasize how the reward
-function is the crucial aspect of the RL algorithm. The better the
-reward function, the faster the agent learns and with fewer errors.}
-
-\subsection{Engineering issues with Reinforcement Learning}
-\giselle{Why are these called engineering issues? Aren't they just
-issues? It might be better to call them challenges though.}
-
-In the routine shown in figure \ref{fig:rl}, we can identify
-two\giselle{It looks like you mention more than two issues below.} main engineering issues that are raised once RL is chosen for training. First, in the case of most scenarios, 
-a reward function needs to be designed. There are reasonable criteria on how this should be designed. For instance, consider a reinforcement learning agent whose goal is to predict the weather. 
-The closer the prediction, the more reward it should be given. \textcolor{red}{Add some references about how best rewards are chosen.}
-
-\medskip
-
-Second, there is a need to choose from the observation what we assume is needed for the state to hold the Markov Property. This can be easy to do for certain scenarios. 
-For instance, \textcolor{red}{add an example here}. However, it becomes more complex as tasks require more sensing. For instance, consider an autonomous vehicle. The observation could be 
-the current fuel, velocity, position, proximity sensors and camera feedback. It is a problem similar to feature extraction in most Machine Learning (ML) settings. \textcolor{red}{How it's usually being done in practice}
-
-
-\medskip
-
-The result of training is a policy, a function to map states to action, thus that maximizes the cumulative rewards. 
-However, several problems come into place when considering the deployment of the trained agent. First, given the mapping from observation to state vector, 
-certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave. 
-This results in an unsafe trained agent, thus constricting reinforcement learning to the realm of simulation. 
 
 \medskip 
 
-Simulation in itself poses multiple issues. The first is again, the need to design and account for how the external real-world environment would behave. 
-This can be hard to do accurately, and usually is the more exhausting part of the implementation process. A best case scenario is to be able to train any agent using RL in the 
-real-world. This can be done if we are able to guarantee some safety properties. Those safety properties need not to be perfect, but should severly decrease the possibility of accidents 
-and dangerous outcomes. 
+The reward function is a crucial aspect of the RL algorithm. For instance, consider a game of chess 
+where the agent is punished when it loses and rewarded if it wins. The agent is bound to learn how to 
+maximize its winnings but it will need to exhaust multiple possible combinations to learn. In this case, 
+the training time is not optimal. A better approach would be to also reward it for making a good opening, for instance. 
+Another example would be only considering negative rewards. Say we want our agent to escape a maze, and we punish it at every timestep for not escaping. 
+If there is a 'fire'/fatality state, the agent will learn to move towards the fatality state as to cut its negative rewards as soon as possible. 
+In conclusion, a good reward function is the first step of optimal learning. By choosing the right reward function, 
+we can ensure a faster and more efficient training, possibly with fewer errors. 
 
-\subsection{Safety in Reinforcement Learning}
+\section{Challenges in Reinforcement Learning}
 
-To be able to guarantee some safety properties, we look into a safe controller implementation that acts like an oracle, constricting the possible actions 
-of the RL agent to those it deems "safe". The following work will focus on (1) the integration of this safe controller to 
-the reinforcement learning training process, see section \ref{rlscarchitecture} and (2) the theoretical guarantees of the safe controller and its implementation, see section \ref{scspecs} and finally, (3) testing the hybrid architecture of RL+SC 
-on a vehicle platooning problem done in simulation as to compare its safety and optimality with a basic RL implementation.
-Figure \ref{fig:overviewsol} is an overview of the proposed solution and the high level basis of the work. 
+\subsection{Reward Shaping}
+The task of choosing a reward function that ensures optimality is thus crucial. However, the generation of an appropriate 
+reward function for a given problem is still an open challenge \cite{kober2013}. This problem is known as \textit{Reward Shaping} \cite{laud2011}.  
+Ideally, rewards would be given by the real-world, i.e. \textit{native rewards}. For instance, recent work investigates dynamically generating a reward 
+using a user verbal feedback to the autonomous agent \cite{gonzalez2010}. However, most RL agents 
+can only stay in simulation due to the lack of safety guarantees. This is because of the trial-and-error nature of the RL training. 
+Thus, there exists a need for \textit{shaping rewards} instead. There are reasonable criteria on how this should be done: \emph{standard practices}. \textcolor{red}{describe those practices}
+However, there still exists a lack of a systematic method to design a reward function.
+
+\subsection{Exploration vs. Exploitation}
+A central issue in reinforcement learning is the dilemma of \emph{exploration} vs. \emph{exploitation}. Consider this problem. An agent is at an intersection. It has the choice of going either right or left. 
+It does not yet know the outcome of either. It chooses right at a given point and receives a reward $r=1$. The question is "When faced with the same decision, should it keep going right?" There are two issues to consider. 
+First, it does not know the outcome of going left. It could be that there is a better reward waiting for it on the left lane. Second, when dealing with a stochastic environment, it might be that $r$ was a one-time occurence. 
+It would be equivalent to someone buying a lottery ticket, and winning \$1M on their first try, and thus, spending all that their won in trying to make it happen again. This problem showcases the importance of exploration; an agent 
+needs to see where other paths might lead to, but also exploitation; if it keeps exploring forever it will never accumulate rewards. This is especially evident when the possible states cannot be exhausted. Several techniques have been proposed 
+to balance between exploration and exploitation \cite{Kaelbling1996ReinforcementLA}. A notable one is the \emph{epsilon-greedy} technique. The idea is to set some probability $\epsilon$ by which the agent decides to explore. This probability can be adapted 
+to decrease as more \emph{episodes} are completed. 
+
+\subsection{Meta-Learning}
+The result of training is a policy $\pi$, a function to map states to action $\pi : S \rightarrow A$. The learned policy is the one that maximizes the cumulative rewards.
+This training is most often done in simulation, given the lack of safety guarantees of RL. 
+However, several problems come into place when considering the deployment of the trained agent. Considering that an agent has done well in 
+a designed simulation does not imply that it will do as well in the real-world. Overall, it must be that certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave 
+when out of simulation. This problem of adaptation is known as \emph{Meta-learning}. Meta-learning in reinforcement learning is the problem of learning-to-learn, which is about efficiently
+adapting a learned policy to conditions and tasks that were not encountered in the past. In RL, meta-learning
+involves adapting the learning parameters, balancing exploration and exploitation to direct the
+agent interaction \cite{gupta_meta-reinforcement_2018,schweighofer_meta-learning_2003}. Meta-learning is a central problem in AI, since an agent that can solve more
+and more problems it has not seen before, approaches the ideal of a general-purpose AI. 
+
+
+\section{Symbolic Reasoning for Reinforcement Learning}
+As to tackle the challenges from section 3, we are inspired from current Neurosymbolic AI trends. Precisely, neurosymbolic integration has been an ongoing work in the last years towards a combination of deep learning (DL) and symbolic reasoning.
+The work has been a response to criticism of DL on its lack of formal semantics and intuitive explanation and the lack of expert knowledge towards guiding machine learning models. 
+Key questions the field targets are identifying the necessary and sufficient building blocks of AI \cite{garcez2020neurosymbolic}, namely, how can we provide the semantics of knowledge, 
+and work towards meta-learning? 
+
+Current Neurosymbolic AI trends are concerned with knowledge representation and reasoning, namely, they investigate computational-logic systems 
+and representation to precede learning in order to provide some form of incremental update, e.g. a meta-network to group two sub-neural networks. \cite{Besold2017NeuralSymbolicLA}
+This leads to neurosymbolic AI finding various applications including vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
+vision analogy-making \cite{Reed2015DeepVA}, or learning communication protocols \cite{Foerster2016LearningTC}. Those results inspire us to use those techniques for reinforcement learning, as to tackle its challenges.
+
+\medskip
+Rewards are domain dependent and thus, given domain specific rules, a \emph{domain informed} module can guide a RL agent towards better decisions. This can be done by 
+adapting the reward function by defining which states are desirable, which are to be avoided and which are fatal. Given rules and judgments, a logic programming module 
+is able to search the space and send feedback to the reinforcement learning agent. The goal is a systematic method to design a reward function which can ensure faster and more efficient 
+training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma, \textcolor{red}{how tho}
+We will call the propose module a \emph{Domain Informed Oracle (DIO)}. 
 
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.6]{overview.png}
   \caption{Overview of the proposed solution}
-  \label{fig:overviewsol}
+  \label{fig:overview}
 \end{figure}
 
-Note that (3) is a work in progress. The current formalization of the scenario for the problem of vehicle platooning 
-and its significance is in section \ref{vehicleplat}.
+The diagram in Figure~\ref{fig:overview} is a high-level description of our proposed solution. 
+%
+The box on the left represents a basic reinforcement learning algorithm that depends on the scenario of the given problem and 
+the common standard practices discussed previously to design a reward function. 
+%
+The box on the right represents our proposed domain knowledge to inform the reinforcement learning algorithm. 
+Precisely, the domain informed oracle is given the scenario and can thus start a feedback loop between itself and 
+the informed RL module to update the rewards. 
+%
+Finally, those two implementations will be compared based on their performance. In the following, we define performance 
+given three metrics: (1) time to train (2) optimality of the learned policy and (3) number of errors through training. 
+Consider 'errors' as suboptimal decisions that were made by the agent while in the process of training. For example, exploring a (state, action) pair 
+that has previously given a negative reward is suboptimal. 
 
-
-\section{RL+SC Architecture} \label{rlscarchitecture}
-Assume for the following that there exists a safe controller (SC) type of oracle that is able to take in the current
-environment as observed by the reinforcement learning agent and decide deterministically on a set of possible safe actions. 
-More on the practical specifications of this safe controller can be found in section \ref{scspecs}. 
-We suppose that the SC can output false positives but never false negatives. In other words, if a safe controller deems 
-a situation safe, then it has to be safe. We allow it to misjudge a situation and be conservative on safety. 
+\section{Domain Informed Oracle} 
+\subsection{Architecture}
+In this section, we lay the foundations of the architecture that combines the Domain Informed Oracle with 
+reinforcement learning. Note that in our proposed architecture, we suppose Q-learning, a specific method to compute the policy in RL. 
 
 \medskip 
 
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.55]{basicrl.png}
-  \caption{Basic reinforcement learning architecture}
+  \caption{Reinforcement learning architecture}
   \label{fig:basicrl}
 \end{figure}
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.55]{rlsc.png}
-  \caption{Safe controller integrated in reinforcement learning architecture}
-  \label{fig:scinrl}
+  \includegraphics[scale=0.55]{dio.png}
+  \caption{Dio+RL architecture}
+  \label{fig:diorl}
 \end{figure}
 
-\section{Safe Controller Specifications} \label{scspecs}
-In the previous section, we assume the existence of a safe controller that acts like an oracle.
-In our setting the safe controller takes in the current observation of the environment and 
-returns the state representation and a set of possible actions to the reinforcement learning side. 
-Some conditions need to hold on both the state representation and the set of possible actions to define a 'good' safe controller.
-In the following section, we lay down the foundations 
-for such a module, starting by the guarantees we would like for it to have. 
-
-\begin{enumerate}
-  \item The returned state upholds the Markov Property.
-  \item The resulting state of any action of the possible set of actions 
-        should not include any known fatality conditions, except if necessary. 
-\end{enumerate}
-
-We make the following assumptions, (1) actions are deterministic, meaning if an agent chooses to go left, they will go left with certainty, 
-(2) sensors can be faulty and they obey a gaussian distribution for their uncertainty, (3) the world is filled with uncertainties and the safe controller cannot account 
-for all of them. Note that in the following, we will define uncertainty as an evolution of the world given the sensors that is unknown by the safe controller, i.e.
-no known step semantics for the uncertain.
+The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more details. The environment, which as we follow a simulation is formalized in the scenario, sends the current state 
+to the Q-Learning algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment that is then 
+updated and the resulting state along its associated reward is computed from the reward function and step function formalized in the scenario. Thus, in the next iteration, the 
+agent receives the reward from its previous action which it uses to improve its policy and continues with its training starting from the next state.  
 
 \medskip 
 
+The architecture in Figure \ref{fig:diorl} introduces DIO in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
+the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query DIO. The result of this query is $A$ which we keep 
+obscure. The fundamental idea is that $A$ is used to inform the reward function when it is tasked with computing the reward. 
 
-Given our assumptions, we make those first observations. \newline
-\textbf{Observation 1:} Though our SC cannot account for all uncertainties, there exists a set of expected information that is informed 
-given known step semantics, i.e. $E_t$. Precisely, considering actions are deterministic and the problem is a Markov Decision Problem (MDP), the SC can compute the resulting expected state. \newline
-\textbf{Observation 2:} The SC cannot ensure that the expected will be the next observed. \newline
-\textbf{Observation 3:} Since there is a finite number of sensors, every sensor output can be defined as a proposition associated with a specific value. \newline 
-
-\medskip 
-
-By taking our observation 1 and our assumption 2, we can construct the following deterministic approach to compute the state and the set of possible actions. 
+\subsection{Specifications} \label{scspecs}
+DIO is a logic programming based module that takes the query from the reward function and returns $A$, a judgment that the scenario awaits to update its reward function. The judgment is obscured as it is a choice of the scenario, 
+independent of the DIO implementation. In the following, we will define $A$ by its behavior, rather than its type. To do so, we will walk through the routine in the diagram of Figure \ref{fig:diospecs}.
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.55]{scworlds.png}
-  \caption{SC to compute the state and possible actions}
-  \label{fig:scworld}
+  \includegraphics[scale=0.46]{diospecs.png}
+  \caption{Domain Informed Oracle routine}
+  \label{fig:diospecs}
 \end{figure}
 
-In the first layer, if we know the distribution of our sensors, we are able to compute the possible worlds and assume the one with the highest probability.
-In the case of figure \ref{fig:scworld}, it is $p_5$. By assuming our state and the possible actions, we can utilize domain specific knowledge into 
-computing the expected possible worlds. Given some fatality conditions, it is possible to assess whether a given world is desirable or should be blocked. 
+\begin{enumerate}
+  \item The scenario queries DIO. It sends $(s_t, a)$, the state at time $t$ and the action. It also sends $L : s \rightarrow t$ where $t$ is a sum of types: 
+        $t \equiv t_1 + t_2 .. + t_n$. For instance, consider our previous example of the chess game and let the scenario define good openings as "desirable" and random openings as 
+        "undesirable". Thus $t \equiv d + ud$ where $d$ is equivalent to desirable and $ud$ to undesirable. 
+  \item The first step of DIO is translation $T : \mathbb{R}^n \rightarrow t_1 \times t_2 \times ... t_n$ that takes in the state vector $s_t$ and returns a conjunction of propositions, let it be $P$. 
+  \item P is passed alongside the action to the domain specific rules defined in DIO. 
+  \item Using step semantics, DIO generates possible worlds up to a given time $t'$. Note that given the stochasticity of the environment, there is not certainty on
+        whether the worlds expected by DIO will necessarily happen. 
+  \item Those possible worlds, equivalent to states, can be transformed using $L$ to $t$. 
+  \item At the last step, DIO ends up with a set $S$ of $t$ that defines the labels of all the possible worlds.
+  \item The last step is left as an inference depending on how the the judgment for deciding a final $A$ from $S$ 
+        is formulated. For instance, we can consider a rule where if most of the possible worlds are undesirable, then let $A$ be undesirable.
+  \item Finally, $A$ is passed to the scenario. Note then that $A : t$. 
+\end{enumerate}
 
-\textcolor{blue}{There's a lot more than can go on here. A couple of my notes.}
-\begin{itemize}
-  \item Consider history, basically : $[S_t, a, S_{t+1}/E_t]$. We are technically able to compute the level of uncertainty of a result, since
-        we're only dealing with numerical computation. Basically, suppose I never had $sound(e)$ in my observation, I don't know what it is, for all I know, 
-        it could be the worse possible outcome and I have no clue how to react to it. I should be able then to choose my safest action, the one I know to always result 
-        in non fatal conditions. Suppose I survive such an uncertainty, then now I know what the next state was actually compared to what I expected,
-        if I 'normalize' the next state while accounting for uncertainty of sensors and compare it to my expected, I now have a numerical value that 
-        I can embed in my step semantics to adapt for this uncertainty. Inductive reasoning basically. 
-  \item Obviously, the more domain specific knowledge, the less uncertainties to deal with.
-  \item Could also just give the uncertainty decision to the RL, basically randomly try it. It's a sacrifice we're willing to make 
-        for learning. We're still ensuring some aspect of safety so already doing better.
-  \item For a better argument on how the deployment in real life can be fine is a distinction between 
-        undesirable vs fatal. I don't really want to swerve into the road but I also won't exist if I crash into a car. 
-\end{itemize}
+Note how this does not guarantee that the reward function will be informed in a meaningful way.
+To that end, we need to consider (1) what are the specifications of a 'good' reward function, (2) what conditions should be set 
+on the domain specific rules and $L$ provided by the scenario, (3) how to define a systematic way for the scenario to use 
+this information. Those considerations are left for future investigations. 
 
-\subsection{From SC to verification conditions} 
-\textcolor{red}{todo.}
  
 
-\section{Vehicle Platooning : Case Study} \label{vehicleplat}
-To put our approach in practice, we consider the case of vehicle platooning. The setting is as follows: multiple autonomous vehicles 
-are tasked with following each other while ensuring that they minimize the gap between them. 
-As described in \cite{LarssonErik2015Tvpp}, forming a vehicle platoon helps reduce fuel consumption severly. The closer the proximity and faster the speed, the more fuel is saved. 
-Even by assuming no faulty communication between the vehicles, the uncertainties of the road make it a challenge to deploy autonomous vehicles trained using reinforcement learning 
-with that goal in mind. For instance, consider an unexpected construction on the usual route that the vehicles take. 
-As the leader of the platoon will be the first to notice, we would like to communicate as early as possible to the followers that a decelaration needs to happen. 
-In the context of reinforcement learning, there are two cases, (1) the agents have been trained on that occurence, thus they all decrease their velocities, or 
-(2) the agents have never encountered that problem in training, thus are bound to fail. 
+\section{Traffic Simulation} \label{traffic}
 
-\medskip 
-
-
-\subsection{Preliminary Results}
-\textcolor{red}{todo}
-\subsection{Discussion}
-\textcolor{red}{todo}
 
 \section{Related Work}
-One of the many ways safety has been approached is by formalization and symbolic reasoning. 
-In the case of artificial intelligence, recent work proposes neurosymbolic integration. 
-Neurosymbolic integration has been an ongoing work in the last years towards a combination of deep learning (DL) and symbolic reasoning.
-The work has been a response to criticism of DL, precisely, the lack of formal semantics and intuitive explanation and the lack of expert knowledge towards guiding machine learning models. 
-Key questions the field targets are identifying the necessary and sufficient building blocks of AI \cite{garcez2020neurosymbolic}, namely, how can we provide the semantics of knowledge, 
-and work towards meta-learning? Meta-learning in reinforcement learning is the problem of learning-to-learn, which is about efficiently
-adapting a learned policy to conditions and tasks that were not encountered in the past. In RL, meta-learning
-involves adapting the learning parameters, balancing exploration and exploitation to direct the
-agent interaction \cite{gupta_meta-reinforcement_2018,schweighofer_meta-learning_2003}. Meta-learning is a central problem in AI, since an agent that can solve more
-and more problems it has not seen before, approaches the ideal of a general-purpose AI. 
 
-\medskip
-
-Approaches that were concerned with safe reinforcement learning, have approached the problem in previous work \cite{Garca2015ACS} in two ways. First was changing the optimization criteria \cite{rockafellar2000}, precisely by incorporating risk into the performance of the policy.
-Namely, either considering the worst case scenario and constraining on it, reducing the variance to be more sensitive or applying constraints i.e. only update the policy if the action is in a safe set. 
-This does not however guarantee safety, but tends to minimize the probability of risk, hence not allowing RL systems to be deployed in the physical world. 
-Second was to consider the exploration process, either by incorporating external knowledge i.e. learning from demonstration \cite{Siebel2007EvolutionaryRL} or adopting a risk directed exploration \cite{law2005}. These approaches can be considered rigid, 
-as requiring more data and expert knowledge that needs to be proven safe and sound, or in the latter, decreasing the efficiency and requiring more time for the learning process. 
-In particular, in these previous two approaches, work that makes use of formal security frameworks is yet to be investigated. 
-
-\medskip
-
-Some of the more recent work that does investigate a hybrid architecture (i.e. RL and symbolic reasoning) makes use of
-set-theoretic techniques and constraint satisfaction problems to optimize from the constraints \cite{Li2021SafeRL}, or proposes a reactive system called a shield \cite{alshiekh2017} to either constraint the actions given by the environment or adapt them once the RL module chooses one. 
-In both cases, the added safety controller is described by its specifications, rather than being an independent existing controller. 
-
-\medskip
-
-\textcolor{red}{Partially observable Markov decision process belief system to improve from observation to state vector.}
-
-\medskip
-
-\textcolor{red}{Explain how this idea is novel.}
+take related work from prof. giselle notes
 
 \section{Conclusions}
 \textcolor{red}{todo.}
@@ -388,6 +334,10 @@ In both cases, the added safety controller is described by its specifications, r
 
 \bibliographystyle{unsrt}
 \bibliography{biblio.bib}
+
+\newpage
+
+\section{Appendix}
 
 
 
