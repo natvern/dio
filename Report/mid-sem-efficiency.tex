@@ -9,6 +9,7 @@
 \usepackage{float}
 \usepackage{url}
 \usepackage{proof}
+\usepackage{hyperref}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -196,13 +197,16 @@ a RL implementation that makes use of standard practices to design a reward func
 
 
 \section{Reinforcement Learning} 
+
 Reinforcement Learning is a method of learning that maps situations to
 actions in order to maximize its rewards
 \cite{sutton2018reinforcement}. Rewards are numerical values associated to a state and action. Precisely, one defines a reward function 
-$R : (S * A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
+$R : (S \times A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
 of the environment and the action refers to the action chosen by the RL agent. By defining this reward function and the scenario of the problem the agent is trying to solve, 
 reinforcement learning has the advantage of not requiring a prior dataset. Indeed, the agent is not told what to do, but rather 
-learns from the effect of its actions on the environment. Consider figure \ref{fig:rl}. 
+learns from the effect of its actions on the environment. Consider
+Figure~\ref{fig:rl}. 
+
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.6]{rlroutine.png}
@@ -230,11 +234,7 @@ This reward is a domain dependent function that represents how
 ``good'' the state is.
 %
 The agent's goal is to increase its reward by taking actions that
-reach better states each time.\giselle{This last sentence is like a
-magic box to me. Maybe we need to make it less magic, maybe not.}\samar{I think it's fine to 
-keep it as a black box. It will involve mentioning Bayesian and Markov decision process and 
-I didn't need those in the latter half.} 
-%
+reach better states each time.
 
 \medskip 
 
@@ -243,25 +243,34 @@ where the agent is punished when it loses and rewarded if it wins. The agent is 
 maximize its winnings but it will need to exhaust multiple possible combinations to learn. In this case, 
 the training time is not optimal. A better approach would be to also reward it for making a good opening, for instance. 
 Another example would be only considering negative rewards. Say we want our agent to escape a maze, and we punish it at every timestep for not escaping. 
-If there is a 'fire'/fatality state, the agent will learn to move towards the fatality state as to cut its negative rewards as soon as possible. 
+If there is a fatality state (\emph{e.g.}, a fire or a black whole), the agent will learn to move towards the fatality state as to cut its negative rewards as soon as possible. 
 In conclusion, a good reward function is the first step of optimal learning. By choosing the right reward function, 
 we can ensure a faster and more efficient training, possibly with fewer errors. 
 
-\section{Challenges in Reinforcement Learning}
+\subsection{Challenges in Reinforcement Learning}
 
-\subsection{Reward Shaping}
+\subsubsection{Reward Shaping}
+
 The task of choosing a reward function that ensures optimality is thus crucial. However, the generation of an appropriate 
 reward function for a given problem is still an open challenge \cite{kober2013}. This problem is known as \textit{Reward Shaping} \cite{laud2011}.  
 Ideally, rewards would be given by the real-world, i.e. \textit{native rewards}. For instance, recent work investigates dynamically generating a reward 
 using a user verbal feedback to the autonomous agent \cite{gonzalez2010}. However, most RL agents 
 can only stay in simulation due to the lack of safety guarantees. This is because of the trial-and-error nature of the RL training. 
 Thus, there exists a need for \textit{shaping rewards} instead. There are reasonable criteria on how this should be done, those are \emph{standard practices}. For instance, 
-rewards that can be continuously harvested speed up convergence compared to rewards that can only be harvested at 'the end' (i.e. the chess example). Similarly, one should avoid only 
+rewards that can be continuously harvested speed up convergence
+compared to rewards that can only be harvested at ``the end''
+(\emph{i.e.} the chess example). Similarly, one should avoid only 
 negative rewards as that results in unwanted behavior. Furthermore, if dealing with a continuous state space, it helps to have a polynomial differential function as the reward function 
 as it is shown to help the agent learn faster. Finally, one can normalize rewards at the end as to not end up with too many discrepancies. 
-However, there still exists a lack of a systematic method to design a reward function.
+However, there still exists a lack of a systematic method to design a
+reward function.
+%
+Moreover, the abstract representation of states and actions can make
+it difficult to map domain specific rules and judgments to the reward
+function.
 
-\subsection{Exploration vs. Exploitation}
+\subsubsection{Exploration vs. Exploitation}
+
 A central issue in reinforcement learning is the dilemma of \emph{exploration} vs. \emph{exploitation}. Consider this problem. An agent is at an intersection. It has the choice of going either right or left. 
 It does not yet know the outcome of either. It chooses right at a given point and receives a reward $r=1$. The question is "When faced with the same decision, should it keep going right?" There are two issues to consider. 
 First, it does not know the outcome of going left. It could be that there is a better reward waiting for it on the left lane. Second, when dealing with a stochastic environment, it might be that $r$ was a one-time occurence. 
@@ -270,7 +279,8 @@ needs to see where other paths might lead to, but also exploitation; if it keeps
 to balance between exploration and exploitation \cite{Kaelbling1996ReinforcementLA}. A notable one is the \emph{epsilon-greedy} technique. The idea is to set some probability $\epsilon$ by which the agent decides to explore. This probability can be adapted 
 to decrease as more \emph{episodes} are completed. 
 
-\subsection{Meta-Learning}
+\subsubsection{Meta-Learning}
+
 The result of training is a policy $\pi$, a function to map states to action $\pi : S \rightarrow A$. The learned policy is the one that maximizes the cumulative rewards.
 This training is most often done in simulation, given the lack of safety guarantees of RL. 
 However, several problems come into place when considering the deployment of the trained agent. Considering that an agent has done well in 
