@@ -67,23 +67,94 @@
 
 \maketitle 
 
-\begin{abstract} Reinforcement learning (RL) is a powerful AI method that does not require pre-gathered data but 
-  relies on a trial-and-error process for the agent to learn. This is made possible through a reward function that associates 
-  current state configurations to a numerical value. The agent's goal is then to maximize its cumulative reward over its lifetime. 
-  Unfortunately, RL suffers multiple challenges: (1) reward shaping, (2) meta-learning and (3) the exploration-exploitation dilemma. 
-  (1) refers to the lack of systematics methods to design a reward function that ensures fast and efficient learning. (2) is the problem of 
-  deploying a trained agent in one simulation to the real-world or possibly another simulation where it encounters 
-  state configurations it did not during its training. The goal is to be able to efficiently adapt to those configurations. Finally, (3) 
-  is the question of whether to always exploit what the agent knows or explore in the hope that an unexplored state 
-  might result in better rewards. 
+\begin{abstract} 
 
-  \medskip 
+  %% The story
 
-  We propose a \emph{Domain Informed Oracle (DIO)} based on domain specific rules and judgments to provide 
-  an informed decision to the reward function, thus permitting to dynamically adapt the rewards. DIO is incorporated 
-  in a RL architecture and is defined by its behavior in relation to the input given by the reward function. 
-  Our implementation is tested on a Traffic Simulator scenario and compared to a basic uninformed RL algorithm. The comparison 
-  is based around Performance which we define by three metrics: time to train, optimality of the learned policy and finally, number of errors through training. 
+  %% There is this great new method!
+  Reinforcement learning (RL) is a powerful AI method that does not
+  require pre-gathered data but relies on a trial-and-error process
+  for the agent to learn. 
+  %
+  This is made possible through a reward function that associates
+  current state configurations to a numerical value. 
+  %
+  The agent's goal is then to maximize its cumulative reward over its
+  lifetime. 
+  %
+  %% Oh, but there are some issues...
+  Unfortunately, RL suffers multiple challenges: (1) reward shaping,
+  (2) meta-learning and (3) the exploration-exploitation dilemma. 
+  %
+  (1) refers to the lack of systematic methods to design a reward
+  function that ensures fast and efficient learning.
+  %
+  (2) is the problem of deploying an agent trained in a simulation to
+  the real-world, or possibly another simulation, where it encounters
+  state configurations it did not during its training. The goal is to
+  be able to efficiently adapt to those configurations.
+  %
+  Finally, (3) is the question of whether to always exploit what the
+  agent knows or explore in the hope that an unexplored state might
+  result in better rewards. 
+
+  \medskip
+
+  % This is needed to connect the ideas from the previous paragraph
+  % and the next.
+
+  %% No problem, we can solve them!
+  These challenges can be alleviated for a given domain by fine
+  tuning the reward function with domain specific information. 
+  %
+  For example, if the agent is a self-driving car, the reward function
+  can include the physics equations to predict, with some degree of
+  certainty, the car's trajectory for the next few seconds.
+  %
+  By looking into the future, the reward function can penalize bad
+  behavior before it reaches a catastrophic state (\emph{e.g.}, a
+  crash).
+  %
+  A better reward function prunes the (often infinite) search space
+  faster, allowing the agent to explore (breadth) new states instead
+  of exploiting (depth) dead ends.
+  %
+  %% Oh, but only on a case by case basis...
+  However, tuning the reward might be hard depending on the domain and
+  how states are represented.
+  %
+  States are typically represented as vector of values in RL, and
+  translating properties and rules from a domain into this
+  representation can be complicated depending on how many values are
+  used, what they represent, whether they are normalized or not, etc.
+
+  \medskip
+
+  %% We can fix that!
+  We propose a \emph{Domain Informed Oracle (DIO)} as a solution for
+  systematically incorporating domain specific knowledge into RL
+  reward functions.
+  %
+  DIO is a collection of domain specific rules and judgments written
+  in a declarative language, such as Prolog.
+  %
+  It does not rely on the RL representation of states, allowing
+  the programmer to focus on the domain specific knowledge using an
+  expressive and intuitive language, where they can define states and
+  rules in the most convenient way.
+  %
+  DIO provides an informed decision to the reward function, thus
+  allowing it to dynamically adapt the rewards. 
+  %
+  %DIO is incorporated into a RL architecture and is defined by its
+  %behavior in relation to the input given by the reward function. 
+  %
+  Our implementation is tested on a Traffic Simulator scenario and
+  compared to a basic uninformed RL algorithm. 
+  %
+  The comparison is based on performance which we define by three
+  metrics: time to train, optimality of the learned policy and
+  finally, number of errors through training. 
   
 \end{abstract}
 
