@@ -10,7 +10,7 @@
 #####################################################
 
 # Name of the main tex document(without .tex suffix)
-TARGET = mid-sem
+TARGET = mid-sem-efficiency
 
 # Source Paths
 SRCDIR = . 

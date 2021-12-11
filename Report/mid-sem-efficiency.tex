@@ -10,6 +10,9 @@
 \usepackage{url}
 \usepackage{proof}
 
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
 \usepackage{xcolor}
 \newcommand{\bluenote}[1]{\color{blue}{ \em #1 }\color{black}}
 
@@ -26,6 +29,9 @@
 \usepackage{mathptmx}
 
 \usepackage[T1]{fontenc}
+
+\usepackage{caption}
+\usepackage{subcaption}
 
 \thispagestyle{empty} 
 
@@ -396,8 +402,8 @@ results. Similarly, we look further into the specifications of DIO to ensure tha
 \bibliographystyle{unsrt}
 \bibliography{biblio.bib}
 
-
-
-
+% Commenting this in/out to include/exclude the appendix
+\newpage
+\input{appendix}
 
 \end{document}
