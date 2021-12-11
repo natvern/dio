@@ -110,15 +110,15 @@ adopted \cite{li2019reinforcement}, respectively for Go, StarCraft II and Dota 2
 
 Reinforcement Learning is a powerful tool as it does not require pre-gathered data as most Machine Learning (ML) 
 techniques do. The general idea of RL is a trial-and-error process. In other words, a car trained using RL is bound to 
-crash to learn not to crash again. This learning is based around a \textit{domain dependent} reward function. For example, say we want to teach an autonomous car to stop at a STOP sign. We will 
-punish it via a negative reward when it does not, otherwise, we will reward it. Thus, through multiple iterations, 
+crash to learn not to crash again. This learning is based on a \textit{domain dependent} reward function. For example, suppose we would like to teach an autonomous car to stop at a STOP sign. We will 
+punish it via a negative reward when it does not, and reward it if it does. Thus, through multiple iterations, 
 and with the goal to maximize its rewards, a reinforcement learning trained agent will learn to stop at a STOP sign. 
 %
 
 \medskip
 
 The task of choosing a reward function that ensures optimality is thus crucial. In the following work, we propose a Domain Informed Oracle (DIO) to
-inform a reinforcement learning . Precisely, we propose a systematic way to encode domain specific rules into a reward function for RL. We argue that such a combination will ensure 
+inform a reinforcement learning . Precisely, we propose a systematic way to encode domain specific rules to inform a reward function for RL. We argue that such a combination will ensure 
 a faster and more efficient RL trained agent in terms of optimality. The proposed combination is then tested on a traffic simulation. The results are compared with 
 a RL implementation that makes use of standard practices to design a reward function. 
 
@@ -129,7 +129,7 @@ Reinforcement Learning is a method of learning that maps situations to
 actions in order to maximize its rewards
 \cite{sutton2018reinforcement}. Rewards are numerical values associated to a state and action. Precisely, one defines a reward function 
 $R : (S * A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
-of the environment and the action refers to the action chosen by the RL agent. By defining this reward function and the scenario of the problem the agent is trying to solve, 
+of the environment and the action refers to the action chosen by the RL agent. By making use of this reward function and the trial-and-error process, 
 reinforcement learning has the advantage of not requiring a prior dataset. Indeed, the agent is not told what to do, but rather 
 learns from the effect of its actions on the environment. Consider figure \ref{fig:rl}. 
 \begin{figure}[H]
@@ -167,28 +167,29 @@ I didn't need those in the latter half.}
 
 \medskip 
 
-The reward function is a crucial aspect of the RL algorithm. For instance, consider a game of chess 
+To emphasize again, the reward function is a crucial aspect of the RL algorithm. For instance, consider a game of chess 
 where the agent is punished when it loses and rewarded if it wins. The agent is bound to learn how to 
-maximize its winnings but it will need to exhaust multiple possible combinations to learn. In this case, 
-the training time is not optimal. A better approach would be to also reward it for making a good opening, for instance. 
-Another example would be only considering negative rewards. Say we want our agent to escape a maze, and we punish it at every timestep for not escaping. 
-If there is a 'fire'/fatality state, the agent will learn to move towards the fatality state as to cut its negative rewards as soon as possible. 
-In conclusion, a good reward function is the first step of optimal learning. By choosing the right reward function, 
+maximize its winnings but it will need to exhaust multiple possible combinations to learn how to play. In this case, 
+the training time is not optimal. A better approach would be to additionally reward it for making a good opening. 
+Another example of a bad reward choice would be only considering negative rewards. Say we want our agent to escape a maze, and we punish it at every timestep for not escaping. 
+If there exists a fatality state, the agent will learn to move towards the fatality state as to cut its negative rewards as soon as possible. 
+In conclusion, a good reward function is the first step towards optimal learning. By choosing the right reward function, 
 we can ensure a faster and more efficient training, possibly with fewer errors. 
 
 \section{Challenges in Reinforcement Learning}
 
 \subsection{Reward Shaping}
-The task of choosing a reward function that ensures optimality is thus crucial. However, the generation of an appropriate 
+The task of choosing a reward function that ensures optimality is crucial. However, the generation of an appropriate 
 reward function for a given problem is still an open challenge \cite{kober2013}. This problem is known as \textit{Reward Shaping} \cite{laud2011}.  
 Ideally, rewards would be given by the real-world, i.e. \textit{native rewards}. For instance, recent work investigates dynamically generating a reward 
 using a user verbal feedback to the autonomous agent \cite{gonzalez2010}. However, most RL agents 
 can only stay in simulation due to the lack of safety guarantees. This is because of the trial-and-error nature of the RL training. 
 Thus, there exists a need for \textit{shaping rewards} instead. There are reasonable criteria on how this should be done, those are \emph{standard practices}. For instance, 
-rewards that can be continuously harvested speed up convergence compared to rewards that can only be harvested at 'the end' (i.e. the chess example). Similarly, one should avoid only 
-negative rewards as that results in unwanted behavior. Furthermore, if dealing with a continuous state space, it helps to have a polynomial differential function as the reward function 
-as it is shown to help the agent learn faster. Finally, one can normalize rewards at the end as to not end up with too many discrepancies. 
-However, there still exists a lack of a systematic method to design a reward function.
+rewards that can be continuously harvested speed up convergence compared to rewards that can only be harvested at 'the end' (i.e. the chess example). Similarly, one should avoid only providing negative 
+rewards as that results in unwanted behavior (i.e. the maze example). Furthermore, if dealing with a continuous state space, a polynomial differential reward function 
+is shown to help the agent learn faster. Finally, one can normalize rewards at the end as to not end up with too many discrepancies. Unfortunately, these standard practices do not always ensure 
+an optimal reward function and the problem of reward shaping is reduced to a trial-and-error process. In other words, one arbitrarily updates their reward function until the learned policy approaches optimal. 
+Therefore, there still exists a lack of a systematic method to design a reward function.
 
 \subsection{Exploration vs. Exploitation}
 A central issue in reinforcement learning is the dilemma of \emph{exploration} vs. \emph{exploitation}. Consider this problem. An agent is at an intersection. It has the choice of going either right or left. 
