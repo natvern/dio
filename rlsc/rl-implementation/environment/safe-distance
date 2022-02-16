@@ -1,0 +1,119 @@
+*****  bot patroling from side to side (myDir flip)
+load load .
+
+mod TEST-DO-TASK is
+  inc SCENARIO .
+
+*** Scenario 1: Within safety and green bounds.
+ops v0 v1 : -> Agent .
+
+ops lkb lkb0 lkb1 lkb2 : -> KB .
+eq lkb0 = getLKB(v0) .
+eq lkb1 = getLKB(v1) .
+
+op id : -> Id .
+
+op kbevskb : -> KBEventsKB .
+eq kbevskb = doTask(veh,id,tick,none,none,none,lkb) .
+
+op devsHB : -> DEvent .
+eq devsHB = hbComm(id,lkb) .
+
+eq lkb2 = timeouts(id,lkb) .
+
+op racts : -> RAct .
+eq racts = actSCP(veh,id,lkb2) .
+
+op acts0 : -> Action .
+eq acts0 = myActs(veh,id,lkb2) .
+op racts2 : -> RAct .
+eq racts2 = vals(id,lkb2,acts0) .
+
+ops segSaf segGr segs : -> FSegments .
+eq segSaf = val-safety(id,lkb2,acts0) .
+eq segGr = val-green(id,lkb2,acts0) .
+eq segs = intersect(segSaf,segGr,nil) .
+op racts3 : -> RAct .
+
+eq racts3 = 
+if segs == nil then getMax(id,segSaf,none)
+      else getMax(id,segs,none) fi .
+var f : Rat .
+ops dis vmin vmax vnxt : -> Rat .
+op vD : Rat -> Rat .
+
+eq vD(f) = (dis + vnxt)/(1 + f) .
+
+ops tminSaf tmaxSaf tminGr tmaxGr : -> Nat .
+ops vminSaf vmaxSaf vminGr vmaxGr : -> Rat . 
+
+eq vminSaf = vD(tmaxSaf) .
+eq vmaxSaf = vD(tminSaf) .
+eq vminGr = vD(tmaxGr) .
+eq vmaxGr = vD(tminGr) .
+
+sort Result .
+op [acts:_, vminGr:_, vmaxGr:_, segGr:_, vminSaf:_, vmaxSaf:_, segSaf:_] : Action Rat Rat FSegments Rat Rat FSegments -> Result .
+
+op getResult : -> Result .
+eq getResult = [acts: acts0, vminGr: vminGr, vmaxGr: vmaxGr, segGr: segGr, vminSaf: vminSaf, vmaxSaf: vmaxSaf, segSaf: segSaf] .
+
+
+op ekbST  : -> KB .
+eq ekbST =
+  clock(0)
+  class(i(0),infra)
+  class(v(0),veh)
+  (atloc(v(0),loc(100)) @ 0)
+  (speed(v(0),20) @ 0)
+  (accel(v(0),0) @ 0)
+  class(v(1),veh)
+  (atloc(v(1),loc(45)) @ 0)
+  (speed(v(1),20) @ 0)
+  (accel(v(1),0) @ 0)
+.
+
+op scenario2 : -> Conf .
+eq scenario2 = v0 v1  
+               infra [eId | ekbS1] .
+               
+
+endm
+
+mod TEST-DO-TASK-SAFE-AND-GREEN is inc TEST-DO-TASK .
+
+ops pos0 pos1 : -> Rat .
+eq pos0 = 100 .
+eq pos1 = 45 .
+eq dis = pos0 - pos1 .
+eq vnxt = 20 .
+*** saf distance: [40,80]
+eq tminSaf = 2 . 
+eq tmaxSaf = 4 .
+*** gr distance: [20,60]
+eq tminGr = 1 .
+eq tmaxGr = 3 .
+
+**** [acts: actSpeed(v(1), 17, 23),vminGr: 75/4,vmaxGr: 75/2,segGr: [75/4,u(1),23,u(1)],vminSaf: 15,vmaxSaf: 25,segSaf: [17,u(1),23,u(1)]]
+
+eq v0 = mkVeh(0,0,pos0,vnxt,leading(v(1)),
+        (platoon(v(0),v(1)) @ 0)
+        (atloc(v(1),loc(pos1)) @ 0)
+        (speed(v(1),vnxt) @ 0)
+        ) .
+
+eq v1 = mkVeh(1,0,pos1,vnxt,following(v(0)),
+        (gapNext(v(1),dis) @ 0)
+        (idNext(v(1),v(0)) @ 0)
+        gapGreen(v(1),tminGr,tmaxGr) 
+        gapSafety(v(1),tminSaf,tmaxSaf)
+        (logSpdPlCkFail(v(1),v(0),0) @ 0)      
+        ) .
+
+eq id = v(1) .
+eq lkb = lkb1 .
+
+op ok : -> Bool .
+eq ok = {u(1),actSpeed(v(1), 75/4, 23)} == racts .
+
+endm
