@@ -3,11 +3,11 @@
 - [x] **Prospectus** Oct 1st
 - [x] **Mid-Semester Presentation** Oct 18th
 - [x] **Public Poster Presentation** Dec 8th
-- [ ] **Mid-Year Report** Dec 10th
+- [x] **Mid-Year Report** Dec 10th
 
 --------------------------------------
 
-- [ ] **Mid-Semester Presentation** Mar 7th
+- [x] **Mid-Semester Presentation** Mar 7th
 - [ ] **Thesis Draft** Mar 25th
 - [ ] **MOTM Presentation** Apr 22nd
 - [ ] **Final Thesis** Apr 28th
