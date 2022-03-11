@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.24">
-<info created="D:20211208233405" modified="D:20211210210902"/>
+<info created="D:20211208233405" modified="D:20220307104018"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -384,32 +384,32 @@ h
 400 704 l
 h
 </path>
-<text matrix="1 0 0 1 -172 -16" transformations="translations" pos="444 688" stroke="black" type="label" width="108.399" height="6.918" depth="0" valign="baseline">Domain Informed Oracle</text>
-<path matrix="1 0 0 1 -148 0" stroke="black">
+<text matrix="1 0 0 1 -172 -16" transformations="translations" pos="444 688" stroke="brown" type="label" width="108.399" height="6.918" depth="0" valign="baseline">Domain Informed Oracle</text>
+<path matrix="1 0 0 1 -148 0" stroke="brown">
 416 704 m
 416 648 l
 532 648 l
 532 704 l
 h
 </path>
-<text matrix="1 0 0 1 -124 -76" transformations="translations" pos="300 736" stroke="black" type="label" width="88.363" height="7.473" depth="2.49" valign="baseline">Query(state, action)</text>
+<text matrix="1 0 0 1 -124 -76" transformations="translations" pos="300 736" stroke="brown" type="label" width="88.363" height="7.473" depth="2.49" valign="baseline">Query(state, action)</text>
 <path stroke="black" rarrow="normal/normal">
 160 752 m
 160 636 l
 </path>
-<path stroke="black" rarrow="normal/normal">
+<path stroke="brown" rarrow="normal/normal">
 268 672 m
 208 672
 208 760 c
 </path>
-<path stroke="black" rarrow="normal/normal">
+<path stroke="brown" rarrow="normal/normal">
 224 760 m
 224 688
 268 688 c
 </path>
-<text matrix="1 0 0 1 -4 -8" transformations="translations" pos="240 720" stroke="black" type="label" width="7.472" height="6.808" depth="0" valign="baseline">A</text>
-<text matrix="1 0 0 1 12 24" transformations="translations" pos="84 692" stroke="black" type="label" width="60.412" height="7.473" depth="2.49" valign="baseline">Query(reward</text>
-<text matrix="1 0 0 1 8 24" transformations="translations" pos="84 680" stroke="black" type="label" width="66.75" height="7.473" depth="2.49" valign="baseline">and next-state)</text>
+<text matrix="1 0 0 1 -4 -8" transformations="translations" pos="240 720" stroke="brown" type="label" width="7.472" height="6.808" depth="0" valign="baseline">A</text>
+<text matrix="1 0 0 1 12 24" transformations="translations" pos="84 692" stroke="brown" type="label" width="60.412" height="7.473" depth="2.49" valign="baseline">Query(reward</text>
+<text matrix="1 0 0 1 8 24" transformations="translations" pos="84 680" stroke="brown" type="label" width="66.75" height="7.473" depth="2.49" valign="baseline">and next-state)</text>
 <path stroke="black">
 248 776 m
 248 760 l

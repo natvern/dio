@@ -1,0 +1,43 @@
+% Knowledge Base of rules governing simple traffic 
+% atPos(x,y), speed(v), acc(a), direction(d) apply to our agent
+% Consider Obs(no, xo, yo, vo, do) for every obstacle
+
+nextSpeed(V) :-  speed(V1), acc(A),
+              timestep(T1),
+              V is (V1 + A*T1).
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(right),
+               X is (X1 + V*T1),
+               Y is (Y1).
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(left),
+               X is (X1 - V*T1),
+               Y is (Y1).
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(up),
+               X is (X1),
+               Y is (Y1 + V*T1).
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(down),
+               X is (X1),
+               Y is (Y1 - V*T1).
+
+nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           X is (X1 + V1*T1), 
+                           Y is (Y1 + V1*T1),
+                           V is V1. 
+
+

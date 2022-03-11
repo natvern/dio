@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.24">
-<info created="D:20211208233405" modified="D:20211208233405"/>
+<info created="D:20211208233405" modified="D:20220307104019"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -387,12 +387,6 @@ h
 192 688 m
 192 752 l
 </path>
-<path stroke="black" rarrow="normal/normal">
-128 768 m
-80 680
-96 640
-160 600 c
-</path>
 <text matrix="1 0 0 1 8 -4" transformations="translations" pos="144 768" stroke="black" type="label" width="75.439" height="6.918" depth="0" valign="baseline">Reward function
 </text>
 <text matrix="1 0 0 1 4 -4" transformations="translations" pos="264 768" stroke="black" type="label" width="49.315" height="6.815" depth="1.93" valign="baseline">State space</text>
@@ -401,6 +395,10 @@ h
 <path stroke="black" rarrow="normal/normal">
 280 544 m
 280 576 l
+</path>
+<path stroke="black" arrow="normal/normal">
+128 640 m
+77.666 0 0 -77.666 172 704 128 768 a
 </path>
 </page>
 </ipe>

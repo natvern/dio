@@ -1,10 +1,13 @@
 0.4 :: heads.
+0.8 :: coin(c1); 0.2 :: coin(c2).
+
+notWin(C) :- coin(C). 
+query(notWin(X)).
 
 0.3 :: col(1,red); 0.7 :: col(1,blue).
 0.2 :: col(2,red); 0.3 :: col(2,green); 0.5 :: col(2,blue).
 
 win :- heads, col(_,red).
-%win :- col(1,C), col(2,C).
 
 evidence(col(1,red)).
 query(win).
