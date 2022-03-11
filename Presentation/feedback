@@ -9,4 +9,11 @@ and moreover complex enough to require optimization. (Not a freshman-year physic
 -------------------------------
 
 - Add experimentation results WHEN FIX IT 
-- 
+
+-------------------------------
+
+- Better math slides
+- Be more specific about AI environment and tests
+- Introduce the scenario earlier and make use of more examples
+- Make the motivation clear --> Purpose, what's the outcome
+- Mention how this work differs from previous work done to tackle the problem of reward shaping
