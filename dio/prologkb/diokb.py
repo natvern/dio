@@ -1,24 +1,29 @@
 from problog.program import PrologString
 from problog.core import ProbLog
 from problog import get_evaluatable
+from transl import Translate
 
 class Dio: 
     def __init__(self):
-        self.rules = open("ruleskb", "r").read()
-        self.world = open("worldkb", "r").read()
-        self.labels = open("labels","r").read()
+        self.rules = open("/Users/srahmoun/Documents/Thesis/dio/prologkb/ruleskb", "r").read()
+        self.world = open("/Users/srahmoun/Documents/Thesis/dio/prologkb/worldkb", "w+").read()
+        self.labels = open("/Users/srahmoun/Documents/Thesis/dio/prologkb/labels","r").read()
+        self.transl = Translate()
         self.p = PrologString(self.world+"\n"+self.rules+"\n"+self.labels)
 
     def getLabels(self):
-        return get_evaluatable().create_from(p).evaluate()
+        return get_evaluatable().create_from(self.p).evaluate()
 
-    def updateWorld(self,state):
-        ## Should consider translation here or elsewhere?
+    def updateWorld(self,position,direction,obstacles):
         ## Consider updating the initial file and make 
         ## log of world changes 
-        self.world = state
-        self.updatePrologString()
+        kbt = self.transl.translateFrom([position,direction,obstacles])
+        self.world = kbt
+        self.p = self.updatePrologString()
 
     def updatePrologString(self):
-        self.p = PrologString(self.world+"\n"+self.rules+"\n"+self.labels)
+        return PrologString(self.world+"\n"+self.rules+"\n"+self.labels)
+
+    def getFeedback(self):
+        return self.transl.translateTo(self.getLabels())
     
