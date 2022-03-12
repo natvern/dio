@@ -2,16 +2,16 @@
 % atPos(x,y), speed(v), acc(a), direction(d) apply to our agent
 % Consider Obs(no, xo, yo, vo, do) for every obstacle
 
-nextSpeed(V) :-  speed(V1), acc(A),
+nextSpeed(V) :- (speed(V1), acc(A),
               timestep(T1),
-              V is (V1 + A*T1).
+              V is (V1 + A*T1)).
 
-nextPos(X, Y) :- atPos(X1, Y1),
+nextPos(X, Y) :- (atPos(X1, Y1),
                speed(V),
                timestep(T1),
                direction(right),
                X is (X1 + V*T1),
-               Y is (Y1).
+               Y is (Y1)).
 
 nextPos(X, Y) :- atPos(X1, Y1),
                speed(V),
@@ -34,10 +34,39 @@ nextPos(X, Y) :- atPos(X1, Y1),
                X is (X1),
                Y is (Y1 - V*T1).
 
+0.25 :: choose_up.
+0.25 :: choose_down.
+0.25 :: choose_right.
+0.25 :: choose_left.
+
 nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
                            timestep(T1), 
-                           X is (X1 + V1*T1), 
+                           X is (X1 + (V1*T1)), 
+                           Y is (Y1),
+                           V is V1, 
+                           choose_right.
+
+nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           X is (X1 - (V1*T1)), 
+                           Y is (Y1),
+                           V is V1,
+                           choose_left.
+
+nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
                            Y is (Y1 + V1*T1),
-                           V is V1. 
+                           X is (X1), 
+                           V is (V1),
+                           choose_up.
+
+nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           X is (X1), 
+                           Y is (Y1 - (V1*T1)),
+                           V is V1,
+                           choose_down. 
+
+
 
 

@@ -1,0 +1,6 @@
+1.0 :: speed(1).
+1.0 :: acc(0).
+1.0 :: time(0).
+1.0 :: timestep(1).
+1.0 :: atPos(1,1).
+1.0 :: direction(right).

@@ -6,7 +6,7 @@ from transl import Translate
 class Dio: 
     def __init__(self):
         self.rules = open("/Users/srahmoun/Documents/Thesis/dio/prologkb/ruleskb", "r").read()
-        self.world = open("/Users/srahmoun/Documents/Thesis/dio/prologkb/worldkb", "w+").read()
+        self.world = open("/Users/srahmoun/Documents/Thesis/dio/prologkb/worldkb", "r").read()
         self.labels = open("/Users/srahmoun/Documents/Thesis/dio/prologkb/labels","r").read()
         self.transl = Translate()
         self.p = PrologString(self.world+"\n"+self.rules+"\n"+self.labels)

@@ -28,7 +28,7 @@ class Translate():
         sLabels = {}
         for label in labels:
             sLabels[str(label)] = labels[label]
-        return sLabels["crashmaybe"]*0.05 + sLabels["crash"]*-0.1
+        return sLabels["crash"]*-0.1
 
     def getConstants(self):
         s = "1.0 :: speed(1).\n" + "1.0 :: acc(0).\n" + "1.0 :: time(0).\n" + "1.0 :: timestep(1).\n"

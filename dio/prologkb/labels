@@ -1,5 +1,3 @@
-crash :- nextPos(X, Y), obs(_,X,Y,_,_).
-crashmaybe :- nextPos(X, Y), nextObs(_,X,Y,_,_).
+crash :- nextPos(X, Y), nextObs(_,X,Y,_,_).
 
 query(crash).
-query(crashmaybe).
