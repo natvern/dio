@@ -1,0 +1,272 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{url}
+\usepackage{proof}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\usepackage{bussproofs}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\usepackage{xcolor}
+\newcommand{\bluenote}[1]{\color{blue}{ \em #1 }\color{black}}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper, %letterpaper,
+ total={17cm,22.8cm},
+ margin=24mm,
+ top=22.4mm,
+ bottom=25.4mm
+ }
+ 
+% Times new roman
+\usepackage{mathptmx}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\thispagestyle{empty} 
+
+\setlength{\parindent}{0pt}
+
+% For comment boxes.
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommand{\giselle}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{G: #1}}
+\newcommand{\samar}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=red]{S: #1}}
+
+\author{%
+%  \fontsize{10}{12}\selectfont
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    Samar Rahmouni \\ srahmoun@andrew.cmu.edu
+  \end{minipage}
+  \and
+  %
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    Advisor: Prof. Giselle Reis \\ giselle@cmu.edu
+  \end{minipage}%
+  \vspace*{2ex}
+}
+
+
+\date{}
+
+\title{{\Large\sc Senior Thesis 2021-22\\[2ex]}{\LARGE\bf Domained
+Informed Oracle (DIO)\\ in Reinforcement Learning}\\}
+
+
+\begin{document}
+
+\maketitle 
+
+\begin{abstract} 
+
+  %% The story
+
+  %% There is this great new method!
+  Reinforcement learning (RL) is a powerful AI method that does not
+  require pre-gathered data but relies on a trial-and-error process
+  for the agent to learn. 
+  %
+  This is made possible through a reward function that associates
+  current state configurations to a numerical value. 
+  %
+  The agent's goal is then to maximize its cumulative reward over its
+  lifetime. 
+  % 
+  %% Oh, but there are some issues...
+  Unfortunately, there is no systematic method to design a reward
+  function.
+  %
+  This needs to be done on a case by case basis, and might be hard
+  depending on how the states are represented.
+  %
+  States are typically represented as vector of values in RL, and
+  translating properties and rules from a domain into this
+  representation can be complicated depending on how many values are
+  used, what they represent, whether they are normalized or not, etc.
+
+
+%  \medskip
+
+  % This is needed to connect the ideas from the previous paragraph
+  % and the next.
+
+%%   %% No problem, we can solve them!
+%%   These challenges can be alleviated for a given domain by fine
+%%   tuning the reward function with domain specific information. 
+%%   %
+%%   For example, if the agent is a self-driving car, the reward function
+%%   can include the physics equations to predict, with some degree of
+%%   certainty, the car's trajectory for the next few seconds.
+%%   %
+%%   By looking into the future, the reward function can penalize bad
+%%   behavior before it reaches a catastrophic state (\emph{e.g.}, a
+%%   crash).
+%%   %
+%%   A better reward function prunes the (often infinite) search space
+%%   faster, allowing the agent to explore (breadth) new states instead
+%%   of exploiting (depth) dead ends.
+%%   %
+%%   %% Oh, but only on a case by case basis...
+%%   However, tuning the reward might be hard depending on the domain and
+%%   how states are represented.
+%%   %
+%%   States are typically represented as vector of values in RL, and
+%%   translating properties and rules from a domain into this
+%%   representation can be complicated depending on how many values are
+%%   used, what they represent, whether they are normalized or not, etc.
+
+%  \medskip
+
+  %% We can fix that!
+  We propose a \emph{Domain Informed Oracle (DIO)} as a solution for
+  systematically incorporating domain specific knowledge into RL
+  reward functions.
+  %
+  DIO is a collection of domain specific rules written in a
+  declarative language, such as Prolog.
+  %
+  It does not rely on the RL representation of states, allowing the
+  programmer to focus on the domain specific knowledge using an
+  expressive and intuitive language, where they can define states and
+  rules in the most convenient way.
+  %
+  DIO provides an informed decision to the reward function, thus
+  allowing it to dynamically adapt the rewards. 
+  %
+  %DIO is incorporated into a RL architecture and is defined by its
+  %behavior in relation to the input given by the reward function. 
+  
+  Our implementation is tested on a Traffic Simulator scenario and
+  compared to a basic uninformed RL algorithm. 
+  %
+  The comparison is based on performance which we define by three
+  metrics: time to train, optimality of the learned policy and
+  finally, number of errors states reached. 
+  
+\end{abstract}
+
+
+
+\section{Introduction}
+
+Implementing a robust adaptive controller that is effective in terms
+of precision, time, and quality of decision
+when facing dynamic and uncertain scenarios, has always been a central
+challenge in AI and robotics. Precisely, as we want our autonomous agents to be deployed 
+in the real world, we want to ensure that they are able to adapt to unforeseen scenarios, as well as 
+keep their efficiency. This efficiency is measured in terms of their optimality and time taken to produce a decision. 
+%
+As autonomous cars are deployed, IoT is popularized, and human-robot interactions become more complex, we
+are more and more confronted with the need for robotic agents that can effectively and continually adapt
+to their surroundings, not only in simulation, but also in practice, when deployed as a cyber-physical system. 
+Since we are unable to provide a repertoire of all possible scenarios and actions,
+our agents need to be able to autonomously predict and adapt to new
+changes. Reinforcement Learning (RL) is an approach that
+supports dynamically adapting to new input. It is also the solution that AlphaGo, Deepmind AlphaStar, and OpenAI Five have
+adopted \cite{li2019reinforcement}, respectively for Go, StarCraft II and Dota 2 and found success in. 
+
+\medskip
+
+Reinforcement Learning is a powerful tool as it does not require
+pre-gathered data as most Machine Learning (ML) techniques do. 
+%
+The general idea of RL is a trial-and-error process guided by a
+\textit{domain dependent} reward function.
+%
+For example, if the agent is a self-driving car, the reward function
+can greatly penalize states when it crashes.
+%
+However, this means that the car is bound to crash to learn not to
+crash again.
+%
+A better reward function can include the physics equations to predict,
+with some degree of certainty, the car's trajectory for the next few
+seconds.
+%
+By looking into the future, the reward function can penalize bad
+behavior before it reaches a catastrophic state (a crash).
+%
+A better reward function prunes the (often infinite) search space
+faster, allowing the agent to explore (breadth) new states instead of
+exploiting (depth) dead ends.
+%
+%For example, say we want to teach an autonomous car to stop at a STOP
+%sign. We will punish it via a negative reward when it does not,
+%otherwise, we will reward it. Thus, through multiple iterations, and
+%with the goal to maximize its rewards, a reinforcement learning
+%trained agent will learn to stop at a STOP sign. 
+
+\medskip
+
+The task of choosing a reward function that ensures optimality is thus
+crucial. 
+%
+In this work, we propose a Domain Informed Oracle (DIO) written in a
+declarative language to inform a reinforcement learning algorithm. 
+%
+Our method provides a systematic way to encode domain specific rules
+into a reward function for RL that does not rely on the state
+representation within the RL algorithm.
+%
+We argue that such a combination will ensure a faster and more
+efficient RL trained agent in terms of optimality. 
+%
+The proposed combination is tested on a traffic simulation and the
+results are compared with a RL implementation that makes use of
+standard practices to design a reward function. 
+
+
+%% Reinforcement Learning from basics to challenges to significance
+\input{rl.tex}
+
+%% Overview of the proposed solution as symbolic reasoning for RL
+%% Should separate this to include in related work or change title to make it clearer?
+\input{overview.tex}
+
+%% Domain Informed Oracle : Architecture, specifications and modules interactions
+\input{dio.tex}
+
+%% Dynamic Obstacles in a GridWorld
+\input{gridworld.tex}
+
+%% Traffic Simulation using Carla
+%\input{traffic.tex}
+
+%% Input for related work
+%% Remember to mention more on reward shaping and domain informed approaches to ML
+\input{relatedwork.tex}
+
+\section{Conclusions}
+
+In conclusion, as RL faces the issues of reward shaping, meta-learning and the exploration-exploitation dilemma, domain knowledge show promising results in 
+improving reinforcement learning methods. The main challenge is to make such an integration seamless, and independent of the AI implementation. 
+As we start incorporating our modules into one architecture to test on our Traffic Simulator in Section \ref{traffic}, we will be able to show preliminary 
+results. Similarly, we look further into the specifications of DIO to ensure that it informs the scenario in a meaningful way as discussed in Section \ref{scspecs}. 
+
+\newpage
+
+\bibliographystyle{unsrt}
+\bibliography{biblio.bib}
+
+% Commenting this in/out to include/exclude the appendix
+\newpage
+
+\appendix
+\input{appendix}
+
+\end{document}

@@ -1,0 +1,55 @@
+\section{Traffic Simulation} 
+\label{traffic}
+
+Given the definition of our DIO architecture, the performance as shown in Figure \ref{fig:overview} will be judged on a Traffic Simulation. 
+Precisely, we make use of the OpenSource code of Carla \cite{Dosovitskiy17} to put our implementation in practice. 
+\subsection{Scenario in Reinforcement Learning}
+Our autonomous agent is one vehicle on the road. The road is populated with other vehicles, walkers and traffic signs and lights. 
+The goal of the agent is to get from point $A$ to point $B$ on the map in the fastest time possible. Carla defines \emph{sensors} to collect 
+data from the world. From the sensors, we collect \textbf{collision detector}, \textbf{obstacle detector}, \textbf{IMU} (which defines the internal state of the vehicle that includes acceleration)
+and finally \textbf{position} data to incorporate into our state representation. Thus, 
+\begin{equation*}
+  S_t = [t, p, c, o, a]
+\end{equation*} 
+In other words, the state at time $t$ is defined by $t$ the time, $p$ the position and $a$ the acceleration. $c$ and $o$ are both flags (-1/1) that indicate 
+respectively whether there is a collision or an obstacle detected. (-1) is equivalent to detected while (1) is equivalent to non-detected. Furthermore, 
+\begin{equation*}
+  A_t = ](a_t)-min, (a_t)+max[
+\end{equation*}
+Precisely, our action space at time $t$ is a range delimited by the minimum acceleration possible and the maximum acceleration possible. Finally, 
+\begin{equation*}
+  R_t(s_t) = c * (d(i, p)/t) + (o * a)
+\end{equation*}
+We define $d$ a function that takes in the initial position $i$ and the current position $p$ and computes the distance travelled. 
+By putting everything together, we can see that the reward is maximized when the agent travels the longest distance in a shortest 
+amount of time (without colliding at high speed) while making sure that when an obstacle is detected, acceleration is kept low. 
+
+\subsection{Domain Specific Rules in DIO}
+
+Note that DIO is a logic programming module that we design in Prolog and 
+carry to Python via PySwip \cite{tekol2020}.
+The first step of DIO is to consider the translation. 
+\[
+  \infer[T_1]{[t, p, -1, 1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                \wedge \text{Acc}(a) \wedge
+                              \text{Collision}}
+   \qquad
+   \infer[T_2]{[t, p, -1, -1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                  \wedge \text{Acc}(a) \wedge
+                                  \text{Collision} \wedge \text{Obstacle}}
+\]
+
+\[
+  \infer[T_3]{[t, p, 1, 1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                \wedge \text{Acc}(a)
+                            }
+   \qquad
+   \infer[T_4]{[t, p, 1, -1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
+                                  \wedge \text{Acc}(a) \wedge \text{Obstacle}}
+\]
+
+The domain specific rules will follow the same idea, taking in the ground facts and the action, 
+and infering the next set of ground facts. Thus, DIO searchs for configurations of ground facts given the step semantics, 
+to return the set of labels. The main challenge is pruning the search space as we want to 
+guarantee time efficiency. While we hypothesize that the RL would learn faster by incorporating 
+domain knowledge, we are expecting iterations to take longer as the feedback loop incorporates DIO's computation. This part is an ongoing work. 

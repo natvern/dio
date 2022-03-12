@@ -10,7 +10,7 @@
 #####################################################
 
 # Name of the main tex document(without .tex suffix)
-TARGET = thesis
+TARGET = main
 
 # Source Paths
 SRCDIR = . 
@@ -84,6 +84,13 @@ endif
 	@echo "======================== TEX -> PDF ============================"
 	@$(TEX) $(*F)
 	@$(TEX) $(*F)
+
+# Dependencies
+# DO NOT DELETE
+$(TARGET).tex : $(TEXSRC)
+$(TARGET).bbl : $(TEXSRC) $(BIBSRC)
+$(TARGET).pdf : $(TEXSRC) $(BBLSRC)
+
 	
 # To generate a .bbl file from a .tex file
 %.bbl : %.aux
@@ -97,10 +104,5 @@ endif
 	@echo "======================== TEX -> AUX ============================"
 	@$(TEX) $(*F)
 	
-# Dependencies
-# DO NOT DELETE
-$(TARGET).tex : $(TEXSRC)
-$(TARGET).bbl : $(TEXSRC) $(BIBSRC)
-$(TARGET).pdf : $(TEXSRC) $(BBLSRC)
 
 .PHONY:default all clean reallyclean open
