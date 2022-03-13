@@ -18,7 +18,7 @@ Finally, the reward is a function of the distance from the goal defined as,
   R_t = 1 - 0.9*(\dfrac{steps}{max\_steps})
 \end{equation*}
 
-\medskip
+\newpage
 
 \begin{multicols}{2}
     \begin{figure}[H]
@@ -88,6 +88,67 @@ move by 1-unit, and the speed, since the agent and the obtacles are defined to o
 \]
 
 \subsection{From Norms to Labels}
-\textcolor{red}{Todo.}
+In the following, we define \textbf{norms} as textual sentences to describe the intended goal behavior. 
+Thus, in the gridworld example, we consider three possibles norms, (1) \textit{crash} when the agent and the obstacle overlap, (2) \textit{maybecrash} 
+when the agent and the obstacle are one square from each other and finally (3) \textit{safe} when there is ample distance between the agent the obstacle 
+in this case, two square distances. Those norms are identified as 'labels', i.e. predicates defined as follows. 
+
+\[
+    \infer{crash}{atPos(X,Y), obs(X,Y,\_)} 
+    \qquad
+    \infer{maybecrash}{P_1::atPos(X,Y), P_2::obs(X,Y,\_)
+      & \ldots}
+\] 
+\[
+    \infer{safe}{
+      P_1::atPos(X_1,Y_1), P_2::obs(X_2,Y_2,\_),X_1 \neq X_2, Y_1 \neq Y_2
+      & \ldots
+    }
+\]
+ 
 
 \subsection{Translation Unit}
+
+  \begin{algorithm}[H]
+    \caption{Dio/RL Loop}
+    \begin{algorithmic}[1]
+    
+    \Procedure{Step}{$S_t, a$}       \Comment{(State, action) Pair}
+        \State Check for invalid actions
+        \State Check for obstacles 
+        \State Update Obstacles positions
+        \State Update Agent's position
+        \State \textbf{UpdateWorld}(position, direction, obstacles) \Comment{KB update in DIO}
+        \State $obs, reward$ = Step'$(S_t, ac)$ \Comment{Call to Initial Env}
+        \State $reward'$ = \textbf{getFeedback()} \Comment{Query DIO}
+        \If{$reward' != -1$} 
+            \State $reward$ += reward'
+        \EndIf
+        \State return (obs,reward)
+    \EndProcedure
+    
+    \end{algorithmic}
+    \end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Reward Shaping from RL to DIO/TU}
+  \begin{algorithmic}[1]
+      
+      \Procedure{getFeedback}{} 
+      \State labels $\gets$ \textbf{getLabels()} \Comment{Evaluated predicates w/ Corresponding Probabilities}
+      \State $P \gets \{$crash, maybecrash, safe$\}$  \Comment{Set of possible worlds}
+      \State $F \gets \{-1,-0.5,1\}$ \Comment{Numerical value associated with world}
+      \State $i \gets 1$
+      \State $r \gets 0$
+      \While{$i \leq$ length(labels)} 
+         \State $r \gets r +$ labels[P[i]]*F[i] \Comment{Equivalent to weighted probabilities}
+         \State $i \gets i+1$
+
+
+      \EndWhile
+      
+      \EndProcedure
+      
+      \end{algorithmic}
+      \end{algorithm}
+    

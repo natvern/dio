@@ -96,3 +96,10 @@ In practice, we consider the following modules and their interactions as shown i
   \caption{Modules \& Interactions}
   \label{fig:mods}
 \end{figure}
+
+Figure \ref{fig:mods} describes the interactions of the different modules. Precisely, 
+given the rules and the world knowledge base at a given time $t$, we are able 
+to produce the corresponding label, i.e. the query over a predicate. The predicate is fed 
+into the Translation Unit (TU) that transforms the predicate to a numerical value that is given to the Reinforcement Learning 
+as a reward shaping $r'$ added to the original reward given by the environment. As a result of the RL action, the next state is given 
+to TU that translates it into Ground facts to update the world knowledge, thus resetting the loop.
