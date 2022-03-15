@@ -10,5 +10,12 @@
 *.fdb_latexmk
 *.synctex.gz
 
-# pdf for which we have the latex sources
-mid-sem-efficiency.pdf
+# pdfs for which we have the latex sources
+Preliminary-work/notes.pdf
+Problem Statement -Abstract/abstract.pdf
+Problem Statement -Abstract/problem-statement.pdf
+Propsectus/draft.pdf
+Propsectus/prospectus.pdf
+Report/mid-sem-appendix.pdf
+Report/midsem-report.pdf
+Thesis/main.pdf
