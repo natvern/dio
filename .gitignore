@@ -1,5 +1,8 @@
 ## List of files to be ignored by git:
 
+# MacOS metadata
+.DS_Store
+
 # Generated each time during latex compilation
 *.bbl
 *.blg
