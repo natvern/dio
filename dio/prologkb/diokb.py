@@ -14,10 +14,10 @@ class Dio:
     def getLabels(self):
         return get_evaluatable().create_from(self.p).evaluate()
 
-    def updateWorld(self,position,direction,obstacles):
+    def updateWorld(self,position,direction,obstacles,goal):
         ## Consider updating the initial file and make 
         ## log of world changes 
-        kbt = self.transl.translateFrom([position,direction,obstacles])
+        kbt = self.transl.translateFrom([position,direction,obstacles,goal])
         self.world = kbt
         self.p = self.updatePrologString()
 

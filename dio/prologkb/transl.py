@@ -1,3 +1,5 @@
+import csv
+
 class Translate(): 
     def __init__(self):
         pass
@@ -20,7 +22,9 @@ class Translate():
         for obs in obstacles:
             obskb += "1.0 :: obs(0,{},{},0,0).\n".format(obs[0],obs[1])
         conskb = self.getConstants()
-        return conskb + poskb + dirkb + obskb
+        goal = state[3]
+        goalkb = "1.0 :: goal({},{}).\n".format(goal[0],goal[1])
+        return conskb + poskb + dirkb + obskb + goalkb
         
 
     def translateTo(self, labels):
@@ -28,8 +32,18 @@ class Translate():
         sLabels = {}
         for label in labels:
             sLabels[str(label)] = labels[label]
-        return sLabels["crash"]*-0.1
+        myLabels = self.getInference()
+        r = 0
+        for label in sLabels.keys():
+            r += myLabels[label]*sLabels[label]
+        return r
 
     def getConstants(self):
         s = "1.0 :: speed(1).\n" + "1.0 :: acc(0).\n" + "1.0 :: time(0).\n" + "1.0 :: timestep(1).\n"
         return s
+
+    def getInference(self):
+        with open('/Users/srahmoun/Documents/Thesis/dio/prologkb/inference.csv', mode='r') as inp:
+            reader = csv.reader(inp)
+            D = {rows[0]:float(rows[1]) for rows in reader}
+        return D

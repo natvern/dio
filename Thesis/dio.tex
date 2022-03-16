@@ -8,18 +8,20 @@ It does not mean that our solution is specific to Q-learning.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.41]{figures/basicrl.png}
-  \caption{Reinforcement learning architecture}
-  \label{fig:basicrl}
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/basicrl.png}
+    \captionof{figure}{Reinforcement learning architecture}
+    \label{fig:basicrl}
+  \end{minipage}%
+  \begin{minipage}{.45\textwidth}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/dio.png}
+    \captionof{figure}{Dio+RL architectureg}
+    \label{fig:diorl}
+  \end{minipage}
 \end{figure}
 
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.42]{figures/dio.png}
-  \caption{Dio+RL architecture}
-  \label{fig:diorl}
-\end{figure}
 
 The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more details. The environment defined by the scenario sends the current state 
 to the Q-Learning algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
@@ -62,7 +64,7 @@ independent of the DIO implementation. In the following, we will define $A$ by i
   \item Finally, $A$ is passed to the scenario. Note then that $A : t$. 
 \end{enumerate}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
   \includegraphics[scale=0.55]{figures/scworlds.png}
   \caption{Game Tree Simulation by DIO}
