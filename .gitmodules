@@ -1,0 +1,6 @@
+[submodule "dio/rl-starter-files"]
+	path = dio/rl-starter-files
+	url = https://github.com/lcswillems/rl-starter-files
+[submodule "dio/torch-ac"]
+	path = dio/torch-ac
+	url = git@github.com:lcswillems/torch-ac.git

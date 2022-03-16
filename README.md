@@ -12,3 +12,11 @@
 - [ ] **MOTM Presentation** Apr 22nd
 - [ ] **Final Thesis** Apr 28th
 - [ ] **Final Presentation** Apr 28th
+
+--------------------------------------
+
+This repository has submodules. To clone it, use:
+
+```
+git clone --recurse-submodules git@github.com:natvern/Thesis.git
+```
