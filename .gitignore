@@ -1,5 +1,9 @@
 ## List of files to be ignored by git:
 
+# Python generated files
+__pycache__
+.ipynb_checkpoints
+
 .vscode
 
 # MacOS metadata
