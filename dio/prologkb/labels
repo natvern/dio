@@ -1,11 +1,14 @@
 crash :- nextPos(X, Y), obs(_,X,Y,_,_).
 maybecrash :- nextPos(X,Y), nextObs(_,X,Y,_,_).
 P::close :- nextPos(X,Y), goal(I,J), 
-            L is abs(I-X) + abs(Y-J), L > 1, P is 1.0/L.
+            time(T),
+            L is abs(I-X) + abs(Y-J), L > 1, P is 1.0/(L+T).
 P::close :- nextPos(X,Y), goal(I,J), 
-            L is abs(I-X) + abs(Y-J), L is 0, P is 1.0.
+            time(T),
+            L is abs(I-X) + abs(Y-J), L is 0, P is 1.0/(L+T).
 P::close :- nextPos(X,Y), goal(I,J), 
-            L is abs(I-X) + abs(Y-J), L =< 1, P is 0.8.
+            time(T),
+            L is abs(I-X) + abs(Y-J), L =< 1, P is 1/(L+T).
 
 query(crash).
 query(maybecrash).

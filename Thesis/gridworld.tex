@@ -32,6 +32,7 @@ Finally, the reward is a function of the distance from the goal defined as,
 \end{multicols}
 
 \subsection{Domain Specific Rules}
+\textcolor{red}{Fix the rules.}
 The rules are defined as a ProbLog \cite{problog}: a probabilistic prolog that allows us to capture 
 the stochasticity of the environment. Precisely, we want to consider the erratic movements of the obstacles, considering 
 we do not have previous knowledge on the distribution of their given movement. We assume a uniform distribution and define the following. 
@@ -90,6 +91,7 @@ In the following, we define \textbf{norms} as textual sentences to describe the 
 Thus, in the gridworld example, we consider three possibles norms, (1) \textit{crash} when the agent and the obstacle overlap, (2) \textit{maybecrash} 
 when the agent and the obstacle are one square from each other and finally (3) \textit{safe} when there is ample distance between the agent the obstacle 
 in this case, two square distances. Those norms are identified as 'labels', i.e. predicates defined as follows. 
+\textcolor{red}{Add the 'close' predicate}.
 
 \[
     \infer{crash}{atPos(X,Y), obs(X,Y,\_)} 
@@ -149,3 +151,7 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
       
       \end{algorithmic}
       \end{algorithm}
+
+    \subsection{Preliminary Results}
+    \textcolor{red}{\textbf{9 minutes vs 16seconds, REALLY need to optimize} 
+    Add graphs and discussion}

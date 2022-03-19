@@ -1,9 +1,12 @@
 import csv
 
 class Translate(): 
+    time = 0
     def __init__(self):
-        pass
+        self.time = 0
+
     def translateFrom(self, state):
+        self.time += 1
         position = state[0] # position
         poskb  = "1.0 :: atPos({}, {}).\n".format(position[0],position[1])
         direction = state[1] # direction
@@ -24,7 +27,8 @@ class Translate():
         conskb = self.getConstants()
         goal = state[3]
         goalkb = "1.0 :: goal({},{}).\n".format(goal[0],goal[1])
-        return conskb + poskb + dirkb + obskb + goalkb
+        timekb = "1.0 :: time({}).\n".format(self.time)
+        return conskb + poskb + dirkb + obskb + goalkb + timekb
         
 
     def translateTo(self, labels):
@@ -39,7 +43,7 @@ class Translate():
         return r
 
     def getConstants(self):
-        s = "1.0 :: speed(1).\n" + "1.0 :: acc(0).\n" + "1.0 :: time(0).\n" + "1.0 :: timestep(1).\n"
+        s = "1.0 :: speed(1).\n" + "1.0 :: acc(0).\n" + "1.0 :: timestep(1).\n"
         return s
 
     def getInference(self):
