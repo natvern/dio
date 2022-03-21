@@ -45,6 +45,12 @@
 
 \setlength{\parindent}{0pt}
 
+\usepackage[toc]{glossaries}
+\usepackage{glossary-mcols}
+
+\makeglossaries
+\loadglsentries{terminology}
+
 % For comment boxes.
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommand{\giselle}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{G: #1}}
@@ -165,6 +171,9 @@ Informed Oracle (DIO)\\ in Reinforcement Learning}\\}
 \end{abstract}
 
 
+\newpage 
+\tableofcontents
+\newpage
 
 \section{Introduction}
 
@@ -275,5 +284,9 @@ results. Similarly, we look further into the specifications of DIO to ensure tha
 
 \appendix
 \input{appendix}
+\newpage
+
+\glsaddall
+\printglossary[style=mcolindex, title=Terminology, toctitle=List of Terms]
 
 \end{document}
