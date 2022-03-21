@@ -1,2 +1,61 @@
 \section{Optimization} \label{optimality} 
-\textcolor{red}{To write.}
+
+\subsection{Problog Procedure} 
+% High level overview of Problog
+Problog is a logic programming language that aims to bridge between probabilistic 
+logic programming and statistical relational learning \cite{fierens_van}. 
+A problog program specifies a probability distribution over possible worlds. 
+This probability distribution corresponds to the possible worlds whether a fact is taken 
+or discarded given the probability associated with it. Precisely, they define a world 
+is a subset of ground probabilistic facts where the probability of the subset is the product of 
+the probabilities of the facts it contains.
+
+\paragraph{Statistical Relational Learning (SRL)}
+    Discipline of Artificial Intelligence that considers first order logic relations between 
+    structures of a complex system and model it through probabilistic graphs such as Bayesian or 
+    Markov networks.
+
+\paragraph{Probabilistic Logic Programming (PLP)}
+    Discipline of Programming Languages that augments traditional logic programming such as Prolog 
+    with the power to infer over probabilistic facts to support the modeling of structured 
+    probability distributions.
+
+
+% Evidence and inference tasks in Problog
+\paragraph{}
+Furthermore, problog extends PLP with the power of considering evidences 
+in the inference task. This is made possible without requiring the transformation 
+the Bayesian networks on which to use SRL. Instead, problog considers the subset described above 
+and assumes only worlds where the evidence held remains true. Those possible worlds and their associated 
+probabilities are then added and divided by the choice with the higher probability. Problog makes this 
+possible by a 3-steps conversion from a problog program to a weighted boolean formula.
+
+\paragraph{}
+% Conversion steps to weighted formula
+First, problog grounds the program by only considering facts relevant to the query in question. 
+The relevant ground rules are specifically converted to equivalent Boolean formulas. 
+Precisely, inferences are converted into bi-directional implications and its corresponding premises 
+are converted to a conjunction of disjunction of facts. 
+Finally, problog asserts the evidence by adding it to the previous boolean formula 
+as a conjunction and defines a weight function that assigns a weight to every literal. 
+The weights are derived from the probability associated with the relevant literal, whether explicility 
+given or implicility computed. 
+
+
+\subsection{Compile once Evaluate many}
+Since the grounding of the problog program is dependent on the query, it is possible to first compile the model 
+to a problog internal format and ground all possible queries and evidence specified in the model. This allows us 
+to compile once and evaluate many. This can help with the optimization of our program, since our files can be defined into 
+(1) rules, (2) world knowledge base and (3) labels as explained in \ref{sec:modules}. (1) and (3) are constants, while the dynamics 
+of the world (2) change at every given timestep. We can then initially ground the constants and later 
+extend the database to incorporate the environment knowledge. 
+ 
+\textcolor{red}{To write.} \samar{mention multiprocessing 
+and transformation to evidence based probabilities}
+
+\subsection{Feedback n-steps} 
+Another possible optimization is to extend the number of steps for which feedback is requested. In the 
+following, we evaluate the tradeoff between optimality and speed of training when increasing $n$. 
+
+
+

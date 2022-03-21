@@ -1,0 +1,30 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Reinforcement Learning}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Challenges in Reinforcement Learning}{4}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Symbolic Reasoning for Reinforcement Learning}{5}{section.3}%
+\contentsline {section}{\numberline {4}Domain Informed Oracle}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Architecture}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Specifications}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Modules Interactions}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Dynamic Obstacles in a GridWorld}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Scenario in Reinforcement Learning}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Domain Specific Rules}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}World Knowledge}{11}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}From Norms to Labels}{11}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Translation Unit}{11}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Preliminary Results}{12}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Optimization}{13}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Problog Procedure}{13}{subsection.6.1}%
+\contentsline {paragraph}{Statistical Relational Learning (SRL)}{13}{section*.12}%
+\contentsline {paragraph}{Probabilistic Logic Programming (PLP)}{13}{section*.13}%
+\contentsline {paragraph}{}{13}{section*.14}%
+\contentsline {paragraph}{}{13}{section*.15}%
+\contentsline {subsection}{\numberline {6.2}Compile once Evaluate many}{14}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Feedback n-steps}{14}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Traffic Simulation}{14}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Scenario in Reinforcement Learning}{14}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Domain Specific Rules in DIO}{14}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Related Work}{15}{section.8}%
+\contentsline {section}{\numberline {9}Conclusions}{15}{section.9}%
+\contentsline {section}{\numberline {A}Appendix}{18}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Issues with the safe RL approach}{19}{subsection.A.1}%

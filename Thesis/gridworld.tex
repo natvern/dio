@@ -39,13 +39,10 @@ we do not have previous knowledge on the distribution of their given movement. W
 The rules of DIO take the following form: 
 
 \begin{prooftree}
-  \AxiomC{$P_0 :: \varphi(0)$}
-  \AxiomC{$P_1 :: \varphi(1)$}
-  \AxiomC{$P_2 :: \varphi(2)$}
-  \AxiomC{$P_3 :: \varphi(3)$}
-  \AxiomC{$\ldots$}
+  \AxiomC{$p_1 \dots p_n$}
+  \AxiomC{$\sum_{i=0}^{n}P(i) = 1$}
   \RightLabel{(action)}
-  \QuinaryInfC{$p_1,\ldots, p_n$}
+  \BinaryInfC{$P_i :: \varphi(i)$}
 \end{prooftree}
 We define $\sum_{i=0}^{n}P(i) = 1$, and $\varphi(i)$ corresponds to the conjunction of grounds facts of the possible world with probability $P_i$.
 The action is equivalent to our step semantics, thus, we enforce that a given action modifies the facts in some form. In practice, an action is the missing 
@@ -87,23 +84,27 @@ move by 1-unit, and the speed, since the agent and the obtacles are defined to o
 \]
 
 \subsection{From Norms to Labels}
-In the following, we define \textbf{norms} as textual sentences to describe the intended goal behavior. 
+In the following, we define \textbf{\glsplural{norms}} as textual sentences to describe the intended goal behavior. 
 Thus, in the gridworld example, we consider three possibles norms, (1) \textit{crash} when the agent and the obstacle overlap, (2) \textit{maybecrash} 
 when the agent and the obstacle are one square from each other and finally (3) \textit{safe} when there is ample distance between the agent the obstacle 
 in this case, two square distances. Those norms are identified as 'labels', i.e. predicates defined as follows. 
-\textcolor{red}{Add the 'close' predicate}.
 
 \[
-    \infer{crash}{atPos(X,Y), obs(X,Y,\_)} 
+    \infer{1 :: crash}{1 :: atPos(X,Y) & 1 :: obs(X,Y,\_)} 
     \qquad
-    \infer{maybecrash}{P_1::atPos(X,Y), P_2::obs(X,Y,\_)
+    \infer{P_1 \times P_2 :: maybecrash}{P_1::atPos(X,Y), P_2::obs(X,Y,\_)
       & \ldots}
 \] 
 \[
-    \infer{safe}{
+    \infer{P_1 \times P_2 :: safe}{
       P_1::atPos(X_1,Y_1), P_2::obs(X_2,Y_2,\_),X_1 \neq X_2, Y_1 \neq Y_2
       & \ldots
     }
+\]
+\[
+  \infer{1.0/(L+T) :: close}{
+    nextPos(X,Y), goal(I,J), time(T), L = abs(I-X) + abs(Y-J)
+  }
 \]
  
 
