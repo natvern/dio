@@ -1,8 +1,11 @@
 \section{Dynamic Obstacles in a GridWorld} 
 We first evaluate the performance of our dio/rl implementation compared to an implementation making only use of rl. 
+
 \subsection{Scenario in Reinforcement Learning}
-Our autonomous agent exists in an 8x8 grid world. Its goal is to reach the goal from his initial position (1,1).
-Along the way, there exists dynamic obstacles which movements is unknown. The agent is punished if colliding with an obstacle and the episode, hereby ends. 
+
+Our autonomous agent exists in an 8x8 grid world. Its goal is to reach
+the lower right position (8,8) from his initial position (1,1).
+Along the way, there exists dynamic obstacles whose movements is unknown. The agent is punished if colliding with an obstacle and the episode, hereby ends. 
 This environment offered by gym-gridworld \cite{gym_minigrid} is useful for testing our algorithm in a Dynamic Obstacle avoidance for a partially observable 
 environment. Precisely, we define the state as follows. 
 \begin{equation*}

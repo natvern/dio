@@ -6,8 +6,9 @@ actions in order to maximize its rewards
 $R : (S \times A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
 of the environment and the action refers to the action chosen by the RL agent. By defining this reward function and the scenario of the problem the agent is trying to solve, 
 reinforcement learning has the advantage of not requiring a prior dataset. Indeed, the agent is not told what to do, but rather 
-learns from the effect of its actions on the environment. Consider
-Figure~\ref{fig:rl}. 
+learns from the effect of its actions on the environment. 
+% Consider Figure~\ref{fig:rl}. [GR] You are explaining the figure in
+% the next paragraph, so this sentence is not needed.
 
 \begin{figure}[H]
   \centering
@@ -73,9 +74,14 @@ as it is shown to help the agent learn faster. Finally, one can normalize reward
 However, there still exists a lack of a systematic method to design a
 reward function, and this needs to be done on a case by case basis.
 %
-Moreover, the abstract representation of states and actions can make
+Moreover,\giselle{I think this is one of the main points you should
+make about DIO, but it is mentioned here in an \emph{en passant}
+style, which diminishes its importance.} the abstract representation of states and actions can make
 it difficult to map domain specific rules and judgments to the reward
-function. A consequence of finding a systematic method to shaping rewards handles (2).
+function. A consequence of finding a systematic method to shaping
+rewards handles (2), namely, the exploitation vs. exploration
+dilemma.\giselle{I added the ``namely'' part because at this point the
+definition of (2) was too long ago.}
 
 \medskip
 
@@ -99,7 +105,8 @@ acquired knowledge and resolving the conflict when necessary. More interestingly
 the real-world, or possibly another simulation, where it encounters
 state configurations it did not during its training. The goal is to
 be able to efficiently adapt to those configurations. The problem of meta-learning in RL stems from the uncertainties of the world. 
-Consider the result of training: It is a policy $\pi$, a function to map states to action $\pi : S \rightarrow A$. The learned policy is the one that maximizes the cumulative rewards.
+Consider the result of training: a function $\pi$ that map states to
+actions $\pi : S \rightarrow A$. The learned policy is the one that maximizes the cumulative rewards.
 This training is most often done in simulation, given the lack of safety guarantees of RL. 
 However, several problems come into place when considering the deployment of the trained agent. Considering that an agent has done well in 
 a designated simulation does not imply that it will do as well in the real-world. Overall, it must be that certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave 
