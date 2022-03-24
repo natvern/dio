@@ -18,10 +18,9 @@ Current Neurosymbolic AI trends are concerned with knowledge representation and 
 and representation to precede learning in order to provide some form
 of incremental update, e.g. a meta-network to group two sub-neural
 networks~\cite{Besold2017NeuralSymbolicLA}.
-As a result, neurosymbolic AI is able to apply to vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
+As a result, neurosymbolic AI applies to vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
 vision analogy-making \cite{Reed2015DeepVA}, or learning communication
-protocols \cite{Foerster2016LearningTC}.\giselle{Is this sentence
-incomplete? I am having a hard time parsing it.} \samar{fixed.}
+protocols \cite{Foerster2016LearningTC}.
 Those results inspire us to use those techniques for reinforcement learning, as to tackle its challenges.
 
 \medskip
@@ -32,8 +31,7 @@ is able to search the space and send feedback to the reinforcement learning agen
 training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma. For instance, if a domain informed module 
 can infer that only one of the possible next states is desirable, then exploration in that specific case is suboptimal.  
 We will call the proposed module a \emph{Domain Informed Oracle
-(DIO)}.\giselle{What is the idea you are trying to convey in this
-paragraph? I think it can be made clearer.} \samar{fixed?}
+(\dio}.
 
 \begin{figure}[H]
   \centering
@@ -44,7 +42,7 @@ paragraph? I think it can be made clearer.} \samar{fixed?}
 \giselle{This figure is not exactly your proposed solution, but how
 you would compare your solution with another one. For this picture I
 suggest that you take the diagram of reinforcement learning
-(Figure~\ref{fig:rl}) and add DIO between the agent and environment
+(Figure~\ref{fig:rl}) and add \dio between the agent and environment
 (something that informs the reward function).}
 
 The diagram in Figure~\ref{fig:overview} is a high-level description of our proposed solution. 
