@@ -213,21 +213,21 @@ as shown in Algorithm 2.
     but also learned to reach the goal. 
 
 
-    \begin{figure}[H]
-      \centering
-      \begin{minipage}{.5\textwidth}
-        \centering
-        \includegraphics[width=1\linewidth]{figures/diofps.png}
-        \captionof{figure}{Frames per Second with Dio}
-        \label{fig:fpsdio}
-      \end{minipage}%
-      \begin{minipage}{.5\textwidth}
-        \centering
-        \includegraphics[width=1\linewidth]{figures/rlfps.png}
-        \captionof{figure}{Frames per Second without Dio}
-        \label{fig:fpsrl}
-      \end{minipage}
-    \end{figure}
+%     \begin{figure}[H]
+%       \centering
+%       \begin{minipage}{.5\textwidth}
+%         \centering
+%         \includegraphics[width=1\linewidth]{figures/diofps.png}
+%         \captionof{figure}{Frames per Second with Dio}
+%         \label{fig:fpsdio}
+%       \end{minipage}%
+%       \begin{minipage}{.5\textwidth}
+%         \centering
+%         \includegraphics[width=1\linewidth]{figures/rlfps.png}
+%         \captionof{figure}{Frames per Second without Dio}
+%         \label{fig:fpsrl}
+%       \end{minipage}
+%     \end{figure}
 
     First, as expected, the implementation using Dio is much slower only able to run 
     an average of 150 episodes per second. As a result, for 80k episodes, the implementation with Dio 
@@ -240,6 +240,33 @@ as shown in Algorithm 2.
 
     \begin{figure}[H]
       \centering
+      % FPS / episodes
+      \begin{minipage}{.5\textwidth}
+        \centering
+        \textsc{RL + DIO}
+      \end{minipage}%
+      \begin{minipage}{.5\textwidth}
+        \centering
+        \textsc{RL}
+      \end{minipage}
+      \vspace{0.2cm}
+
+      % FPS/episodes
+      \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{figures/diofps.png}
+        \captionof{figure}{Frames per Second with Dio}
+        \label{fig:fpsdio}
+      \end{minipage}%
+      \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{figures/rlfps.png}
+        \captionof{figure}{Frames per Second without Dio}
+        \label{fig:fpsrl}
+      \end{minipage}
+      \vspace{0.2cm}
+      
+      % Frames mean / episodes
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/dioframesmean.png}
@@ -252,16 +279,8 @@ as shown in Algorithm 2.
         \captionof{figure}{Mean of frames per episode without Dio}
         \label{fig:framesrl}
       \end{minipage}
-    \end{figure}
+      \vspace{0.2cm}
 
-    The dip in the mean frames in \ref{fig:framesdio} show that the agent did not only learn 
-    how to only collide but also is learning how to reach the goal in the shortest amount of time. 
-    Since \ref{fig:returndio} is still increasing, we can also tell that the values did not converge yet and 
-    the agent can learn even a better optimization while \ref{fig:returnrl} shows that the values converge towards
-    a suboptimal policy.
-
-    \begin{figure}[H]
-      \centering
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/dioreturn.png}
@@ -276,10 +295,31 @@ as shown in Algorithm 2.
       \end{minipage}
     \end{figure}
 
+    The dip in the mean frames in \ref{fig:framesdio} show that the agent did not only learn 
+    how to only collide but also is learning how to reach the goal in the shortest amount of time. 
+    Since \ref{fig:returndio} is still increasing, we can also tell that the values did not converge yet and 
+    the agent can learn even a better optimization while \ref{fig:returnrl} shows that the values converge towards
+    a suboptimal policy.
+
+%     \begin{figure}[H]
+%       \centering
+%       \begin{minipage}{.5\textwidth}
+%         \centering
+%         \includegraphics[width=1\linewidth]{figures/dioreturn.png}
+%         \captionof{figure}{Mean of \glspl{return} per episode with Dio}
+%         \label{fig:returndio}
+%       \end{minipage}%
+%       \begin{minipage}{.5\textwidth}
+%         \centering
+%         \includegraphics[width=1\linewidth]{figures/rlreturn.png}
+%         \captionof{figure}{Mean of returns per episode without Dio}
+%         \label{fig:returnrl}
+%       \end{minipage}
+%     \end{figure}
+
     In \ref{fig:returndio} and \ref{fig:returnrl}, it is evident that the policy learned by Dio 
     is more optimal. Similarly, when evaluating our policies on the same reward scheme, 
     the implementation with dio averages a 0.64 while without dio averages a -0.18 return.
-=======
     Overall, the results show that an implementation that makes use of
     dio\giselle{Create a command for DIO so that it is typeset
     consistently.} is beneficial even in a stochastic environment. 
