@@ -18,6 +18,10 @@ __pycache__
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.toc
+*.glo
+*.ilg
+*.ist
 
 # pdfs for which we have the latex sources
 Preliminary-work/notes.pdf
