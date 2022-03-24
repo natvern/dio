@@ -58,4 +58,49 @@ Another possible optimization is to extend the number of steps for which feedbac
 following, we evaluate the tradeoff between optimality and speed of training when increasing $n$. 
 
 
+\begin{table}[h!]
+        \centering
+        \begin{minipage}{.5\textwidth}
+    \begin{tabular}[width=1\linewidth]{||c c c c c||} 
+     \hline
+     n-Steps & $\mu$ & $\sigma$ & $min$ & $max$ \\  [0.5ex] 
+     \hline\hline
+     1 & 49.6 & 21.0 & 15.0 & 139.0 \\ 
+     \hline
+     2 & 52.4 & 21.5 & 8.0 & 124.0 \\
+     \hline
+     3 & 180.4 & 88.0 & 3.0 & 256.0 \\
+     \hline
+     4 & 232.2 & 60.2 & 23.0 & 256.0 \\ [1ex] 
+     \hline
+    \end{tabular}
+    \captionof{table}{n-Steps Frames/Episode}
+\end{minipage}% 
+\begin{minipage}{.5\textwidth}
+    \centering
+    \begin{tabular}[width=1\linewidth]{||c c c c c||} 
+     \hline
+     n-Steps & $\mu$ & $\sigma$ & $min$ & $max$ \\  [0.5ex] 
+     \hline\hline
+     1 & 0.64 & 0.55 & -1.0 & 0.95 \\ 
+     \hline
+     2 & 0.57 & 0.61 & -1.0 & 0.94 \\
+     \hline
+     3 & -0.50 & 0.50 & -1.0 & 0.00 \\
+     \hline
+     4 & -0.15 & 0.36 & -1.0 & 0.45 \\ [1ex] 
+     \hline
+    \end{tabular}
+    \captionof{table}{n-Steps Returns/Episode}
+\end{minipage}%
+\end{table}
+
+As expected by decreasing the number of times we call Dio, we were able to reduce the 
+training time considerably. By half for $n=2$, a third in $n=3$, etc. Overall, the change of optimality 
+between $n=1$ and $n=2$ is negligeable, as the success percentage drops from $90\%$ to $87\%$. 
+The mean return drops by $0.9$, although the max reward does not change much. 
+Starting from $n=3$ and $n=4$, we gain a lot in performance but we lose almost all optimality. 
+A visualization of the resulting policy shows that the agent almost never reaches the goal, similarly to the 
+implementation without Dio. In conclusion, $n=2$ is the best optimization. 
+
 
