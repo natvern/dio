@@ -290,13 +290,11 @@ Trivially, the \textsc{getReward} from TU is an identity function.
     \end{figure}
 
     %%
-    \paragraph{}
     We first visualized the learned policy in the two implementations. Althrough both learned 
     how to not crash into the Dynamic Obstacles, the implementation with \dio{} was better at minimizing the number of steps 
     but also learned to reach the goal. 
 
     %%
-    \paragraph{}
     First, as expected, the implementation using \dio{} is much slower only able to run 
     an average of 150 episodes per second. As a result, for 80k episodes, the implementation with \dio{} 
     took 9 minutes to train versus 16 seconds for the implementation without. However, this loss in time shows as in \ref{fig:framesdio} 
@@ -307,7 +305,6 @@ Trivially, the \textsc{getReward} from TU is an identity function.
 
 
     %%
-    \paragraph{}
     The dip in the mean frames in \ref{fig:framesdio} show that the agent did not only learn 
     how to only collide but also is learning how to reach the goal in the shortest amount of time. 
     Since \ref{fig:returndio} is still increasing, we can also tell that the values did not converge yet and 
@@ -315,13 +312,11 @@ Trivially, the \textsc{getReward} from TU is an identity function.
     a suboptimal policy.
 
 
-    \paragraph{}
     In \ref{fig:returndio} and \ref{fig:returnrl}, it is evident that the policy learned by \dio{} 
     is more optimal. Similarly, when evaluating our policies on the same reward scheme, 
     the implementation with \dio{} averages a 0.64 while without \dio{} averages a -0.18 return.
 
     %%
-    \paragraph{}
     Overall, the results show that an implementation that makes use of
     \dio{} is beneficial even in a stochastic environment. As we lose in speed, we gain in optimality of the solution. 
     Given those preliminary results, we want to (1) optimize our implementation 

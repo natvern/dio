@@ -98,7 +98,6 @@ the probabilities of the facts it contains.
 
 
 % Evidence and inference tasks in Problog
-\paragraph{}
 Furthermore, problog extends PLP with the power of considering evidences 
 in the inference task. This is made possible without requiring the transformation 
 the Bayesian networks on which to use SRL. Instead, problog considers the subset described above 
@@ -106,7 +105,6 @@ and assumes only worlds where the evidence held remains true. Those possible wor
 probabilities are then added and divided by the choice with the higher probability. Problog makes this 
 possible by a 3-steps conversion from a problog program to a weighted boolean formula.
 
-\paragraph{}
 % Conversion steps to weighted formula
 First, problog grounds the program by only considering facts relevant to the query in question. 
 The relevant ground rules are specifically converted to equivalent Boolean formulas. 
