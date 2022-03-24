@@ -5,6 +5,7 @@ __pycache__
 .ipynb_checkpoints
 
 .vscode
+*.swp
 
 # MacOS metadata
 .DS_Store
