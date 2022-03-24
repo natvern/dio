@@ -31,7 +31,7 @@ is able to search the space and send feedback to the reinforcement learning agen
 training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma. For instance, if a domain informed module 
 can infer that only one of the possible next states is desirable, then exploration in that specific case is suboptimal.  
 We will call the proposed module a \emph{Domain Informed Oracle
-(\dio}.
+(\dio{}}.
 
 \begin{figure}[H]
   \centering
@@ -43,9 +43,9 @@ We will call the proposed module a \emph{Domain Informed Oracle
 
 The diagram in Figure~\ref{fig:overview} is a high-level description of our proposed solution. 
 %
-Precisely, the (state, action) pair is fed into \dio alongside the environment. While the environment produces its own 
-reward function, \dio also computes its own reward. 
+Precisely, the (state, action) pair is fed into \dio{} alongside the environment. While the environment produces its own 
+reward function, \dio{} also computes its own reward. 
 
 \paragraph{} Those two rewards are merged by the reward shaping unit. We could either 
-overwrite the initial reward and only trust \dio, likewise we could trust them both equally and take their average. This is left as a \emph{design choice}. 
+overwrite the initial reward and only trust \dio{}, likewise we could trust them both equally and take their average. This is left as a \emph{design choice}. 
 Finally, this computed new reward is given to the agent that is unaware of this new mechanic. 

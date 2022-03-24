@@ -1,6 +1,6 @@
 \section{Dynamic Obstacles in a GridWorld} 
 \label{gridworlddyn}
-We first evaluate the performance of our \dio/rl implementation compared to an implementation making only use of reinforcement learning. 
+We first evaluate the performance of our \dio{}/rl implementation compared to an implementation making only use of reinforcement learning. 
 We precisely look at (1) frames per second to evaluate speed. A \gls{frame} is a the step taken by the agent at one unit of time. Thus, frames/second 
 during training are equivalent to how fast the learning takes. We also look at the mean of frames per episode and the mean of returns per episode to evaluate 
 optimality. An \gls{episode} is defined as the collection of steps before we reach a terminal state, either 
@@ -53,7 +53,7 @@ an obstacle, to encourage staying away from the dynamic obstacles.
 The rules are defined as a ProbLog~\cite{problog}: a probabilistic prolog that allows us to capture 
 the stochasticity of the environment, as we previously introduced in \ref{sec:problog}. Precisely, we want to consider the erratic movements of the obstacles, considering 
 we do not have previous knowledge on the distribution of their given movement. We assume a uniform distribution and define the following. 
-The rules of \dio take the following form: 
+The rules of \dio{} take the following form: 
 
 \begin{prooftree}
   \AxiomC{$p_1 \dots p_n$}
@@ -130,12 +130,12 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
  The choice was made considering that a crash would imply a 'maybecrash', thus trivially true. 
 
 \subsection{Translation Unit}
-The translation unit is the bridge between \dio and RL. Precisely, it handles both feeding 
-the world facts to \dio and translates the feedback given to a numerical value, through 
-a given function. First, the \dio/RL loop is given in Algorithm 1. 
+The translation unit is the bridge between \dio{} and RL. Precisely, it handles both feeding 
+the world facts to \dio{} and translates the feedback given to a numerical value, through 
+a given function. First, the \dio{}/RL loop is given in Algorithm 1. 
 
   \begin{algorithm}[H]
-    \caption{\dio/RL Loop}
+    \caption{\dio{}/RL Loop}
     \begin{algorithmic}[1]
     
     \Procedure{Step}{$S_t, a$}       \Comment{(State, action) Pair}
@@ -143,9 +143,9 @@ a given function. First, the \dio/RL loop is given in Algorithm 1.
         \State Check for obstacles 
         \State Update Obstacles positions
         \State Update Agent's position
-        \State \textbf{TU.UpdateWorld}(position, direction, obstacles) \Comment{KB update in \dio}
+        \State \textbf{TU.UpdateWorld}(position, direction, obstacles) \Comment{KB update in \dio{}}
         \State $obs, reward$ = Step'$(S_t, ac)$ \Comment{Call to Initial Env}
-        \State $J$ = \textbf{getFeedback()} \Comment{Query \dio}
+        \State $J$ = \textbf{getFeedback()} \Comment{Query \dio{}}
         \State $reward$ = TU.getReward($J$) 
         \State return (obs,reward)
     \EndProcedure
@@ -205,13 +205,13 @@ Trivially, the \textsc{getReward} from TU is an identity function.
       \begin{minipage}{.4\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/diopolicy.png}
-        \captionof{figure}{\Gls{policy} learned with \dio}
+        \captionof{figure}{\Gls{policy} learned with \dio{}}
         \label{fig:policydio}
       \end{minipage}%
       \begin{minipage}{.4\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/rlpolicy.png}
-        \captionof{figure}{Policy learned without \dio}
+        \captionof{figure}{Policy learned without \dio{}}
         \label{fig:policyrl}
       \end{minipage}
     \end{figure}
@@ -222,13 +222,13 @@ Trivially, the \textsc{getReward} from TU is an identity function.
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/diofps.png}
-        \captionof{figure}{Frames per Second with \dio}
+        \captionof{figure}{Frames per Second with \dio{}}
         \label{fig:fpsdio}
       \end{minipage}%
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/rlfps.png}
-        \captionof{figure}{Frames per Second without \dio}
+        \captionof{figure}{Frames per Second without \dio{}}
         \label{fig:fpsrl}
       \end{minipage}
     \end{figure}
@@ -239,13 +239,13 @@ Trivially, the \textsc{getReward} from TU is an identity function.
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/dioreturn.png}
-        \captionof{figure}{Mean of \glspl{return} per episode with \dio}
+        \captionof{figure}{Mean of \glspl{return} per episode with \dio{}}
         \label{fig:returndio}
       \end{minipage}%
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/rlreturn.png}
-        \captionof{figure}{Mean of returns per episode without \dio}
+        \captionof{figure}{Mean of returns per episode without \dio{}}
         \label{fig:returnrl}
       \end{minipage}
     \end{figure}
@@ -255,13 +255,13 @@ Trivially, the \textsc{getReward} from TU is an identity function.
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/dioframesmean.png}
-        \captionof{figure}{Mean of \glspl{frame} per episode with \dio}
+        \captionof{figure}{Mean of \glspl{frame} per episode with \dio{}}
         \label{fig:framesdio}
       \end{minipage}%
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/rlframesmean.png}
-        \captionof{figure}{Mean of frames per episode without \dio}
+        \captionof{figure}{Mean of frames per episode without \dio{}}
         \label{fig:framesrl}
       \end{minipage}
     \end{figure}
@@ -269,17 +269,17 @@ Trivially, the \textsc{getReward} from TU is an identity function.
     %%
     \paragraph{}
     We first visualized the learned policy in the two implementations. Althrough both learned 
-    how to not crash into the Dynamic Obstacles, the implementation with \dio was better at minimizing the number of steps 
+    how to not crash into the Dynamic Obstacles, the implementation with \dio{} was better at minimizing the number of steps 
     but also learned to reach the goal. 
 
     %%
     \paragraph{}
-    First, as expected, the implementation using \dio is much slower only able to run 
-    an average of 150 episodes per second. As a result, for 80k episodes, the implementation with \dio 
+    First, as expected, the implementation using \dio{} is much slower only able to run 
+    an average of 150 episodes per second. As a result, for 80k episodes, the implementation with \dio{} 
     took 9 minutes to train versus 16 seconds for the implementation without. However, this loss in time shows as in \ref{fig:framesdio} 
-    a gain in optimality. When visualizing the learned policy of \dio, we found that our agent succeeds in 90\% 
+    a gain in optimality. When visualizing the learned policy of \dio{}, we found that our agent succeeds in 90\% 
     of the time to reach the goal without colliding taking an average of $50 \pm 21$. Consider that 
-    the optimal number of steps without obstacles is 13, while the policy learned without \dio did not reach a suitable solution and collides with an obstacle $17\%$ of the episodes. Furthermore, it takes an average of $231 \pm 59$ to end an episode 
+    the optimal number of steps without obstacles is 13, while the policy learned without \dio{} did not reach a suitable solution and collides with an obstacle $17\%$ of the episodes. Furthermore, it takes an average of $231 \pm 59$ to end an episode 
     indicating that more than not, it ends the episode without ever reaching the goal. 
 
 
@@ -293,16 +293,16 @@ Trivially, the \textsc{getReward} from TU is an identity function.
 
 
     \paragraph{}
-    In \ref{fig:returndio} and \ref{fig:returnrl}, it is evident that the policy learned by \dio 
+    In \ref{fig:returndio} and \ref{fig:returnrl}, it is evident that the policy learned by \dio{} 
     is more optimal. Similarly, when evaluating our policies on the same reward scheme, 
-    the implementation with \dio averages a 0.64 while without \dio averages a -0.18 return.
+    the implementation with \dio{} averages a 0.64 while without \dio{} averages a -0.18 return.
 
     %%
     \paragraph{}
     Overall, the results show that an implementation that makes use of
-    \dio is beneficial even in a stochastic environment. As we lose in speed, we gain in optimality of the solution. 
+    \dio{} is beneficial even in a stochastic environment. As we lose in speed, we gain in optimality of the solution. 
     Given those preliminary results, we want to (1) optimize our implementation 
     and (2) test our implementation in a more complex scenario that requires a more complex understanding of the world 
-    from \dio side. (1) is discussed in \ref{optimality} and (2) is discussed in \ref{traffic}. 
+    from \dio{} side. (1) is discussed in \ref{optimality} and (2) is discussed in \ref{traffic}. 
 
     

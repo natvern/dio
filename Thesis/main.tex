@@ -58,7 +58,7 @@
 \newcommand{\giselle}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{G: #1}}
 \newcommand{\samar}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue]{S: #1}}
 
-\newcommand{\dio}{\textsc{ dio }}
+\newcommand{\dio}{\textsc{dio}}
 
 \author{%
 %  \fontsize{10}{12}\selectfont
@@ -79,7 +79,7 @@
 \date{}
 
 \title{{\Large\sc Senior Thesis 2021-22\\[2ex]}{\LARGE\bf Domained
-Informed Oracle (\dio)\\ in Reinforcement Learning}\\}
+Informed Oracle (\dio{})\\ in Reinforcement Learning}\\}
 
 
 \begin{document}
@@ -148,11 +148,11 @@ Informed Oracle (\dio)\\ in Reinforcement Learning}\\}
 %  \medskip
 
   %% We can fix that!
-  We propose a \emph{Domain Informed Oracle (\dio)} as a solution for
+  We propose a \emph{Domain Informed Oracle (\dio{})} as a solution for
   systematically incorporating domain specific knowledge into RL
   reward functions.
   %
-  \dio is a collection of domain specific rules written in a
+  \dio{} is a collection of domain specific rules written in a
   declarative language, such as Prolog.
   %
   It does not rely on the RL representation of states, allowing the
@@ -160,7 +160,7 @@ Informed Oracle (\dio)\\ in Reinforcement Learning}\\}
   expressive and intuitive language, where they can define states and
   rules in the most convenient way.
   %
-  \dio provides an informed decision to the reward function, thus
+  \dio{} provides an informed decision to the reward function, thus
   allowing it to dynamically adapt the rewards. 
   %
   %DIO is incorporated into a RL architecture and is defined by its
@@ -174,7 +174,7 @@ Informed Oracle (\dio)\\ in Reinforcement Learning}\\}
   finally, the success percentage, i.e. the number of times it reaches a positive terminal state, a goal 
   for example. 
   
-  Our results show that although the time to train is longer, the learned policy using \dio succeeds 
+  Our results show that although the time to train is longer, the learned policy using \dio{} succeeds 
   in 90\% of the time to reach the goal. The policy both incorporates safety by avoiding 
   crashing into an obstacle but also optimality by choosing the fastest possible path. This is not the case with an implementation that only makes use of RL, precisely a proximal policy optimization that 
   does learn safety but always ends its episode in the maximum number of steps, rather than reaching the goal. 
@@ -240,7 +240,7 @@ exploiting (depth) dead ends.
 The task of choosing a reward function that ensures optimality is thus
 crucial. 
 %
-In this work, we propose a Domain Informed Oracle (\dio) written in a
+In this work, we propose a Domain Informed Oracle (\dio{}) written in a
 declarative language to inform a reinforcement learning algorithm. 
 %
 Our method provides a systematic way to encode domain specific rules
@@ -287,7 +287,7 @@ In conclusion, as RL faces the issues of reward shaping, meta-learning and the e
 improving reinforcement learning methods. The main challenge is to make such an integration seamless, and independent of the AI implementation. 
 This is a task we were able to produce in our simpler introductary example of the Dynamic Obstacles in the grid world. Results are promising and will be further 
 extended to the traffic simulation referred to in \ref{traffic}. More directions open up as we think of optimization, this includes mix-matching the n-steps approach with the 
-number of steps \dio can look ahead. Similarly, we look at the differences between overwriting vs. fine-tuning the rewards using \dio and if such choice matters in training. 
+number of steps \dio{} can look ahead. Similarly, we look at the differences between overwriting vs. fine-tuning the rewards using \dio{} and if such choice matters in training. 
 As we start adding complexity to the algorithm, we turn our focus into the specifications as shown in \ref{scspecs} to better inform 
 on meaningful and effective way to translate our labels to their corresponding numerical values design choice. 
 

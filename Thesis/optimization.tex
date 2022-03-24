@@ -11,10 +11,10 @@ of the world (2) change at every given timestep. We can then initially ground th
 extend the database to incorporate the environment knowledge. 
  
 Further work needs to be done as the grounding breaks the multiprocessing capabilities of training the reinforcement learning. 
-Another direction could be to incorporate evidence-based probabilities which allows us to query \dio easily.
+Another direction could be to incorporate evidence-based probabilities which allows us to query \dio{} easily.
 
 \subsection{Feedback n-steps} 
-Another possible optimization is to query \dio every n steps, rather than every 1 step. In the 
+Another possible optimization is to query \dio{} every n steps, rather than every 1 step. In the 
 following, we evaluate the tradeoff between optimality and speed of training when increasing $n$. 
 
 
@@ -55,12 +55,12 @@ following, we evaluate the tradeoff between optimality and speed of training whe
 \end{minipage}%
 \end{table}
 
-As expected by decreasing the number of times we call \dio, we were able to reduce the 
+As expected by decreasing the number of times we call \dio{}, we were able to reduce the 
 training time considerably. By half for $n=2$, a third in $n=3$, etc. Overall, the change of optimality 
 between $n=1$ and $n=2$ is negligeable, as the success percentage drops from $90\%$ to $87\%$. 
 The mean return drops by $0.9$, although the max reward does not change much. 
 Starting from $n=3$ and $n=4$, we gain a lot in performance but we lose almost all optimality. 
 A visualization of the resulting policy shows that the agent almost never reaches the goal, similarly to the 
-implementation without \dio. In conclusion, $n=2$ is the best optimization. 
+implementation without \dio{}. In conclusion, $n=2$ is the best optimization. 
 
 

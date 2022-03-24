@@ -17,11 +17,12 @@ It does not mean that our solution is specific to it, rather it can be generaliz
   \begin{minipage}{.45\textwidth}
     \centering
     \includegraphics[width=1\linewidth]{figures/dio.png}
-    \captionof{figure}{\dio+RL architecture}
+    \captionof{figure}{\dio{}+RL architecture}
     \label{fig:diorl}
   \end{minipage}
 \end{figure}
-
+\giselle{Are these figures still accurate? I thought you were no
+longer using Q-learning.}
 
 The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more details. The environment defined by the scenario sends the current state 
 to the Q-Learning algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
@@ -30,12 +31,12 @@ agent receives the reward from its previous action which it uses to improve its 
 
 \medskip 
 
-The architecture in Figure \ref{fig:diorl} introduces \dio in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
-the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query \dio. The result of this query is $A$ which we keep 
+The architecture in Figure \ref{fig:diorl} introduces \dio{} in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
+the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query \dio{}. The result of this query is $A$ which we keep 
 obscure. The fundamental idea is that $A$ is used to inform the reward function when it is tasked with computing the reward. 
  
 
-\subsection{\dio procedure}
+\subsection{\dio{} procedure}
 \label{sec:modules}
 In practice, we consider the following modules and their interactions as shown in \ref{fig:mods}.
 
@@ -62,7 +63,7 @@ In practice, we consider the following modules and their interactions as shown i
   \label{fig:mods}
 \end{figure}
 
-Figure \ref{fig:mods} describes the interactions of the different modules, basically taking a closure look to \dio. Precisely, 
+Figure \ref{fig:mods} describes the interactions of the different modules, basically taking a closure look to \dio{}. Precisely, 
 given the rules and the world knowledge base at a given time $t$, we are able 
 to produce the corresponding label, i.e. the query over a predicate. The predicate is fed 
 into the Translation Unit (TU) that transforms the predicate to a numerical value that is given to the Reinforcement Learning 
