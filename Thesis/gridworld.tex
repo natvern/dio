@@ -188,37 +188,40 @@ Trivially, the \textsc{getReward} from TU is an identity function.
     to the number of frames. The code is available on github \cite{dio} with steps on how to replicate our model. 
     Refer to the beginning of \ref{gridworlddyn} for an explanation of the metrics. 
 
-    \vspace{1cm}
+    %\vspace{1cm}
 
+  \begin{figure}
+    \centering
     
-    \begin{minipage}{.4\textwidth}  
+    \begin{minipage}{.5\textwidth}  
       \centering 
       \textsc{DIO $+$ RL}
     \end{minipage}%
-    \begin{minipage}{.4\textwidth}
+    \begin{minipage}{.5\textwidth}
       \centering
       \text{RL}
     \end{minipage}
+    \vspace{0.2cm}
 
-    \begin{figure}[H]
-      \centering
-      \begin{minipage}{.4\textwidth}
+%    \begin{figure}[H]
+%      \centering
+      \begin{minipage}{.5\textwidth}
         \centering
-        \includegraphics[width=1\linewidth]{figures/diopolicy.png}
+        \includegraphics[width=0.7\linewidth]{figures/diopolicy.png}
         \captionof{figure}{\Gls{policy} learned with \dio{}}
         \label{fig:policydio}
       \end{minipage}%
-      \begin{minipage}{.4\textwidth}
+      \begin{minipage}{.5\textwidth}
         \centering
-        \includegraphics[width=1\linewidth]{figures/rlpolicy.png}
+        \includegraphics[width=0.7\linewidth]{figures/rlpolicy.png}
         \captionof{figure}{Policy learned without \dio{}}
         \label{fig:policyrl}
       \end{minipage}
-    \end{figure}
-
-
-    \begin{figure}[H]
-      \centering
+%    \end{figure}
+%
+%
+%    \begin{figure}[H]
+%      \centering
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/diofps.png}
@@ -231,10 +234,10 @@ Trivially, the \textsc{getReward} from TU is an identity function.
         \captionof{figure}{Frames per Second without \dio{}}
         \label{fig:fpsrl}
       \end{minipage}
-    \end{figure}
-
-
-    \begin{figure}[H]
+%    \end{figure}
+%
+%
+%    \begin{figure}[H]
       \centering
       \begin{minipage}{.5\textwidth}
         \centering
@@ -248,9 +251,9 @@ Trivially, the \textsc{getReward} from TU is an identity function.
         \captionof{figure}{Mean of returns per episode without \dio{}}
         \label{fig:returnrl}
       \end{minipage}
-    \end{figure}
-
-    \begin{figure}[H]
+%    \end{figure}
+%
+%    \begin{figure}[H]
       \centering
       \begin{minipage}{.5\textwidth}
         \centering
