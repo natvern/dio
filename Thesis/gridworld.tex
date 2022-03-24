@@ -127,9 +127,16 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
     nextPos(X,Y), goal(I,J), time(T), L = abs(I-X) + abs(Y-J)
   }
 \]
- 
+
+ \paragraph{Nondeterminism} 
+ If we look at crash and maybecrash predicates, we notice that the two hold for the 
+ same premises. This is what we define as non-determinism, where any of the two can be chosen. 
+ The choice was made considering that a crash would imply a 'maybecrash', thus trivially true. 
 
 \subsection{Translation Unit}
+The translation unit is the bridge between Dio and RL. Precisely, it handles both feeding 
+the world facts to Dio and translates the feedback given to a numerical value, through 
+a given function. First, the Dio/RL loop is given in Algorithm 1. 
 
   \begin{algorithm}[H]
     \caption{Dio/RL Loop}
@@ -151,6 +158,11 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
     
     \end{algorithmic}
     \end{algorithm}
+
+When it comes to reward shaping, we focus on the 'getFeedback' function. First, the translation units gets 
+the labels, i.e. the probabilities of the evaluated predicates and constructs a function that associates 
+every predicate to its corresponding numerical value. Finally, the reward is equivalent to weighted probabilities 
+as shown in Algorithm 2.
 
 \begin{algorithm}[H]
   \caption{Reward Shaping from RL to DIO/TU}
@@ -178,7 +190,28 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
     Our testing was done on a Dynamic Obstacles grid world using proximal policy optimization over 80k frames. 
     We pick up the frames per second to evaluate the speed of learning, the mean number of frames per episode 
     to evaluate the optimality of the solution and finally, the mean returns per episode to evaluate convergence relative 
-    to the number of frames. 
+    to the number of frames. The code is available on github \cite{dio} with steps on how to replicate our model.
+
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{.4\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{figures/diopolicy.png}
+        \captionof{figure}{\Gls{policy} learned with Dio}
+        \label{fig:policydio}
+      \end{minipage}%
+      \begin{minipage}{.4\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{figures/rlpolicy.png}
+        \captionof{figure}{Policy learned without Dio}
+        \label{fig:policyrl}
+      \end{minipage}
+    \end{figure}
+
+    We first visualized the learned policy in the two implementations. Althrough both learned 
+    how to not crash into the Dynamic Obstacles, the implementation with Dio was better at minimizing the number of steps 
+    but also learned to reach the goal. 
+
 
     \begin{figure}[H]
       \centering
@@ -199,16 +232,18 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
     First, as expected, the implementation using Dio is much slower only able to run 
     an average of 150 episodes per second. As a result, for 80k episodes, the implementation with Dio 
     took 9 minutes to train versus 16 seconds for the implementation without. However, this loss in time shows as in \ref{fig:framesdio} 
-    a gain in optimality. When visualizing the learned policy of Dio, we found that our agent succeeds in \textcolor{red}{percentage of success} 
-    of the time to reach the goal without colliding while the policy learned without Dio did not reach a suitable solution and fails in \textcolor{red}{add percentage} 
-    of the time. 
+    a gain in optimality. When visualizing the learned policy of Dio, we found that our agent succeeds in 90\% 
+    of the time to reach the goal without colliding taking an average of $50 \pm 21$. Consider that 
+    the optimal number of steps without obstacles is 13, while the policy learned without Dio did not reach a suitable solution and fails to 
+    not collide 17\% of the time. When it does reach a solution, it takes an average of $231 \pm 59$ to reach the goal. 
+
 
     \begin{figure}[H]
       \centering
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/dioframesmean.png}
-        \captionof{figure}{Mean of frames per episode with Dio}
+        \captionof{figure}{Mean of \glspl{frame} per episode with Dio}
         \label{fig:framesdio}
       \end{minipage}%
       \begin{minipage}{.5\textwidth}
@@ -230,7 +265,7 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
       \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{figures/dioreturn.png}
-        \captionof{figure}{Mean of returns per episode with Dio}
+        \captionof{figure}{Mean of \glspl{return} per episode with Dio}
         \label{fig:returndio}
       \end{minipage}%
       \begin{minipage}{.5\textwidth}
@@ -241,9 +276,14 @@ in this case, two square distances. Those norms are identified as 'labels', i.e.
       \end{minipage}
     \end{figure}
 
+    In \ref{fig:returndio} and \ref{fig:returnrl}, it is evident that the policy learned by Dio 
+    is more optimal. Similarly, when evaluating our policies on the same reward scheme, 
+    the implementation with dio averages a 0.64 while without dio averages a -0.18 return.
+=======
     Overall, the results show that an implementation that makes use of
     dio\giselle{Create a command for DIO so that it is typeset
     consistently.} is beneficial even in a stochastic environment. 
+
     As we lose in speed, we gain in optimality of the solution. 
     Given those preliminary results, we want to (1) optimize our implementation 
     and (2) test our implementation in a more complex scenario that requires a more complex understanding of the world 
