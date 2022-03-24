@@ -53,37 +53,57 @@ an obstacle, to encourage staying away from the dynamic obstacles.
 The rules are defined as a ProbLog~\cite{problog}: a probabilistic prolog that allows us to capture 
 the stochasticity of the environment, as we previously introduced in \ref{sec:problog}. Precisely, we want to consider the erratic movements of the obstacles, considering 
 we do not have previous knowledge on the distribution of their given movement. We assume a uniform distribution and define the following. 
-The rules of \dio{} take the following form: 
+The rules of \dio{} deriving a predicate $\gamma$ take the following form: 
 
 \begin{prooftree}
-  \AxiomC{$p_1 \dots p_n$}
-  \AxiomC{$\sum_{i=0}^{n}P(i) = 1$}
+  \AxiomC{$P_1 :: \psi_1$}
+  \AxiomC{\dots}
+  \AxiomC{$P_n :: \psi_n$}
+  %\AxiomC{$\sum_{i=0}^{n}P(i) = 1$}
   \RightLabel{(action)}
-  \BinaryInfC{$P_i :: \varphi(i)$}
+  \TrinaryInfC{$Q :: \gamma$}
 \end{prooftree}
-We define $\sum_{i=0}^{n}P(i) = 1$, and $\varphi(i)$ corresponds to the conjunction of grounds facts of the possible world with probability $P_i$.
+
+\noindent
+where $Q$ and $P_1, ..., P_n$ are probabilities for the facts $\gamma$
+and $\psi_1, ..., \psi_n$, respectively.
+%
+The rule should be read as an implication from the top down, i.e., if
+the premise facts $\psi_1, ..., \psi_n$ hold with their corresponding
+probabilities, than we can infer the conclusion $\gamma$ with
+probability $Q$.
+%
+Note that $Q$ will naturally be a function of $P_1, ..., P_n$.
+%
+If there are $k$ rules with conclusions $Q_1 :: \gamma, ..., Q_k ::
+\gamma$, then it must be the case that $\sum_{i=0}^{k} Q_i = 1$.
+%, and $\varphi(i)$ corresponds to the conjunction of grounds facts of the possible world with probability $P_i$.
 The action is equivalent to our step semantics, thus, we enforce that a given action modifies the facts in some form. In practice, an action is the missing 
 clause to generate the next predicate. In the gridworld example, we give the following. 
 
-\begin{multicols}{2}
-\begin{prooftree}
-  \AxiomC{atPos(X + V*T, Y)}
+\vspace{0.2cm}
+\begin{center}
+  \AxiomC{atPos(X,Y)}
+  \AxiomC{speed(V)}
+  \AxiomC{timestep(T)}
   \RightLabel{(right)}
   \LeftLabel{(1)}
-  \UnaryInfC{atPos(X,Y), speed(V), timestep(T)}
-\end{prooftree}
-\columnbreak 
-\begin{prooftree}
-  \AxiomC{0.25 :: obs(X + V*T, Y, V) \ldots}
+  \TrinaryInfC{atPos(X + V*T, Y)}
+  \DisplayProof
+  \hspace{0.2cm}
+  %
+  \AxiomC{obs(X,Y,V)}
+  \AxiomC{timestep(T)}
   \LeftLabel{(2)}
   \RightLabel{(time)}
-  \UnaryInfC{obs(X,Y,V), timestep(T)}
-\end{prooftree}
-\end{multicols}
+  \BinaryInfC{0.25 :: obs(X + V*T, Y, V)}
+  \DisplayProof
+\end{center}
+\vspace{0.2cm}
 
 (1) considers the movement of the agent while (2) considers the movement of the obstacles. Note that (2) considers 
 a uniform distribution over the movement of the obstacle, since every obstacle has a uniform probability of moving up/down/left/right. 
-We could do the same for (1) by consider the probability of an action failing. In our case, we assume the movement is deterministic and no failure over the movement 
+We could do the same for (1) by considering the probability of an action failing. In our case, we assume the movement is deterministic and no failure over the movement 
 of the agent happens.
 
 
