@@ -7,16 +7,18 @@ Our autonomous agent exists in an 8x8 grid world. Its goal is to reach
 the lower right position (8,8) from his initial position (1,1).
 Along the way, there exists dynamic obstacles whose movements is
 unknown. The agent is punished if colliding with an obstacle and the
-episode\giselle{You need to explain what an episode is before reaching
-this point}, hereby ends. 
+\gls{episode}\giselle{You need to explain what an episode is before reaching
+this point}, hereby ends. An episode is defined as the collection of steps before we reach a terminal state, either 
+through fatalities (e.g. colliding with an obstacle), goals or reaching the maximum number of steps that we set to 256 steps.
 This environment offered by gym-gridworld~\cite{gym_minigrid} is useful for testing our algorithm in a Dynamic Obstacle avoidance for a partially observable 
-environment. Precisely, we define the state as follows. 
+environment. Precisely, we define the state as follows. \samar{fixed.}
 \begin{equation*}
   S_t = [x, y, d, G]
 \end{equation*}
 $(x,y)$ define the position of our agent while $d$ its direction. $G$
 is the gridworld observed by the agent which includes walls, obstacles
-and free squares.\giselle{But not the whole grid, correct?} 
+and free squares. Note that this observed environment is from the point of the view 
+of the agent and does not represent the entire grid. \giselle{But not the whole grid, correct?} \samar{fixed.}
 The action space is, 
 \begin{equation*}
   A_t = \{ right: 0, up: 1, down: 2, left: 3 \}
@@ -27,6 +29,9 @@ distance, and the intuition behind this function.}
 \begin{equation*}
   R_t = 1 - 0.9*(\dfrac{steps}{max\_steps})
 \end{equation*}
+Note that the $max_steps$ is defined by the manhattan distance between the agent and the goal. The intuition is 
+we want to reward the agent the faster it reaches the goal. Additionally, the agent is punished with $-1$ if it collides with 
+an obstacle, to encourage staying away from the dynamic obstacles. \samar{fixed}
 
 \begin{multicols}{2}[\medskip]
     \begin{figure}[H]
@@ -45,13 +50,14 @@ distance, and the intuition behind this function.}
 
 \subsection{Domain Specific Rules}
 \textcolor{red}{Fix the rules.}
-The rules are defined as a ProbLog~\cite{problog}\gielle{I think it
+The rules are defined as a ProbLog~\cite{problog} 
+\giselle{I think it
 makes sense to explain what problog is already in the section where
 you explain the DIO architecture. So that when we reach this point, we
 know what to expect.}: a probabilistic prolog that allows us to capture 
 the stochasticity of the environment. Precisely, we want to consider the erratic movements of the obstacles, considering 
 we do not have previous knowledge on the distribution of their given movement. We assume a uniform distribution and define the following. 
-The rules of DIO take the following form: 
+The rules of DIO take the following form: \samar{Should I move the Problog procedure up? I think it wouldn't fit but I'm not sure.}
 
 \begin{prooftree}
   \AxiomC{$p_1 \dots p_n$}

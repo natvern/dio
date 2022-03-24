@@ -87,12 +87,17 @@ Observe how this does not guarantee that the reward function will be informed in
 To that end, we need to consider (1) what are the specifications of a 'good' reward function, (2) what conditions should be set 
 on the domain specific rules and $L$ provided by the scenario, (3) how to define a systematic way for the scenario to use 
 this information. Those considerations are left for future
-investigations.\giselle{You have good results. How are you using the
+investigations. However, note that those problems are existing problems in defining a reward function 
+without DIO but made easier to investigate with DIO. This is made possible because the problem 
+is not that of writing the reward function given a state vector, rather how to write a reward function given 
+$A$. For instance, in our experiments, we label states as either desirable, undesirable or fatal and associate 
+the corresponding numerical values $(1,-0.5, -1)$, intuitively. Such a basic labeling gave us good results without 
+going through the trial-and-error process that is present in RL. \giselle{You have good results. How are you using the
 information to compute the reward? Unrelated: you should be careful
 here not to give the impression that you are just adding one layer to
 the problem of reward shaping (the problem before is how to write a
 reward function given a state vector, the problem now is how to write
-a reward function given $A$).} 
+a reward function given $A$).} \samar{fixed.}
  
 
 \subsection{Modules Interactions}
@@ -102,7 +107,7 @@ In practice, we consider the following modules and their interactions as shown i
 \begin{enumerate}
   \item \textbf{World Rules} defining the rules governing the world. This is domain-dependent and implemented 
         in a logic programming file, i.e. we are able to define the next step via step semantics.
-  \item \textbf{World Knowledge Base} defining the ground facts which describe the world at a given time step. This module is 
+  \item \textbf{Knowledge Base} defining the ground facts which describe the world at a given time step. This module is 
         continuously updated to account for the dynamics of the
         state.\giselle{Calling it ``World'' sounds static, this is
         actually the description of the state as propositional facts,

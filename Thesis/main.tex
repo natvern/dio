@@ -164,12 +164,18 @@ Informed Oracle (DIO)\\ in Reinforcement Learning}\\}
   %DIO is incorporated into a RL architecture and is defined by its
   %behavior in relation to the input given by the reward function. 
   
-  Our implementation is tested on a Traffic Simulator scenario and
-  compared to a basic uninformed RL algorithm. 
+  Our implementation is tested on a grid worl with dynamic obstacles and later extended 
+  to a traffic simulation scenario. It is then compared to a basic uninformed RL algorithm. 
   %
   The comparison is based on performance which we define by three
   metrics: time to train, optimality of the learned policy and
-  finally, number of errors states reached. 
+  finally, the success percentage, i.e. the number of times it reaches a positive terminal state, a goal 
+  for example. 
+  
+  Our results show that although the time to train is longer, the learned policy using DIO succeeds 
+  in 90\% of the time to reach the goal. The policy both incorporates safety by avoiding 
+  crashing into an obstacle but also optimality by choosing the fastest possible path. This is not the case with an implementation that only makes use of RL, precisely a proximal policy optimization that 
+  does learn safety but always ends its episode in the maximum number of steps, rather than reaching the goal. 
   \giselle{You should add an overview of the results to the abstract.}
 
 \end{abstract}
