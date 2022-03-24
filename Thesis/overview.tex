@@ -18,7 +18,7 @@ Current Neurosymbolic AI trends are concerned with knowledge representation and 
 and representation to precede learning in order to provide some form
 of incremental update, e.g. a meta-network to group two sub-neural
 networks~\cite{Besold2017NeuralSymbolicLA}.
-As a result, neurosymbolic AI applies to vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
+As a result, neurosymbolic AI has been successfully applied to vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
 vision analogy-making \cite{Reed2015DeepVA}, or learning communication
 protocols \cite{Foerster2016LearningTC}.
 Those results inspire us to use those techniques for reinforcement learning, as to tackle its challenges.
@@ -30,8 +30,8 @@ adapting the reward function. For instance, we consider defining which states ar
 is able to search the space and send feedback to the reinforcement learning agent. The goal is a systematic method to design a reward function which can ensure faster and more efficient 
 training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma. For instance, if a domain informed module 
 can infer that only one of the possible next states is desirable, then exploration in that specific case is suboptimal.  
-We will call the proposed module a \emph{Domain Informed Oracle
-(\dio{}}.
+We will call the proposed module a \emph{Domain Informed Oracle}
+(\dio{}).
 
 \begin{figure}[H]
   \centering
@@ -43,9 +43,9 @@ We will call the proposed module a \emph{Domain Informed Oracle
 
 The diagram in Figure~\ref{fig:overview} is a high-level description of our proposed solution. 
 %
-Precisely, the (state, action) pair is fed into \dio{} alongside the environment. While the environment produces its own 
+Precisely, the (state, action) pair is fed into \dio{}. While the environment produces its own 
 reward function, \dio{} also computes its own reward. 
 
-\paragraph{} Those two rewards are merged by the reward shaping unit. We could either 
+Those two rewards are merged by the reward shaping unit. We could either 
 overwrite the initial reward and only trust \dio{}, likewise we could trust them both equally and take their average. This is left as a \emph{design choice}. 
 Finally, this computed new reward is given to the agent that is unaware of this new mechanic. 

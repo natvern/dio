@@ -21,7 +21,7 @@ learns from the effect of its actions on the environment.
 The diagram in Figure~\ref{fig:rl} is a high-level description of how
 an agent using reinforcement learning can be trained.  
 %
-The lower box represents the \emph{environment} as seen by the agent
+The upper left box represents the \emph{environment} as seen by the agent
 according to its sensors.
 %
 The current state of the environment is represented as a \emph{state
@@ -34,10 +34,13 @@ Once the action is taken, the environment is updated to the next state
 and the agent receives a \emph{reward} as feedback.
 %
 This reward is a domain dependent function that represents how
-``good'' the state is.
+``good'' the new state is.
 %
 The agent's goal is to increase its reward by taking actions that
 reach better states each time.
+%
+The triple (state, action, reward) helps the agent in shaping the
+final policy.
 
 \medskip 
 
