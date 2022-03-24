@@ -39,23 +39,13 @@ We will call the proposed module a \emph{Domain Informed Oracle
   \caption{Overview of the proposed solution}
   \label{fig:overview}
 \end{figure}
-\giselle{This figure is not exactly your proposed solution, but how
-you would compare your solution with another one. For this picture I
-suggest that you take the diagram of reinforcement learning
-(Figure~\ref{fig:rl}) and add \dio between the agent and environment
-(something that informs the reward function).}
+
 
 The diagram in Figure~\ref{fig:overview} is a high-level description of our proposed solution. 
 %
-The box on the left represents a basic reinforcement learning algorithm that depends on the scenario of the given problem and 
-the common standard practices discussed previously to design a reward function. 
-%
-The box on the right represents our proposed domain knowledge to inform the reinforcement learning algorithm. 
-Precisely, the domain informed oracle is given the scenario and can thus start a feedback loop between itself and 
-the informed RL module to update the rewards.\giselle{This description
-needs to change when you change the figure.} 
-%
-Finally, those two implementations will be compared based on their performance. In the following, we define performance 
-given three metrics: (1) time to train (2) optimality of the learned policy and (3) number of errors through training. 
-Consider `errors' as suboptimal decisions that were made by the agent while in the process of training. For example, exploring a (state, action) pair 
-that has previously given a negative reward is suboptimal. 
+Precisely, the (state, action) pair is fed into \dio alongside the environment. While the environment produces its own 
+reward function, \dio also computes its own reward. 
+
+\paragraph{} Those two rewards are merged by the reward shaping unit. We could either 
+overwrite the initial reward and only trust \dio, likewise we could trust them both equally and take their average. This is left as a \emph{design choice}. 
+Finally, this computed new reward is given to the agent that is unaware of this new mechanic. 

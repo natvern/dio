@@ -2,40 +2,40 @@
 \contentsline {section}{\numberline {2}Reinforcement Learning}{3}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Challenges in Reinforcement Learning}{4}{subsection.2.1}%
 \contentsline {section}{\numberline {3}Symbolic Reasoning for Reinforcement Learning}{5}{section.3}%
+\contentsline {paragraph}{}{6}{section*.4}%
 \contentsline {section}{\numberline {4}Domain Informed Oracle}{6}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Architecture}{6}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}\textsc { dio }procedure}{7}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Problog Procedure}{8}{subsection.4.3}%
-\contentsline {paragraph}{Statistical Relational Learning (SRL)}{8}{section*.11}%
-\contentsline {paragraph}{Probabilistic Logic Programming (PLP)}{8}{section*.12}%
-\contentsline {paragraph}{}{9}{section*.13}%
-\contentsline {paragraph}{}{9}{section*.14}%
+\contentsline {paragraph}{Statistical Relational Learning (SRL)}{8}{section*.7}%
+\contentsline {paragraph}{Probabilistic Logic Programming (PLP)}{8}{section*.8}%
+\contentsline {paragraph}{}{9}{section*.9}%
+\contentsline {paragraph}{}{9}{section*.10}%
 \contentsline {section}{\numberline {5}Dynamic Obstacles in a GridWorld}{9}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Scenario in Reinforcement Learning}{9}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Domain Specific Rules}{10}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}World Knowledge}{10}{subsection.5.3}%
 \contentsline {subsection}{\numberline {5.4}From Norms to Labels}{11}{subsection.5.4}%
-\contentsline {paragraph}{Nondeterminism}{11}{section*.16}%
+\contentsline {paragraph}{Nondeterminism}{11}{section*.12}%
 \contentsline {subsection}{\numberline {5.5}Translation Unit}{11}{subsection.5.5}%
 \contentsline {subsection}{\numberline {5.6}Results}{12}{subsection.5.6}%
-\contentsline {paragraph}{}{14}{section*.22}%
-\contentsline {paragraph}{}{14}{section*.23}%
-\contentsline {paragraph}{}{14}{section*.24}%
-\contentsline {paragraph}{}{14}{section*.25}%
-\contentsline {paragraph}{}{14}{section*.26}%
+\contentsline {paragraph}{}{13}{section*.17}%
+\contentsline {paragraph}{}{13}{section*.18}%
+\contentsline {paragraph}{}{13}{section*.19}%
+\contentsline {paragraph}{}{13}{section*.20}%
+\contentsline {paragraph}{}{13}{section*.21}%
 \contentsline {section}{\numberline {6}Optimization}{14}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Compile once Evaluate many}{14}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Feedback n-steps}{15}{subsection.6.2}%
-\contentsline {section}{\numberline {7}Traffic Simulation}{15}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Scenario in Reinforcement Learning}{15}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Domain Specific Rules in \textsc { dio }}{16}{subsection.7.2}%
-\contentsline {section}{\numberline {8}Related Work}{16}{section.8}%
+\contentsline {subsection}{\numberline {6.2}Feedback n-steps}{14}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Traffic Simulation}{14}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Scenario in Reinforcement Learning}{14}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Domain Specific Rules in \textsc { dio }}{15}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Related Work}{15}{section.8}%
 \contentsline {section}{\numberline {9}Conclusions}{16}{section.9}%
 \contentsline {section}{\numberline {A}Appendix}{19}{appendix.A}%
 \contentsline {subsection}{\numberline {A.1}Issues with the safe RL approach}{20}{subsection.A.1}%
 \contentsline {subsection}{\numberline {A.2}Reinforcement Learning: Behind the Scenes}{20}{subsection.A.2}%
-\contentsline {paragraph}{Markov Decision Process (MDP)}{20}{section*.31}%
-\contentsline {paragraph}{Q-Learning}{21}{section*.32}%
-\contentsline {paragraph}{Proximal Policy Optimization (PPO)}{21}{section*.33}%
+\contentsline {paragraph}{Markov Decision Process (MDP)}{20}{section*.26}%
+\contentsline {paragraph}{Q-Learning}{21}{section*.27}%
+\contentsline {paragraph}{Proximal Policy Optimization (PPO)}{21}{section*.28}%
 \contentsline {subsection}{\numberline {A.3}\textsc { dio }interface}{21}{subsection.A.3}%
-\contentsline {section}{List of Terms}{23}{section*.36}%

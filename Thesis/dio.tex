@@ -23,17 +23,14 @@ It does not mean that our solution is specific to it, rather it can be generaliz
 \end{figure}
 
 
-The diagram in Figure \ref{fig:basicrl}\giselle{This figure should
-probably match Figure~\ref{fig:rl}. Note to self: discuss the diagram
-on my whiteboard.} describes the basic routine of RL in more details. The environment defined by the scenario sends the current state 
+The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more details. The environment defined by the scenario sends the current state 
 to the Q-Learning algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
 The resulting state along its associated reward is computed from the reward function and step function formalized in the scenario. Thus, in the next iteration, the 
 agent receives the reward from its previous action which it uses to improve its policy and continues with its training starting from the computed next state.  
 
 \medskip 
 
-The architecture in Figure \ref{fig:diorl}\giselle{Note to self:
-discuss this figure} introduces \dio in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
+The architecture in Figure \ref{fig:diorl} introduces \dio in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
 the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query \dio. The result of this query is $A$ which we keep 
 obscure. The fundamental idea is that $A$ is used to inform the reward function when it is tasked with computing the reward. 
  
