@@ -5,10 +5,10 @@
 \contentsline {section}{\numberline {4}Domain Informed Oracle}{6}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Architecture}{6}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Specifications}{7}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Modules Interactions}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.3}Modules Interactions}{9}{subsection.4.3}%
 \contentsline {section}{\numberline {5}Dynamic Obstacles in a GridWorld}{10}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Scenario in Reinforcement Learning}{10}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Domain Specific Rules}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.2}Domain Specific Rules}{11}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}World Knowledge}{11}{subsection.5.3}%
 \contentsline {subsection}{\numberline {5.4}From Norms to Labels}{11}{subsection.5.4}%
 \contentsline {paragraph}{Nondeterminism}{11}{section*.9}%
@@ -30,3 +30,5 @@
 \contentsline {section}{\numberline {A}Appendix}{20}{appendix.A}%
 \contentsline {subsection}{\numberline {A.1}Issues with the safe RL approach}{21}{subsection.A.1}%
 \contentsline {section}{List of Terms}{22}{section*.23}%
+=======
+
