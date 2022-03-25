@@ -6,8 +6,9 @@ actions in order to maximize its rewards
 $R : (S \times A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
 of the environment and the action refers to the action chosen by the RL agent. By defining this reward function and the scenario of the problem the agent is trying to solve, 
 reinforcement learning has the advantage of not requiring a prior dataset. Indeed, the agent is not told what to do, but rather 
-learns from the effect of its actions on the environment. Consider
-Figure~\ref{fig:rl}. 
+learns from the effect of its actions on the environment. 
+% Consider Figure~\ref{fig:rl}. [GR] You are explaining the figure in
+% the next paragraph, so this sentence is not needed.
 
 \begin{figure}[H]
   \centering
@@ -20,7 +21,7 @@ Figure~\ref{fig:rl}.
 The diagram in Figure~\ref{fig:rl} is a high-level description of how
 an agent using reinforcement learning can be trained.  
 %
-The lower box represents the \emph{environment} as seen by the agent
+The upper left box represents the \emph{environment} as seen by the agent
 according to its sensors.
 %
 The current state of the environment is represented as a \emph{state
@@ -33,10 +34,13 @@ Once the action is taken, the environment is updated to the next state
 and the agent receives a \emph{reward} as feedback.
 %
 This reward is a domain dependent function that represents how
-``good'' the state is.
+``good'' the new state is.
 %
 The agent's goal is to increase its reward by taking actions that
 reach better states each time.
+%
+The triple (state, action, reward) helps the agent in shaping the
+final policy.
 
 \medskip 
 
@@ -48,6 +52,8 @@ Another example would be only considering negative rewards. Say we want our agen
 If there is a fatality state (\emph{e.g.}, a fire or a black whole), the agent will learn to move towards the fatality state as to cut its negative rewards as soon as possible. 
 In conclusion, a good reward function is the first step of optimal learning. By choosing the right reward function, 
 we can ensure a faster and more efficient training, possibly with fewer errors. 
+
+For more information on the algorithms we have used for our implementations, refer to \ref{sec:rldetails}.
 
 \subsection{Challenges in Reinforcement Learning}
 \label{sec:challenges}
@@ -73,9 +79,11 @@ as it is shown to help the agent learn faster. Finally, one can normalize reward
 However, there still exists a lack of a systematic method to design a
 reward function, and this needs to be done on a case by case basis.
 %
-Moreover, the abstract representation of states and actions can make
-it difficult to map domain specific rules and judgments to the reward
-function. A consequence of finding a systematic method to shaping rewards handles (2).
+\dio{} does not rely on an abstract representation to infer a reward function, rather only needs 
+to care about the translation to a domain specific language, like prolog or datalog to assess a given world. 
+It provides a more declarative approach to reason about rewards, thus providing a systematic method to map 
+labels to rewards. As a consequence, it is able to handle (2), namely, the exploitation vs. exploration
+dilemma.
 
 \medskip
 
@@ -99,7 +107,8 @@ acquired knowledge and resolving the conflict when necessary. More interestingly
 the real-world, or possibly another simulation, where it encounters
 state configurations it did not during its training. The goal is to
 be able to efficiently adapt to those configurations. The problem of meta-learning in RL stems from the uncertainties of the world. 
-Consider the result of training: It is a policy $\pi$, a function to map states to action $\pi : S \rightarrow A$. The learned policy is the one that maximizes the cumulative rewards.
+Consider the result of training: a function $\pi$ that map states to
+actions $\pi : S \rightarrow A$. The learned policy is the one that maximizes the cumulative rewards.
 This training is most often done in simulation, given the lack of safety guarantees of RL. 
 However, several problems come into place when considering the deployment of the trained agent. Considering that an agent has done well in 
 a designated simulation does not imply that it will do as well in the real-world. Overall, it must be that certain uncertainties will not be expected, thus there can be no expectation on how the agent will behave 

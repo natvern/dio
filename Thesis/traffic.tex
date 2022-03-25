@@ -1,8 +1,9 @@
 \section{Traffic Simulation} 
 \label{traffic}
 
-Given the definition of our DIO architecture, the performance as shown in Figure \ref{fig:overview} will be judged on a Traffic Simulation. 
+Given the definition of our \dio{} architecture, the performance as shown in Figure \ref{fig:overview} will be judged on a Traffic Simulation. 
 Precisely, we make use of the OpenSource code of Carla \cite{Dosovitskiy17} to put our implementation in practice. 
+This is a \emph{work in progress}. 
 \subsection{Scenario in Reinforcement Learning}
 Our autonomous agent is one vehicle on the road. The road is populated with other vehicles, walkers and traffic signs and lights. 
 The goal of the agent is to get from point $A$ to point $B$ on the map in the fastest time possible. Carla defines \emph{sensors} to collect 
@@ -24,11 +25,11 @@ We define $d$ a function that takes in the initial position $i$ and the current 
 By putting everything together, we can see that the reward is maximized when the agent travels the longest distance in a shortest 
 amount of time (without colliding at high speed) while making sure that when an obstacle is detected, acceleration is kept low. 
 
-\subsection{Domain Specific Rules in DIO}
+\subsection{Domain Specific Rules in \dio{}}
 
-Note that DIO is a logic programming module that we design in Prolog and 
+Note that \dio{} is a logic programming module that we design in Prolog and 
 carry to Python via PySwip \cite{tekol2020}.
-The first step of DIO is to consider the translation. 
+The first step of \dio{} is to consider the translation. 
 \[
   \infer[T_1]{[t, p, -1, 1, a]}{\text{Time}(t) \wedge \text{Pos}(p) 
                                 \wedge \text{Acc}(a) \wedge
@@ -49,7 +50,7 @@ The first step of DIO is to consider the translation.
 \]
 
 The domain specific rules will follow the same idea, taking in the ground facts and the action, 
-and infering the next set of ground facts. Thus, DIO searchs for configurations of ground facts given the step semantics, 
+and infering the next set of ground facts. Thus, \dio{} searchs for configurations of ground facts given the step semantics, 
 to return the set of labels. The main challenge is pruning the search space as we want to 
 guarantee time efficiency. While we hypothesize that the RL would learn faster by incorporating 
-domain knowledge, we are expecting iterations to take longer as the feedback loop incorporates DIO's computation. This part is an ongoing work. 
+domain knowledge, we are expecting iterations to take longer as the feedback loop incorporates \dio{} computation. This part is an ongoing work. 

@@ -1,45 +1,5 @@
 \section{Optimization} \label{optimality} 
 
-\subsection{Problog Procedure} 
-% High level overview of Problog
-Problog is a logic programming language that aims to bridge between probabilistic 
-logic programming and statistical relational learning \cite{fierens_van}. 
-A problog program specifies a probability distribution over possible worlds. 
-This probability distribution corresponds to the possible worlds whether a fact is taken 
-or discarded given the probability associated with it. Precisely, they define a world 
-is a subset of ground probabilistic facts where the probability of the subset is the product of 
-the probabilities of the facts it contains.
-
-\paragraph{Statistical Relational Learning (SRL)}
-    Discipline of Artificial Intelligence that considers first order logic relations between 
-    structures of a complex system and model it through probabilistic graphs such as Bayesian or 
-    Markov networks.
-
-\paragraph{Probabilistic Logic Programming (PLP)}
-    Discipline of Programming Languages that augments traditional logic programming such as Prolog 
-    with the power to infer over probabilistic facts to support the modeling of structured 
-    probability distributions.
-
-
-% Evidence and inference tasks in Problog
-\paragraph{}
-Furthermore, problog extends PLP with the power of considering evidences 
-in the inference task. This is made possible without requiring the transformation 
-the Bayesian networks on which to use SRL. Instead, problog considers the subset described above 
-and assumes only worlds where the evidence held remains true. Those possible worlds and their associated 
-probabilities are then added and divided by the choice with the higher probability. Problog makes this 
-possible by a 3-steps conversion from a problog program to a weighted boolean formula.
-
-\paragraph{}
-% Conversion steps to weighted formula
-First, problog grounds the program by only considering facts relevant to the query in question. 
-The relevant ground rules are specifically converted to equivalent Boolean formulas. 
-Precisely, inferences are converted into bi-directional implications and its corresponding premises 
-are converted to a conjunction of disjunction of facts. 
-Finally, problog asserts the evidence by adding it to the previous boolean formula 
-as a conjunction and defines a weight function that assigns a weight to every literal. 
-The weights are derived from the probability associated with the relevant literal, whether explicility 
-given or implicility computed. 
 
 
 \subsection{Compile once Evaluate many}
@@ -50,12 +10,57 @@ to compile once and evaluate many. This can help with the optimization of our pr
 of the world (2) change at every given timestep. We can then initially ground the constants and later 
 extend the database to incorporate the environment knowledge. 
  
-\textcolor{red}{To write.} \samar{mention multiprocessing 
-and transformation to evidence based probabilities}
+Further work needs to be done as the grounding breaks the multiprocessing capabilities of training the reinforcement learning. 
+Another direction could be to incorporate evidence-based probabilities which allows us to query \dio{} easily.
 
 \subsection{Feedback n-steps} 
-Another possible optimization is to extend the number of steps for which feedback is requested. In the 
+Another possible optimization is to query \dio{} every n steps, rather than every 1 step. In the 
 following, we evaluate the tradeoff between optimality and speed of training when increasing $n$. 
 
+
+\begin{table}[h!]
+        \centering
+        \begin{minipage}{.5\textwidth}
+    \begin{tabular}[width=1\linewidth]{||c c c c c||} 
+     \hline
+     n-Steps & $\mu$ & $\sigma$ & $min$ & $max$ \\  [0.5ex] 
+     \hline\hline
+     1 & 49.6 & 21.0 & 15.0 & 139.0 \\ 
+     \hline
+     2 & 52.4 & 21.5 & 8.0 & 124.0 \\
+     \hline
+     3 & 180.4 & 88.0 & 3.0 & 256.0 \\
+     \hline
+     4 & 232.2 & 60.2 & 23.0 & 256.0 \\ [1ex] 
+     \hline
+    \end{tabular}
+    \captionof{table}{n-Steps Frames/Episode}
+\end{minipage}% 
+\begin{minipage}{.5\textwidth}
+    \centering
+    \begin{tabular}[width=1\linewidth]{||c c c c c||} 
+     \hline
+     n-Steps & $\mu$ & $\sigma$ & $min$ & $max$ \\  [0.5ex] 
+     \hline\hline
+     1 & 0.64 & 0.55 & -1.0 & 0.95 \\ 
+     \hline
+     2 & 0.57 & 0.61 & -1.0 & 0.94 \\
+     \hline
+     3 & -0.50 & 0.50 & -1.0 & 0.00 \\
+     \hline
+     4 & -0.15 & 0.36 & -1.0 & 0.45 \\ [1ex] 
+     \hline
+    \end{tabular}
+    \captionof{table}{n-Steps Returns/Episode}
+\end{minipage}%
+\end{table}
+
+As expected by decreasing the number of times we call \dio{}, we were able to reduce the 
+training time considerably. By half for $n=2$, a third in $n=3$, etc. Overall, the change of optimality 
+between $n=1$ and $n=2$ is negligeable, as the success percentage drops from $90\%$ to $87\%$. 
+The mean return drops by $0.9$, although the max reward does not change much. 
+Starting from $n=3$ and $n=4$, we gain a lot in performance but we lose almost all optimality. 
+A visualization of the resulting policy shows that the agent almost never reaches the goal, similarly to the 
+implementation without \dio{}. In conclusion, $n=2$ is the best optimization. 
 
 

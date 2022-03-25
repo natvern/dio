@@ -15,17 +15,23 @@ namely, how can we provide the semantics of knowledge, and work
 towards meta-learning? 
 %
 Current Neurosymbolic AI trends are concerned with knowledge representation and reasoning, namely, they investigate computational-logic systems 
-and representation to precede learning in order to provide some form of incremental update, e.g. a meta-network to group two sub-neural networks. \cite{Besold2017NeuralSymbolicLA}
-This leads to neurosymbolic AI finding various applications including vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
-vision analogy-making \cite{Reed2015DeepVA}, or learning communication protocols \cite{Foerster2016LearningTC}. Those results inspire us to use those techniques for reinforcement learning, as to tackle its challenges.
+and representation to precede learning in order to provide some form
+of incremental update, e.g. a meta-network to group two sub-neural
+networks~\cite{Besold2017NeuralSymbolicLA}.
+As a result, neurosymbolic AI has been successfully applied to vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
+vision analogy-making \cite{Reed2015DeepVA}, or learning communication
+protocols \cite{Foerster2016LearningTC}.
+Those results inspire us to use those techniques for reinforcement learning, as to tackle its challenges.
 
 \medskip
-Rewards are domain dependent and thus, given domain specific rules, a \emph{domain informed} module can guide a RL agent towards better decisions. This can be done by 
+Specifcally, we tackle the challenge of finding a systematic method to map a state to a numerical value: a reward. 
+To do so, we make use of the fact that rewards are domain dependent and thus, given domain specific rules, a \emph{domain informed} module can guide a RL agent towards better decisions. This can be done by 
 adapting the reward function. For instance, we consider defining which states are desirable, which are to be avoided and which are fatal. Given rules and judgments, a logic programming module 
 is able to search the space and send feedback to the reinforcement learning agent. The goal is a systematic method to design a reward function which can ensure faster and more efficient 
 training. This knowledge can furthermore be incorporated into resolving the exploration vs. exploitation dilemma. For instance, if a domain informed module 
 can infer that only one of the possible next states is desirable, then exploration in that specific case is suboptimal.  
-We will call the proposed module a \emph{Domain Informed Oracle (DIO)}. 
+We will call the proposed module a \emph{Domain Informed Oracle}
+(\dio{}).
 
 \begin{figure}[H]
   \centering
@@ -34,16 +40,12 @@ We will call the proposed module a \emph{Domain Informed Oracle (DIO)}.
   \label{fig:overview}
 \end{figure}
 
+
 The diagram in Figure~\ref{fig:overview} is a high-level description of our proposed solution. 
 %
-The box on the left represents a basic reinforcement learning algorithm that depends on the scenario of the given problem and 
-the common standard practices discussed previously to design a reward function. 
-%
-The box on the right represents our proposed domain knowledge to inform the reinforcement learning algorithm. 
-Precisely, the domain informed oracle is given the scenario and can thus start a feedback loop between itself and 
-the informed RL module to update the rewards. 
-%
-Finally, those two implementations will be compared based on their performance. In the following, we define performance 
-given three metrics: (1) time to train (2) optimality of the learned policy and (3) number of errors through training. 
-Consider 'errors' as suboptimal decisions that were made by the agent while in the process of training. For example, exploring a (state, action) pair 
-that has previously given a negative reward is suboptimal. 
+Precisely, the (state, action) pair is fed into \dio{}. While the environment produces its own 
+reward function, \dio{} also computes its own reward. 
+
+Those two rewards are merged by the reward shaping unit. We could either 
+overwrite the initial reward and only trust \dio{}, likewise we could trust them both equally and take their average. This is left as a \emph{design choice}. 
+Finally, this computed new reward is given to the agent that is unaware of this new mechanic. 

@@ -45,7 +45,7 @@
 
 \thispagestyle{empty} 
 
-\setlength{\parindent}{0pt}
+%\setlength{\parindent}{0pt}
 
 \usepackage[toc]{glossaries}
 \usepackage{glossary-mcols}
@@ -57,6 +57,8 @@
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommand{\giselle}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{G: #1}}
 \newcommand{\samar}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue]{S: #1}}
+
+\newcommand{\dio}{\textsc{dio}}
 
 \author{%
 %  \fontsize{10}{12}\selectfont
@@ -77,7 +79,7 @@
 \date{}
 
 \title{{\Large\sc Senior Thesis 2021-22\\[2ex]}{\LARGE\bf Domained
-Informed Oracle (DIO)\\ in Reinforcement Learning}\\}
+Informed Oracle (\dio{})\\ in Reinforcement Learning}\\}
 
 
 \begin{document}
@@ -146,11 +148,11 @@ Informed Oracle (DIO)\\ in Reinforcement Learning}\\}
 %  \medskip
 
   %% We can fix that!
-  We propose a \emph{Domain Informed Oracle (DIO)} as a solution for
+  We propose a \emph{Domain Informed Oracle (\dio{})} as a solution for
   systematically incorporating domain specific knowledge into RL
   reward functions.
   %
-  DIO is a collection of domain specific rules written in a
+  \dio{} is a collection of domain specific rules written in a
   declarative language, such as Prolog.
   %
   It does not rely on the RL representation of states, allowing the
@@ -158,19 +160,25 @@ Informed Oracle (DIO)\\ in Reinforcement Learning}\\}
   expressive and intuitive language, where they can define states and
   rules in the most convenient way.
   %
-  DIO provides an informed decision to the reward function, thus
+  \dio{} provides an informed decision to the reward function, thus
   allowing it to dynamically adapt the rewards. 
   %
   %DIO is incorporated into a RL architecture and is defined by its
   %behavior in relation to the input given by the reward function. 
   
-  Our implementation is tested on a Traffic Simulator scenario and
-  compared to a basic uninformed RL algorithm. 
+  Our implementation is tested on a grid worl with dynamic obstacles and later extended 
+  to a traffic simulation scenario. It is then compared to a basic uninformed RL algorithm. 
   %
   The comparison is based on performance which we define by three
   metrics: time to train, optimality of the learned policy and
-  finally, number of errors states reached. 
+  finally, the success percentage, i.e. the number of times it reaches a positive terminal state, a goal 
+  for example. 
   
+  Our results show that although the time to train is longer, the learned policy using \dio{} succeeds 
+  in 90\% of the time to reach the goal. The policy both incorporates safety by avoiding 
+  crashing into an obstacle but also optimality by choosing the fastest possible path. This is not the case with an implementation that only makes use of RL, precisely a proximal policy optimization that 
+  does learn safety but always ends its episode in the maximum number of steps, rather than reaching the goal. 
+
 \end{abstract}
 
 
@@ -232,7 +240,7 @@ exploiting (depth) dead ends.
 The task of choosing a reward function that ensures optimality is thus
 crucial. 
 %
-In this work, we propose a Domain Informed Oracle (DIO) written in a
+In this work, we propose a Domain Informed Oracle (\dio{}) written in a
 declarative language to inform a reinforcement learning algorithm. 
 %
 Our method provides a systematic way to encode domain specific rules
@@ -252,6 +260,9 @@ standard practices to design a reward function.
 
 %% Overview of the proposed solution as symbolic reasoning for RL
 %% Should separate this to include in related work or change title to make it clearer?
+%% [GR] The flow makes sense to me. I would even suggest merging these
+%% section with the one above, and making one ``Background'' or
+%% ``Motivation'' section (there is probably a better name).
 \input{overview.tex}
 
 %% Domain Informed Oracle : Architecture, specifications and modules interactions
@@ -274,8 +285,11 @@ standard practices to design a reward function.
 
 In conclusion, as RL faces the issues of reward shaping, meta-learning and the exploration-exploitation dilemma, domain knowledge show promising results in 
 improving reinforcement learning methods. The main challenge is to make such an integration seamless, and independent of the AI implementation. 
-As we start incorporating our modules into one architecture to test on our Traffic Simulator in Section \ref{traffic}, we will be able to show preliminary 
-results. Similarly, we look further into the specifications of DIO to ensure that it informs the scenario in a meaningful way as discussed in Section \ref{scspecs}. 
+This is a task we were able to produce in our simpler introductary example of the Dynamic Obstacles in the grid world. Results are promising and will be further 
+extended to the traffic simulation referred to in \ref{traffic}. More directions open up as we think of optimization, this includes mix-matching the n-steps approach with the 
+number of steps \dio{} can look ahead. Similarly, we look at the differences between overwriting vs. fine-tuning the rewards using \dio{} and if such choice matters in training. 
+As we start adding complexity to the algorithm, we turn our focus into the specifications as shown in \ref{scspecs} to better inform 
+on meaningful and effective way to translate our labels to their corresponding numerical values design choice. 
 
 \newpage
 
