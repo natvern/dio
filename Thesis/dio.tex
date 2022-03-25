@@ -21,25 +21,25 @@ It does not mean that our solution is specific to it, rather it can be generaliz
     \label{fig:diorl}
   \end{minipage}
 \end{figure}
-\giselle{Are these figures still accurate? I thought you were no
-longer using Q-learning.}
 
 The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more details. The environment defined by the scenario sends the current state 
-to the Q-Learning algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
+to the \emph{Proximal Policy Optimization} algorithm. More information on the algorithms used found in \ref{sec:rldetails}. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
 The resulting state along its associated reward is computed from the reward function and step function formalized in the scenario. Thus, in the next iteration, the 
 agent receives the reward from its previous action which it uses to improve its policy and continues with its training starting from the computed next state.  
 
 \medskip 
 
 The architecture in Figure \ref{fig:diorl} introduces \dio{} in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
-the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query \dio{}. The result of this query is $A$ which we keep 
-obscure. The fundamental idea is that $A$ is used to inform the reward function when it is tasked with computing the reward. 
+the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query \dio{}. The result of this query is $J$, a judgment which we keep 
+obscure. The fundamental idea is that $J$ is used to inform the reward function when it is tasked with computing the reward. 
  
 
 \subsection{\dio{} procedure}
 \label{sec:modules}
 In practice, we consider the following modules and their interactions as shown in \ref{fig:mods}.
 
+
+\begin{multicols}{2}
 \begin{enumerate}
   \item \textbf{World Rules} defining the rules governing the world. This is domain-dependent and implemented 
         in a logic programming file, i.e. we are able to define the next step via step semantics.
@@ -54,11 +54,12 @@ In practice, we consider the following modules and their interactions as shown i
   \item \textbf{Translation Unit} defining the translation from state to ground facts and from labels to a numerical value, e.g. if the predicate crash is true with $P = 0.25$, then the reward shaped is $r + -0.25$. 
   \item \textbf{Reinforcement Learning} is our independent module that does not make assumption on the algorithm chosen for RL.
 \end{enumerate}
+\end{multicols}
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.55]{figures/dynamics.png}
+  \includegraphics[scale=0.4]{figures/dynamics.png}
   \caption{Modules \& Interactions}
   \label{fig:mods}
 \end{figure}

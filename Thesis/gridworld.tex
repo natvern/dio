@@ -34,12 +34,11 @@ defined as,
 Note that the $max_steps$ is defined by the manhattan distance between the agent and the goal. The intuition is 
 we want to reward the agent the faster it reaches the goal. Additionally, the agent is punished with $-1$ if it collides with 
 an obstacle, to encourage staying away from the dynamic obstacles. 
-\newpage
 
 \begin{multicols}{2}[\medskip]
     \begin{figure}[H]
       \centering
-      \includegraphics[scale=0.55]{figures/gridworldrl.png}
+      \includegraphics[scale=0.4]{figures/gridworldrl.png}
       \caption{Gridworld with Dynamic Obstacles}
       \label{fig:gridrl}
     \end{figure}
@@ -202,7 +201,7 @@ Trivially, the \textsc{getReward} from TU is an identity function.
       \end{algorithm}
 
     \subsection{Results}
-    Our testing was done on a Dynamic Obstacles grid world using proximal policy optimization over 80k frames. 
+    Our testing was done on a Dynamic Obstacles grid world using proximal policy optimization over 80k episodes. 
     We pick up the frames per second to evaluate the speed of learning, the mean number of frames per episode 
     to evaluate the optimality of the solution and finally, the mean returns per episode to evaluate convergence relative 
     to the number of frames. The code is available on github \cite{dio} with steps on how to replicate our model. 
@@ -300,10 +299,9 @@ Trivially, the \textsc{getReward} from TU is an identity function.
     took 9 minutes to train versus 16 seconds for the implementation without. However, this loss in time shows as in \ref{fig:framesdio} 
     a gain in optimality. When visualizing the learned policy of \dio{}, we found that our agent succeeds in 90\% 
     of the time to reach the goal without colliding taking an average of $50 \pm 21$. Consider that 
-    the optimal number of steps without obstacles is 13, while the policy learned without \dio{} did not reach a suitable solution and collides with an obstacle $17\%$ of the episodes. Furthermore, it takes an average of $231 \pm 59$ to end an episode 
-    indicating that more than not, it ends the episode without ever
-    reaching the goal.\giselle{The numbers in this paragraph need to
-    be updated.} 
+    the optimal number of steps without obstacles is 11. It also never exhausts its maximum number of steps, 
+    meaning that our agent either reaches a goal or collide with an obstacle in 10\% of the time. The policy learned without \dio{} did not reach a suitable solution and collides with an obstacle $18\%$ of the episodes. Furthermore, it takes an average of $231 \pm 59$ to end an episode, 
+    precisely, in 82\% of the episodes, the policy exhausts its maximum number of steps and never reaches the goal.
 
 
     %%
