@@ -2,6 +2,8 @@
 % atPos(x,y), speed(v), acc(a), direction(d) apply to our agent
 % Consider Obs(no, xo, yo, vo, do) for every obstacle
 
+size(100, 100).
+
 nextSpeed(V) :- (speed(V1), acc(A),
               timestep(T1),
               V is (V1 + A*T1)).
@@ -11,62 +13,250 @@ nextPos(X, Y) :- (atPos(X1, Y1),
                timestep(T1),
                direction(right),
                X is (X1 + V*T1),
-               Y is (Y1)).
+               Y is (Y1)), 
+               size(S1, S2),
+               X >= 0, X < S1, 
+               Y >= 0, Y < S2.
+
+nextPos(X, Y) :- (atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(right),
+               X2 is (X1 + V*T1),
+               Y is (Y1)), 
+               size(S1, S2),
+               X2 < 0, 
+               X is X1.
+
+nextPos(X, Y) :- (atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(right),
+               X2 is (X1 + V*T1),
+               Y is (Y1)), 
+               size(S1, S2),
+               X2 >= S1, 
+               X is X1.
+
 
 nextPos(X, Y) :- atPos(X1, Y1),
                speed(V),
                timestep(T1),
                direction(left),
                X is (X1 - V*T1),
-               Y is (Y1).
+               Y is (Y1),
+               size(S1, S2),
+               X >= 0, X < S1,
+               Y >= 0, Y < S2.
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(left),
+               X2 is (X1 - V*T1),
+               Y is (Y1),
+               size(S1, S2),
+               X2 < 0,
+               X is X1.
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(left),
+               X2 is (X1 - V*T1),
+               Y is (Y1),
+               size(S1, S2),
+               X2 >= S1,
+               X is X1.
+               
 
 nextPos(X, Y) :- atPos(X1, Y1),
                speed(V),
                timestep(T1),
                direction(up),
                X is (X1),
-               Y is (Y1 + V*T1).
+               Y is (Y1 - V*T1),
+               size(S1, S2),
+               X >= 0, X < S1,
+               Y >= 0, Y < S2.
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(up),
+               X is (X1),
+               Y2 is (Y1 - V*T1),
+               size(S1, S2),
+               Y2 < 0,
+               Y is Y1.
+
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(up),
+               X is (X1),
+               Y2 is (Y1 - V*T1),
+               size(S1, S2),
+               Y2 >= S2,
+               Y is Y1.
 
 nextPos(X, Y) :- atPos(X1, Y1),
                speed(V),
                timestep(T1),
                direction(down),
                X is (X1),
-               Y is (Y1 - V*T1).
+               Y is (Y1 + V*T1), 
+              size(S1, S2),
+               X >= 0, X < S1,
+               Y >= 0, Y < S2.
 
-0.25 :: choose_up.
-0.25 :: choose_down.
-0.25 :: choose_right.
-0.25 :: choose_left.
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(down),
+               X is (X1),
+               Y2 is (Y1 + V*T1), 
+              size(S1, S2),
+               Y2 < 0,
+               Y is Y1.
 
-nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+nextPos(X, Y) :- atPos(X1, Y1),
+               speed(V),
+               timestep(T1),
+               direction(down),
+               X is (X1),
+               Y2 is (Y1 + V*T1), 
+              size(S1, S2),
+               Y2 >= S2,
+               Y is Y1.
+
+
+0.2 :: choose(down); 
+0.2 :: choose(up); 
+0.2 :: choose(left);
+0.2 :: choose(right);
+0.2 :: choose(noOp). 
+
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
                            timestep(T1), 
+                           choose(right),
                            X is (X1 + (V1*T1)), 
-                           Y is (Y1),
-                           V is V1, 
-                           choose_right.
+                           Y is (Y1), 
+                           atPos(X2, Y2), 
+                           (X2, Y2) \= (X, Y),
+                           size(S1, S2),
+                           X >= 0, X < S1, 
+                           Y >= 0, Y < S2.
 
-nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
                            timestep(T1), 
+                           choose(right),
+                           X3 is (X1 + (V1*T1)), 
+                           Y is (Y1), 
+                           size(S1, S2),
+                           X3 < 0, 
+                           X is X1.
+
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(right),
+                           X3 is (X1 + (V1*T1)), 
+                           Y is (Y1), 
+                           size(S1, S2),
+                           X3 >= S1, 
+                           X is X1.
+
+
+
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(left),
                            X is (X1 - (V1*T1)), 
-                           Y is (Y1),
-                           V is V1,
-                           choose_left.
+                           Y is (Y1), 
+                           atPos(X2, Y2), 
+                           (X2, Y2) \= (X, Y),
+                           size(S1, S2),
+                           X >= 0, X < S1, 
+                           Y >= 0, Y < S2.
 
-nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
                            timestep(T1), 
-                           Y is (Y1 + V1*T1),
-                           X is (X1), 
-                           V is (V1),
-                           choose_up.
+                           choose(left),
+                           X3 is (X1 - (V1*T1)), 
+                           Y is (Y1), 
+                           size(S1, S2),
+                           X3 < 0, 
+                           X is X1.
 
-nextObs(N, X, Y, V, D) :-  obs(N, X1, Y1, V1, D1),
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
                            timestep(T1), 
+                           choose(left),
+                           X3 is (X1 - (V1*T1)), 
+                           Y is (Y1), 
+                           size(S1, S2),
+                           X3 >= S1, 
+                           X is X1.
+
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(up),
+                           Y is (Y1 - V1*T1),
                            X is (X1), 
-                           Y is (Y1 - (V1*T1)),
-                           V is V1,
-                           choose_down. 
+                           atPos(X2, Y2), 
+                           (X2, Y2) \= (X, Y),
+                           size(S1, S2),
+                           X >= 0, X < S1, 
+                           Y >= 0, Y < S2.
 
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(up),
+                           Y3 is (Y1 - V1*T1),
+                           X is (X1), 
+                           size(S1, S2),
+                           Y3 < 0, 
+                           Y is Y1.
 
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(up),
+                           Y3 is (Y1 - V1*T1),
+                           X is (X1), 
+                           size(S1, S2),
+                           Y3 >= S2, 
+                           Y is Y1.
 
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(down),
+                           X is (X1), 
+                           Y is (Y1 + (V1*T1)), 
+                           atPos(X2, Y2), 
+                           (X2, Y2) \= (X, Y),
+                           size(S1, S2),
+                           X >= 0, X < S1, 
+                           Y >= 0, Y < S2.
 
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(down),
+                           X is (X1), 
+                           Y3 is (Y1 + (V1*T1)), 
+                           size(S1, S2), 
+                           Y3 < 0,
+                           Y is Y1.
+
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           timestep(T1), 
+                           choose(down),
+                           X is (X1), 
+                           Y3 is (Y1 + (V1*T1)), 
+                           size(S1, S2), 
+                           Y3 >= S2,
+                           Y is Y1.
+
+nextObs(X, Y) :-  obs(N, X1, Y1, V1, D1),
+                           choose(noOp),
+                           X1 is X,
+                           Y1 is Y.

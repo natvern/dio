@@ -1,3 +1,3 @@
-crash, -0.1
-maybecrash, -0.05
-close, 0.1
+maybecrash, -1
+close, 0
+timetaken, 0

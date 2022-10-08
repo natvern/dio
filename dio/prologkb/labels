@@ -1,15 +1,13 @@
-crash :- nextPos(X, Y), obs(_,X,Y,_,_).
-maybecrash :- nextPos(X,Y), nextObs(_,X,Y,_,_).
-P::close :- nextPos(X,Y), goal(I,J), 
-            time(T),
-            L is abs(I-X) + abs(Y-J), L > 1, P is 1.0/(L+T).
-P::close :- nextPos(X,Y), goal(I,J), 
-            time(T),
-            L is abs(I-X) + abs(Y-J), L is 0, P is 1.0/(L+T).
-P::close :- nextPos(X,Y), goal(I,J), 
-            time(T),
-            L is abs(I-X) + abs(Y-J), L =< 1, P is 1/(L+T).
+maybecrash :- nextPos(X,Y), nextObs(X,Y).
 
-query(crash).
+% Consider L the 'safe' zone where we consider the agent to be close to goal
+P :: close :- nextPos(X,Y), goal(I,J), 
+            time(T),
+            L is abs(I-X) + abs(Y-J), P is 1 / (L+1).
+
+T :: timetaken :- time(X), max_steps(N), 
+                  T is X / N.
+
 query(maybecrash).
 query(close).
+query(timetaken).
