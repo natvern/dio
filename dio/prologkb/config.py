@@ -1,5 +1,6 @@
 import numpy
 import csv
+import argparse 
 
 
 class Config:
@@ -14,7 +15,7 @@ class Config:
         self.reward_fail = -1
         self.reward_life = -0.0001 
         self.reward_exhaust = -1
-        self.max_steps = 10000
+        self.max_steps = 3000
 
         ## Weight given to DIO
         self.weight_dio = 1
@@ -31,20 +32,18 @@ class Config:
         self.intermediate = ((self.width-2) * (self.height-2))/3
         self.apocalyptic = 18
 
-
-        self.currentFile = "1p-normalized-alpha-onlycrash-3-intermediate-100x100-vf-v3-180000"
-        self.alpha = 3 ## Weight for DIO
+        self.alpha = 0 ## Weight for DIO
+        self.currentFile = "alpha-{}-280000".format(self.alpha)
         self.obstacles = self.intermediate
 
         self.normalize = abs(self.reward_life / 0.75)
 
 
-
-config = Config()
-
 global Csucc 
 global Cfail 
 global Cexhaust
+
+config = Config()
 
 
 def increase_success():
@@ -79,3 +78,6 @@ def count():
             if row[0] == "-1":
                 failure += 1 
     return [success, failure, exhaustion]
+
+if __name__ == '__main__':
+   print(config.alpha)
