@@ -32,8 +32,8 @@ class Config:
         self.apocalyptic = 18
 
 
-        self.currentFile = "normalized-alpha-onlycrash-0-intermediate-100x100-vf-v1-180000"
-        self.alpha = 0 ## Weight for DIO
+        self.currentFile = "1p-normalized-alpha-onlycrash-3-intermediate-100x100-vf-v3-180000"
+        self.alpha = 3 ## Weight for DIO
         self.obstacles = self.intermediate
 
         self.normalize = abs(self.reward_life / 0.75)
