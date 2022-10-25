@@ -1,1 +1,1 @@
-from diokb import Dio
+from prologkb.diokb import Dio

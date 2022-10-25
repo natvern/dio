@@ -1,9 +1,9 @@
 from problog.program import PrologString
 from problog.core import ProbLog
 from problog import get_evaluatable
-from dio.prologkb.transl import Translate
+from prologkb.transl import Translate
 import os
-import dio.prologkb.config as config
+import prologkb.config as config
 
 class Dio: 
     def __init__(self):

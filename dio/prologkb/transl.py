@@ -1,5 +1,5 @@
 import csv
-from dio.prologkb.config import config
+from prologkb.config import config
 
 
 class Translate(): 
