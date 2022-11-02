@@ -1,0 +1,13 @@
+\section{Related Work}
+
+As discussed previously in Section \ref{symrl}, neurosymbolic AI trends show promising results in improving ML algorithms, whether that is from 
+an interpretability aspect or an optimization one. More recent works take this trend and incorporate symbolic reasoning and 
+domain knowledge in reinforcement learning settings \cite{Driessens2010,Romero2020,achiam2017,marek2010}. \cite{marek2010,Romero2020} use the general idea of \textit{reward shaping} and \textit{epsilon adaptation} respectively 
+to incorporate procedural knowledge into a RL algorithm. Both introduce this combination as a successful strategy to guide the exploration and exploitation tradeoff in RL. They both show promising results. While 
+\cite{marek2010} focuses on providing formal specifications for reward shaping, it lacks practical 
+consequences to the implementation of most RL to make use of its formal methods conclusions. On the other hand, \cite{Romero2020} proposes a method to adapt $\epsilon$ based on domain knowledge, the method is specifically applied to "Welding Sequence Optimization".  
+To do so, the RL algorithm is modified in itself, similarly to what was done in \cite{Driessens2010}. Precisely, in \cite{Driessens2010}, the RL algorithm itself is 
+modified to deal with states that are model-based as opposed to vectors. They defined their method as Relational RL. 
+Furthermore, they conclude that by using more expressive representation language for the RL scenario, their method can be potentially offer a solution to the problem of meta-learning. 
+While \cite{Romero2020,Driessens2010} both present promising rewards, they lack the modularity necessary for scaling the proposed methods to further RL implementations. Those by taking their results into consideration, 
+we are hopeful that symbolic reasoning and RL integration could provide a solution for reward shaping, meta-learning and the exploration-exploitation dilemma. 

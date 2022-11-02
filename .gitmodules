@@ -1,9 +1,6 @@
 [submodule "dio/rl-starter-files"]
 	path = dio/rl-starter-files
 	url = https://github.com/natvern/rl-starter-files.git
-[submodule "dio/torch-ac"]
-	path = dio/torch-ac
-	url = https://github.com/natvern/torch-ac.git
 [submodule "dio/gym-minigrid"]
 	path = dio/gym-minigrid
 	url = https://github.com/natvern/gym-minigrid.git
