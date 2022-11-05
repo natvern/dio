@@ -94,6 +94,7 @@
 \usepackage[noend]{algpseudocode}
 \usepackage[toc]{glossaries}
 \usepackage{glossary-mcols}
+\usepackage{soul}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -133,7 +134,7 @@
 
 \author{Giselle Reis}
 \email{giselle@cmu.edu}
-\orcid{1234-5678-9012}
+\orcid{0000-0002-5145-9829}
 \affiliation{%
   \institution{Carnegie Mellon University}
   \city{Doha}
@@ -153,31 +154,36 @@
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
-\begin{abstract} 
+\begin{abstract}
+  \giselle{Abstract should be shorter. I crossed out what could be
+  removed to achieve this.}
   %% The story
 
   %% There is this great new method!
-  Reinforcement learning (RL) is a powerful AI method that does not
+  Reinforcement learning (RL) is a powerful AI
+  \st{method}{\color{blue}technique} that does not
   require pre-gathered data but relies on a trial-and-error process
   for the agent to learn. 
   %
   This is made possible through a reward function that associates
-  current state configurations to a numerical value. 
+  \st{current} state configurations to a numerical value. 
   %
-  The agent's goal is then to maximize its cumulative reward over its
+  The agent's goal is \st{then} to maximize its cumulative reward over its
   lifetime. 
   % 
   %% Oh, but there are some issues...
   Unfortunately, there is no systematic method to design a reward
-  function.
+  function{\color{blue}, since interpreting abstract states in RL in
+  the context of a domain needs to be done on a case by case basis.}
   %
-  This needs to be done on a case by case basis, and might be hard
-  depending on how the states are represented.
+  \st{This needs to be done on a case by case basis, and might be hard
+  depending on how the states are represented.}
   %
-  States are typically represented as vector of values in RL, and
+  \st{States are typically represented as vectors of values in RL, and
   translating properties and rules from a domain into this
   representation can be complicated depending on how many values are
-  used, what they represent, whether they are normalized or not, etc.
+  used, what they represent, whether they are normalized or not,
+  etc.}\giselle{This can be elaborated in the introduction.}
 
 
 %  \medskip
@@ -213,36 +219,53 @@
 %  \medskip
 
   %% We can fix that!
-  We propose a \emph{Domain Informed Oracle (\dio{})} as a solution for
-  systematically incorporating domain specific knowledge into RL
+  We propose a \emph{Domain Informed Oracle (\dio{})} \st{as a
+  solution for}{\color{blue}to}
+  systematically incorporat\st{ing}{\color{blue}e} domain specific knowledge into RL
   reward functions.
   %
   \dio{} is a collection of domain specific rules written in a
   declarative language, such as Prolog.
   %
   It does not rely on the RL representation of states, allowing the
-  programmer to focus on the domain specific knowledge using an
-  expressive and intuitive language, where they can define states and
-  rules in the most convenient way.
+  programmer to focus on the domain \st{specific} knowledge using an
+  expressive and intuitive language, where \st{they can define states and
+  rules in the most convenient way.}{\color{blue}states and rules can
+  be defined conveniently.}
   %
-  \dio{} provides an informed decision to the reward function, thus
-  allowing it to dynamically adapt the rewards. 
+  {\color{blue}For each state and action pair,} \dio{} provides
+  {\color{blue}information} \st{an informed decision} to the reward
+  function, {\color{blue}to dynamically adapt itself} \st{thus
+  allowing it to dynamically adapt the rewards}.
   %
   %DIO is incorporated into a RL architecture and is defined by its
   %behavior in relation to the input given by the reward function. 
   
-  Our implementation is tested on a grid worl with dynamic obstacles and later extended 
-  to a traffic simulation scenario. It is then compared to a basic uninformed RL algorithm. 
+  Our implementation is tested on a grid world with dynamic obstacles.
+  \st{and later extended 
+  to a traffic simulation scenario. It is then} {\color{blue}and}
+  compared to a basic \st{uninformed} RL algorithm. 
   %
-  The comparison is based on performance which we define by three
+  \st{The comparison is based on performance which we define by three
   metrics: time to train, optimality of the learned policy and
   finally, the success percentage, i.e. the number of times it reaches a positive terminal state, a goal 
-  for example. 
+  for example. }\giselle{This can be elaborated in the experiments
+    section.}
+  %
+  {\color{blue}The results show that the domain specific knowledge
+  incorporated easily through \dio{} lead to shorter training times,
+  faster convergence, and fewer errors.}\giselle{Specullation...
+  Rewrite once results are in.}
   
-  Our results show that although the time to train is longer, the learned policy using \dio{} succeeds 
-  in 90\% of the time to reach the goal. The policy both incorporates safety by avoiding 
-  crashing into an obstacle but also optimality by choosing the fastest possible path. This is not the case with an implementation that only makes use of RL, precisely a proximal policy optimization that 
-  does learn safety but always ends its episode in the maximum number of steps, rather than reaching the goal. 
+  \st{Our results show that although the time to train is longer, the
+  learned policy using \dio{} succeeds in 90\% of the time to reach
+  the goal. The policy both incorporates safety by avoiding crashing
+  into an obstacle but also optimality by choosing the fastest
+  possible path. This is not the case with an implementation that only
+  makes use of RL, precisely a proximal policy optimization that does
+  learn safety but always ends its episode in the maximum number of
+  steps, rather than reaching the goal.}\giselle{I think this is not
+  updated...}
 
 \end{abstract}
 
