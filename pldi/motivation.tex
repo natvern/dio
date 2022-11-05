@@ -12,7 +12,7 @@ learns from the effect of its actions on the environment.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.6]{figures/rlroutine.png}
+  \includegraphics[scale=0.4]{figures/rlroutine.png}
   \caption{Reinforcement Learning Routine}
   \label{fig:rl}
 \end{figure}
@@ -42,8 +42,6 @@ reach better states each time.
 The triple (state, action, reward) helps the agent in shaping the
 final policy.
 
-\medskip 
-
 The reward function is a crucial aspect of the RL algorithm. For instance, consider a game of chess 
 where the agent is punished when it loses and rewarded if it wins. The agent is bound to learn how to 
 maximize its winnings but it will need to exhaust multiple possible combinations to learn. In this case, 
@@ -58,11 +56,24 @@ For more information on the algorithms we have used for our implementations, ref
 \subsection{Challenges in Reinforcement Learning}
 \label{sec:challenges}
 
+{\color{blue}Focus on (1), it makes your contribution stronger. Don't
+treat (1), (2) and (3) as challenges in the same level. Actually, I
+would even go as far as renaming this section ``Reward Shaping'' or
+something like this.}
+
 Reward shaping (1), the exploration-exploitation dilemma (2) and
 meta-learning (3) are main challenges
 that make it harder for RL to be adopted as a solution to more real-world problems. 
 
-\medskip 
+{\color{blue}In this next paragraph, I think it important to mention
+two things. First of all, even though there is evidence about the
+importance of a more informed reward function, many times people would
+still go with the more naive function that only rewards final states,
+and hopes the computer will learn the quality of each step as it
+explores the states (add citations!! Mention works that use this
+reward strategy). Secondly, the former is done probably because
+incorporating domain knowlegde when states are abstractly represented
+may be difficult.}
 
 \emph{Reward shaping}~\cite{laud2011} refers to the lack of systematic methods to design a reward
   function that ensures fast and efficient learning. This generation of an appropriate 
@@ -73,19 +84,27 @@ can only stay in simulation due to the lack of safety guarantees. This is becaus
 Thus, there exists a need for \textit{shaping rewards} instead. There are reasonable criteria on how this should be done, those are \emph{standard practices}. For instance, 
 rewards that can be continuously harvested speed up convergence
 compared to rewards that can only be harvested at ``the end''
-(\emph{i.e.} the chess example). Similarly, one should avoid only 
-negative rewards as that results in unwanted behavior. Furthermore, if dealing with a continuous state space, it helps to have a polynomial differential function as the reward function 
+(\emph{i.e.} the chess example)\giselle{Reference?}. Similarly, one should avoid only 
+negative rewards as that results in unwanted behavior\giselle{Be more
+specific, and if there is a reference, cite it.}. Furthermore, if dealing with a continuous state space, it helps to have a polynomial differential function as the reward function 
 as it is shown to help the agent learn faster. Finally, one can normalize rewards at the end as to not end up with too many discrepancies. 
 However, there still exists a lack of a systematic method to design a
 reward function, and this needs to be done on a case by case basis.
 %
-\dio{} does not rely on an abstract representation to infer a reward function, rather only needs 
+\st{\dio{} does not rely on an abstract representation to infer a reward function, rather only needs 
 to care about the translation to a domain specific language, like prolog or datalog to assess a given world. 
 It provides a more declarative approach to reason about rewards, thus providing a systematic method to map 
 labels to rewards. As a consequence, it is able to handle (2), namely, the exploitation vs. exploration
-dilemma.
+dilemma.}\giselle{Make this part about RL only, and motivate the need
+for \dio{} at the end.}
 
-\medskip
+{\color{blue}The next two paragraphs should be greatly shortned and
+given less importance. The value in them is that it emphasizes the
+importance of a good reward function and thus the relevance of your
+contribution. But if they are made too long, it conveys the idea that
+there are still these big issues to solve, in spite of a good reward
+function, which decreases the relevance of your contribution. Do you
+see this?}
 
 The \emph{exploration vs. exploitation dilemma} is the question of whether to always exploit what the
 agent knows or explore in the hope that an unexplored state might
@@ -99,9 +118,6 @@ to balance between exploration and exploitation \cite{Kaelbling1996Reinforcement
 to decrease as more \emph{episodes} are completed. However, by ensuring (1), an informed reward function is able to sufficiently 
 deter the exploration of undesirable states while encourage the exploitation of desirable ones, continuously adapting to 
 acquired knowledge and resolving the conflict when necessary. More interestingly, a solution to (2) impacts (3). 
-
-
-\medskip
 
 \emph{Meta-learning} is the problem of deploying an agent trained in a simulation to
 the real-world, or possibly another simulation, where it encounters
@@ -125,6 +141,9 @@ can have a significant impact on (3).
 \subsection{Symbolic Reasoning for Reinforcement Learning} 
 \label{symrl}
 
+{\color{blue}Make this specific to the challenge of reward shaping, as
+opposed to the three challenges above.}
+
 To tackle the challenges from Section~\ref{sec:challenges}, we are
 inspired by the current Neurosymbolic AI trends, which explore
 combinations of deep learning (DL) and symbolic reasoning.
@@ -136,8 +155,14 @@ towards guiding machine learning models.
 A key question the field targets is identifying the necessary and
 sufficient building blocks of AI~\cite{garcez2020neurosymbolic},
 namely, how can we provide the semantics of knowledge, and work
-towards meta-learning? 
-%
+towards meta-learning?\giselle{This sentence is not directly related to your
+contribution and may be confusing to readers. I suggest leaving it
+out.}
+
+{\color{blue}I suggest moving the paragraph below to the related work
+part, and dedicating this section more to motivating \dio{} and how it
+makes reward shaping easy.}
+
 Current Neurosymbolic AI trends are concerned with knowledge representation and reasoning, namely, they investigate computational-logic systems 
 and representation to precede learning in order to provide some form
 of incremental update, e.g. a meta-network to group two sub-neural
@@ -145,4 +170,8 @@ networks~\cite{Besold2017NeuralSymbolicLA}.
 As a result, neurosymbolic AI has been successfully applied to vision-based tasks such as semantic labeling \cite{vinyals2015, karpathy2015}, 
 vision analogy-making \cite{Reed2015DeepVA}, or learning communication
 protocols \cite{Foerster2016LearningTC}.
-Those results inspire us to use those techniques for reinforcement learning, as to tackle its challenges.
+Those results inspire us to use those techniques\giselle{Which
+techniques?} for reinforcement learning, as to tackle its challenges.
+
+{\color{blue}This is the place to talk about \dio{}, the part which I
+crossed out before.}
