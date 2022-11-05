@@ -149,7 +149,7 @@
 %% other information printed in the page headers. This command allows
 %% the author to define a more concise list
 %% of authors' names for this purpose.
-\renewcommand{\shortauthors}{Trovato et al.}
+%\renewcommand{\shortauthors}{Trovato et al.}
 
 %%
 %% The abstract is a short summary of the work to be presented in the
@@ -305,31 +305,35 @@
 \section{Introduction}
 
 Implementing a robust adaptive controller that is effective in terms
-of precision, time, and quality of decision
-when facing dynamic and uncertain scenarios, has always been a central
-challenge in AI and robotics. Precisely, as we want our autonomous agents to be deployed 
-in the real world, we want to ensure that they are able to adapt to unforeseen scenarios, as well as 
-keep their efficiency. This efficiency is measured in terms of their optimality and time taken to produce a decision. 
+of precision, time, and quality of decision in dynamic and uncertain
+scenarios has always been a central challenge in AI and robotics. When
+autonomous agents are deployed in the real world, we want to ensure
+that they are able to adapt to unforeseen scenarios, as well as keep
+their efficiency. This efficiency is measured in terms of optimality
+of actions and time to make a decision. 
 %
-As autonomous cars are deployed, IoT is popularized, and human-robot interactions become more complex, we
-are more and more confronted with the need for robotic agents that can effectively and continually adapt
-to their surroundings, not only in simulation, but also in practice, when deployed as a cyber-physical system. 
-Since we are unable to provide a repertoire of all possible scenarios and actions,
-our agents need to be able to autonomously predict and adapt to new
-changes. Reinforcement Learning (RL) is an approach that
-supports dynamically adapting to new input. It is also the solution that AlphaGo, Deepmind AlphaStar, and OpenAI Five have
-adopted \cite{li2019reinforcement}, respectively for Go, StarCraft II and Dota 2 and found success in. 
-
-\medskip
+As autonomous cars are deployed, IoT is popularized, and human-robot
+interactions become more complex, we are more and more confronted with
+the need for robotic agents that can effectively and continually adapt
+to their surroundings, not only in simulation, but also in practice,
+when deployed as a cyber-physical system.\giselle{Potential to recover
+space.}
+Since we are unable to
+provide a repertoire of all possible scenarios and actions, agents
+need to be able to autonomously predict and adapt to changes.
+Reinforcement Learning (RL) is an approach that supports dynamically
+adapting to new input~\cite{sutton2018reinforcement}. It has beed
+successfully used by AlphaGo, Deepmind AlphaStar, and OpenAI Five to
+solve Go, StarCraft II and Dota 2~\cite{li2019reinforcement}.
 
 Reinforcement Learning is a powerful tool as it does not require
 pre-gathered data as most Machine Learning (ML) techniques do. 
 %
-The general idea of RL is a trial-and-error process guided by a
+The general idea of RL is learning via trial-and-error, guided by a
 \textit{domain dependent} reward function.
 %
 For example, if the agent is a self-driving car, the reward function
-can greatly penalize states when it crashes.
+would greatly penalize states where it crashes.
 %
 However, this means that the car is bound to crash to learn not to
 crash again.
@@ -351,12 +355,13 @@ exploiting (depth) dead ends.
 %with the goal to maximize its rewards, a reinforcement learning
 %trained agent will learn to stop at a STOP sign. 
 
-\medskip
-
-The task of choosing a reward function that ensures optimality is thus
-crucial. 
+The task of choosing the reward function is thus crucial.
+{\color{blue}The natural follow up to this sentence would be the
+argument of why desinging the function is hard. I think the motivation
+section is a nice continuation, and I would perhaps even have it as a
+subsection of the introduction.}
 %
-In this work, we propose a Domain Informed Oracle (\dio{}) written in a
+\st{In this work, we propose a Domain Informed Oracle (\dio{}) written in a
 declarative language to inform a reinforcement learning algorithm. 
 %
 Our method provides a systematic way to encode domain specific rules
@@ -368,7 +373,8 @@ efficient RL trained agent in terms of optimality.
 %
 The proposed combination is tested on a traffic simulation and the
 results are compared with a RL implementation that makes use of
-standard practices to design a reward function. 
+standard practices to design a reward function. }\giselle{Parts of
+this can be used to rephrase things in the abstract.}
 
 %%
 %% Our motivation from the lack of symbolic reasoning
