@@ -1,4 +1,5 @@
 \section{Domain Informed Oracle} 
+
 We tackle the challenge of finding a systematic method to map a state to a numerical value: a reward. 
 To do so, we make use of the fact that rewards are domain dependent and thus, given domain specific rules, a \emph{domain informed} module can guide a RL agent towards better decisions. This can be done by 
 adapting the reward function. For instance, we consider defining which states are desirable, which are to be avoided and which are fatal. Given rules and judgments, a logic programming module 
@@ -29,8 +30,6 @@ In this section, we lay the foundations of the architecture that combines the Do
 reinforcement learning. Note that in our proposed architecture, we suppose Proximal Policy Optimization \textcolor{red}{ADD REFERENCE TO PPO PAPER}. 
 It does not mean that our solution is specific to it, rather it can be generalized to any algorithm choice.
 
-\medskip 
-
 \begin{figure}[H]
   \centering
   \begin{minipage}{.5\textwidth}
@@ -51,8 +50,6 @@ The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in mor
 to the \emph{Proximal Policy Optimization} algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
 The resulting state along its associated reward is computed from the reward function and step function formalized in the scenario. Thus, in the next iteration, the 
 agent receives the reward from its previous action which it uses to improve its policy and continues with its training starting from the computed next state.  
-
-\medskip 
 
 The architecture in Figure \ref{fig:diorl} introduces \dio{} in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
 the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query \dio{}. The result of this query is $J$: a numerical value 
