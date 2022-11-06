@@ -54,7 +54,6 @@
     Bib\TeX}}}
 
 
-
 %%
 %% Submission ID.
 %% Use this when submitting an article to a sponsored event. You'll
@@ -104,7 +103,6 @@
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommand{\giselle}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{G: #1}}
 \newcommand{\samar}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue]{S: #1}}
-
 \newcommand{\dio}{\textsc{dio}}
 
 %%
@@ -125,7 +123,7 @@
 %% used to denote shared contribution to the research.
 \author{Samar Rahmouni}
 \email{srahmoun@andrew.cmu.edu}
-\orcid{1234-5678-9012}
+\orcid{0000-0003-1351-1515}
 \affiliation{%
   \institution{Carnegie Mellon University}
   \city{Doha}
@@ -142,8 +140,6 @@
 }
 
 
-
-%%
 %% By default, the full list of authors will be used in the page
 %% headers. Often, this list is too long, and will overlap
 %% other information printed in the page headers. This command allows
@@ -151,121 +147,57 @@
 %% of authors' names for this purpose.
 %\renewcommand{\shortauthors}{Trovato et al.}
 
+
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  \giselle{Abstract should be shorter. I crossed out what could be
-  removed to achieve this.}
   %% The story
 
   %% There is this great new method!
   Reinforcement learning (RL) is a powerful AI
-  \st{method}{\color{blue}technique} that does not
+  technique that does not
   require pre-gathered data but relies on a trial-and-error process
   for the agent to learn. 
   %
   This is made possible through a reward function that associates
-  \st{current} state configurations to a numerical value. 
+  state configurations to a numerical value. 
   %
-  The agent's goal is \st{then} to maximize its cumulative reward over its
+  The agent's goal is to maximize its cumulative reward over its
   lifetime. 
-  % 
+
   %% Oh, but there are some issues...
   Unfortunately, there is no systematic method to design a reward
-  function{\color{blue}, since interpreting abstract states in RL in
-  the context of a domain needs to be done on a case by case basis.}
-  %
-  \st{This needs to be done on a case by case basis, and might be hard
-  depending on how the states are represented.}
-  %
-  \st{States are typically represented as vectors of values in RL, and
-  translating properties and rules from a domain into this
-  representation can be complicated depending on how many values are
-  used, what they represent, whether they are normalized or not,
-  etc.}\giselle{This can be elaborated in the introduction.}
+  function since interpreting abstract states in RL in
+  the context of a domain needs to be done on a case by case basis.
 
-
-%  \medskip
-
-  % This is needed to connect the ideas from the previous paragraph
-  % and the next.
-
-%%   %% No problem, we can solve them!
-%%   These challenges can be alleviated for a given domain by fine
-%%   tuning the reward function with domain specific information. 
-%%   %
-%%   For example, if the agent is a self-driving car, the reward function
-%%   can include the physics equations to predict, with some degree of
-%%   certainty, the car's trajectory for the next few seconds.
-%%   %
-%%   By looking into the future, the reward function can penalize bad
-%%   behavior before it reaches a catastrophic state (\emph{e.g.}, a
-%%   crash).
-%%   %
-%%   A better reward function prunes the (often infinite) search space
-%%   faster, allowing the agent to explore (breadth) new states instead
-%%   of exploiting (depth) dead ends.
-%%   %
-%%   %% Oh, but only on a case by case basis...
-%%   However, tuning the reward might be hard depending on the domain and
-%%   how states are represented.
-%%   %
-%%   States are typically represented as vector of values in RL, and
-%%   translating properties and rules from a domain into this
-%%   representation can be complicated depending on how many values are
-%%   used, what they represent, whether they are normalized or not, etc.
-
-%  \medskip
-
+  %% This issue is crucial [motivation]
+  \textcolor{red}{Summary of motivation.}
+  
   %% We can fix that!
-  We propose a \emph{Domain Informed Oracle (\dio{})} \st{as a
-  solution for}{\color{blue}to}
-  systematically incorporat\st{ing}{\color{blue}e} domain specific knowledge into RL
+  We propose a \emph{Domain Informed Oracle (\dio{})} to
+  systematically incorporate domain specific knowledge into RL
   reward functions.
   %
   \dio{} is a collection of domain specific rules written in a
   declarative language, such as Prolog.
   %
   It does not rely on the RL representation of states, allowing the
-  programmer to focus on the domain \st{specific} knowledge using an
-  expressive and intuitive language, where \st{they can define states and
-  rules in the most convenient way.}{\color{blue}states and rules can
-  be defined conveniently.}
+  programmer to focus on the domain knowledge using an
+  expressive and intuitive language, where states and rules can
+  be defined conveniently.
   %
-  {\color{blue}For each state and action pair,} \dio{} provides
-  {\color{blue}information} \st{an informed decision} to the reward
-  function, {\color{blue}to dynamically adapt itself} \st{thus
-  allowing it to dynamically adapt the rewards}.
+  For each state and action pair, \dio{} provides
+  information to the reward
+  function, to dynamically adapt itself.
   %
-  %DIO is incorporated into a RL architecture and is defined by its
-  %behavior in relation to the input given by the reward function. 
-  
+  %% Methodology
   Our implementation is tested on a grid world with dynamic obstacles.
-  \st{and later extended 
-  to a traffic simulation scenario. It is then} {\color{blue}and}
-  compared to a basic \st{uninformed} RL algorithm. 
+  and compared to a basic RL algorithm. 
   %
-  \st{The comparison is based on performance which we define by three
-  metrics: time to train, optimality of the learned policy and
-  finally, the success percentage, i.e. the number of times it reaches a positive terminal state, a goal 
-  for example. }\giselle{This can be elaborated in the experiments
-    section.}
-  %
-  {\color{blue}The results show that the domain specific knowledge
-  incorporated easily through \dio{} lead to shorter training times,
-  faster convergence, and fewer errors.}\giselle{Specullation...
-  Rewrite once results are in.}
+  %% Results and Conclusions
+  \textcolor{red}{ADD results and conclusions.}
   
-  \st{Our results show that although the time to train is longer, the
-  learned policy using \dio{} succeeds in 90\% of the time to reach
-  the goal. The policy both incorporates safety by avoiding crashing
-  into an obstacle but also optimality by choosing the fastest
-  possible path. This is not the case with an implementation that only
-  makes use of RL, precisely a proximal policy optimization that does
-  learn safety but always ends its episode in the maximum number of
-  steps, rather than reaching the goal.}\giselle{I think this is not
-  updated...}
 
 \end{abstract}
 
@@ -293,9 +225,9 @@
 %% information and the body of the document, and typically spans the
 %% page.
 
-\received{20 February 2007}
-\received[revised]{12 March 2009}
-\received[accepted]{5 June 2009}
+%%\received{20 February 2007}
+%%\received[revised]{12 March 2009}
+%%\received[accepted]{5 June 2009}
 
 %%
 %% This command processes the author and affiliation and title
@@ -312,12 +244,6 @@ that they are able to adapt to unforeseen scenarios, as well as keep
 their efficiency. This efficiency is measured in terms of optimality
 of actions and time to make a decision. 
 %
-As autonomous cars are deployed, IoT is popularized, and human-robot
-interactions become more complex, we are more and more confronted with
-the need for robotic agents that can effectively and continually adapt
-to their surroundings, not only in simulation, but also in practice,
-when deployed as a cyber-physical system.\giselle{Potential to recover
-space.}
 Since we are unable to
 provide a repertoire of all possible scenarios and actions, agents
 need to be able to autonomously predict and adapt to changes.
@@ -325,7 +251,7 @@ Reinforcement Learning (RL) is an approach that supports dynamically
 adapting to new input~\cite{sutton2018reinforcement}. It has beed
 successfully used by AlphaGo, Deepmind AlphaStar, and OpenAI Five to
 solve Go, StarCraft II and Dota 2~\cite{li2019reinforcement}.
-
+%
 Reinforcement Learning is a powerful tool as it does not require
 pre-gathered data as most Machine Learning (ML) techniques do. 
 %
@@ -349,18 +275,7 @@ A better reward function prunes the (often infinite) search space
 faster, allowing the agent to explore (breadth) new states instead of
 exploiting (depth) dead ends.
 %
-%For example, say we want to teach an autonomous car to stop at a STOP
-%sign. We will punish it via a negative reward when it does not,
-%otherwise, we will reward it. Thus, through multiple iterations, and
-%with the goal to maximize its rewards, a reinforcement learning
-%trained agent will learn to stop at a STOP sign. 
-
-The task of choosing the reward function is thus crucial.
-{\color{blue}The natural follow up to this sentence would be the
-argument of why desinging the function is hard. I think the motivation
-section is a nice continuation, and I would perhaps even have it as a
-subsection of the introduction. Alternatively, end the introduction
-with the part below, and keep the motivation section.}
+The task of choosing the reward function is thus crucial, yet difficult as shown in \ref{sec:challenges}.\samar{Adding a reference to motivation instead of emphasizing here.}
 %
 In this work, we propose a Domain Informed Oracle (\dio{}) written in a
 declarative language to inform a reinforcement learning algorithm. 
@@ -368,14 +283,6 @@ declarative language to inform a reinforcement learning algorithm.
 Our method provides a systematic way to encode domain specific rules
 into a reward function for RL that does not rely on the state
 representation within the RL algorithm.
-%
-\st{We argue that such a combination will ensure a faster and more
-efficient RL trained agent in terms of optimality. 
-%
-The proposed combination is tested on a traffic simulation and the
-results are compared with a RL implementation that makes use of
-standard practices to design a reward function. }\giselle{Parts of
-this can be used to rephrase things in the abstract.}
 
 %%
 %% Our motivation from the lack of symbolic reasoning
@@ -431,6 +338,7 @@ on meaningful and effective way to translate our labels to their corresponding n
 %% (and NOT an unnumbered section). This ensures the proper
 %% identification of the section in the article metadata, and the
 %% consistent spelling of the heading.
+
 % TODO: acknowledge reviewers
 %\begin{acks}
 %To Robert, for the bagels and explaining CMYK and color spaces.
