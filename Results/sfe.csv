@@ -1,0 +1,16 @@
+alpha,obstacles,failures
+0.0, minimal, 469
+0.5, minimal, 478
+1.0, minimal, 472
+3.0, minimal, 443
+9.0, minimal, 526
+0.0, intermediate, 819
+0.5, intermediate, 942
+1.0, intermediate, 698
+3.0, intermediate, 934
+9.0, intermediate, 771
+0.0, apocalyptic, 957
+0.5, apocalyptic, 883
+1.0, apocalyptic, 1462
+3.0, apocalyptic, 906
+9.0, apocalyptic, 866
