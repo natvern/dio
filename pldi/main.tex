@@ -172,7 +172,9 @@
   the context of a domain needs to be done on a case by case basis.
 
   %% This issue is crucial [motivation]
-  \textcolor{red}{Summary of motivation.}
+  This is crucial because an informed reward function that rewards different 
+  configurations, on top of terminal states, is shown to result in efficient 
+  training.
   
   %% We can fix that!
   We propose a \emph{Domain Informed Oracle (\dio{})} to
@@ -190,13 +192,25 @@
   For each state and action pair, \dio{} provides
   information to the reward
   function, to dynamically adapt itself.
-  %
+  
+
   %% Methodology
   Our implementation is tested on a grid world with dynamic obstacles.
   and compared to a basic RL algorithm. 
   %
-  %% Results and Conclusions
-  \textcolor{red}{ADD results and conclusions.}
+  %% Results 
+  Our results show that in our simple scenario, some weights to \dio{} ensure 
+  slightly better safety during training, while minimizing policy loss during 
+  deployement. 
+  %
+  %% Conclusions
+  Although the improvements are minimal, they are promising as the architecture 
+  we present allows for a seamless translation between a programming language 
+  and a numerical reward function. 
+
+  %% Future Work
+  Our results need further investigation in more
+  complex settings while allowing for the policies to converge before comparison. 
   
 
 \end{abstract}
@@ -275,8 +289,7 @@ A better reward function prunes the (often infinite) search space
 faster, allowing the agent to explore (breadth) new states instead of
 exploiting (depth) dead ends.
 %
-The task of choosing the reward function is thus crucial, yet difficult as shown in \ref{sec:challenges}.\samar{Adding a reference to motivation instead of emphasizing here.}
-%
+The task of choosing the reward function is thus crucial, yet difficult as shown in \ref{sec:challenges}.
 In this work, we propose a Domain Informed Oracle (\dio{}) written in a
 declarative language to inform a reinforcement learning algorithm. 
 %
@@ -290,6 +303,12 @@ representation within the RL algorithm.
 %% The challenges of finding a 'good' reward function
 %%
 \input{motivation.tex}
+
+%% 
+%% Symbolic reasoning for RL has been investigated by other works
+%% However still facing limitations
+%%
+\input{relatedwork.tex}
 
 %%
 %% What is it that we propose? 
@@ -315,24 +334,19 @@ representation within the RL algorithm.
 %% Results given alpha and obstacles settings 
 %%
 \section{Results}
-\textcolor{red}{The FINAL PART AAAA.}
-
-%% 
-%% Related work 
-%%
-\input{relatedwork.tex} 
+\input{results.tex}
+ 
 
 \section{Conclusions}
 
-In conclusion, as RL faces the issues of reward shaping, meta-learning and the exploration-exploitation dilemma, domain knowledge show promising results in 
-improving reinforcement learning methods. The main challenge is to make such an integration seamless, and independent of the AI implementation. 
-This is a task we were able to produce in our simpler introductary example of the Dynamic Obstacles in the grid world. Results are promising and will be further 
-extended to the traffic simulation referred to in \ref{traffic}. More directions open up as we think of optimization, this includes mix-matching the n-steps approach with the 
-number of steps \dio{} can look ahead. Similarly, we look at the differences between overwriting vs. fine-tuning the rewards using \dio{} and if such choice matters in training. 
-As we start adding complexity to the algorithm, we turn our focus into the specifications as shown in \ref{scspecs} to better inform 
-on meaningful and effective way to translate our labels to their corresponding numerical values design choice. 
+In conclusion, as RL faces the issues of reward shaping, meta-learning and the exploration-exploitation dilemma, domain knowledge might offer a way of improving reinforcement learning methods to ensure better 
+safety. \dio{} architecture offers a seamless way to translate from a domain-dependent language, i.e. prolog, to a numerical value that can inform a reinforcement learning agent. 
+Our architecture was tested on a simple gridworld with dynamic obstacles. 
+Our results show that some weights to \dio{} allowed less crashes during training and resulted in better policies. Although, those improvements are minimal, 
+they need further investigation in more complex settings to truly conclude. Those weights do not have 'apparent' optimal whether in the minimal or intermediate setting, and should be investigated further, as otherwise, they become 
+another hyperparameter that the AI programmer needs to bruteforce and experiment on. 
 
-
+\newpage
 %%
 %% The acknowledgments section is defined using the "acks" environment
 %% (and NOT an unnumbered section). This ensures the proper

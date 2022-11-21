@@ -22,12 +22,12 @@ The diagram in Figure~\ref{fig:overview} is a high-level description of our prop
 Precisely, the (state, action) pair is fed into \dio{}. While the environment produces its own 
 reward function, \dio{} also computes its own reward. 
 
-We could leave the \emph{reward shaping} unit as a design choice. However, it will be enforced in \textcolor{red}{add section where reward computation} 
-that whether it is left as a design choice or else, is irrelevant given how\dio{} affects the final results.
+We could leave the \emph{reward shaping} unit as a design choice. However, it will be enforced in~\ref{sec:comreward}
+that whether it is left as a design choice or else, is irrelevant given how \dio{} affects the final results.
 
 \subsection{Architecture}
 In this section, we lay the foundations of the architecture that combines the Domain Informed Oracle with 
-reinforcement learning. Note that in our proposed architecture, we suppose Proximal Policy Optimization \textcolor{red}{ADD REFERENCE TO PPO PAPER}. 
+reinforcement learning. Note that in our proposed architecture, we suppose Proximal Policy Optimization~\cite{schulman17ppo}. 
 It does not mean that our solution is specific to it, rather it can be generalized to any algorithm choice.
 
 \begin{figure}[H]
@@ -53,7 +53,7 @@ agent receives the reward from its previous action which it uses to improve its 
 
 The architecture in Figure \ref{fig:diorl} introduces \dio{} in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
 the resulting next state of a (state, action) pair, rather than computing the reward using the reward function, the latter is able to query \dio{}. The result of this query is $J$: a numerical value 
-we defined as $r_\dio{}$, the reward given by \dio{} to the (state, action) pair. \textcolor{red}{More on how this reward is computed in section blabla.}
+we defined as $r_\dio{}$, the reward given by \dio{} to the (state, action) pair. More on how this reward is computed in \ref{sec:comreward}.
  
 
 \subsection{\dio{} procedure}
@@ -136,6 +136,7 @@ given or implicility computed.
 
 % How exactly are we getting this numerical value?
 \subsection{Computation of Final Reward}
+\label{sec:comreward}
 In general, reward shaping is expressed as follows
   $R = r_{rl} + r'$, 
 such that $r_{rl}$ is the original reward defined by the reinforcement learning environment. Usually, this associates the value of $1$ for a positive terminal state, 

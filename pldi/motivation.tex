@@ -86,28 +86,9 @@ using a user verbal feedback to the autonomous agent~\cite{gonzalez2010}.
 %
 %% However, this cannot be applied in practice because most training happens in simulation
 %
-However, most RL agents can only stay in simulation due to the lack of safety guarantees. This is because of the trial-and-error nature of the RL training. 
+However, most RL agents can only stay in simulation because the trial-and-error nature of RL prevents any guarantees of safety.
 Thus, there exists a need for \textit{shaping rewards} instead.
 %
 %% As a result, people can only use those 'sparse' reward structure
 Unfortunately, due to the lack of systematic method to build a denser reward function, 
-it is common to use a sparse reward function as long as it still guarantees convergence.~\samar{Lots of work done in formal methods and RL in the past two years. Thinking about moving related work right after this section}
-
-\subsection{Symbolic Reasoning for Reinforcement Learning} 
-\label{symrl}
-\textcolor{blue}
-{I'm thinking it might be interesting to mention more of the recent work here, and thus, change the section to \emph{related work}.
-}
-To tackle the reward shaping challenge from Section~\ref{sec:challenges}, we are
-inspired by the current Neurosymbolic AI trends, which explore
-combinations of deep learning (DL) and symbolic reasoning.
-%
-The work has been a response to criticism of DL on its lack of formal
-semantics and intuitive explanation, and the lack of expert knowledge
-towards guiding machine learning models.
-%
-\dio{} does not rely on an abstract representation to infer a reward function, rather only needs 
-to care about the translation to a domain specific language, like prolog or datalog to assess a given world. 
-It provides a more declarative approach to reason about rewards, thus providing a systematic method to map 
-labels to rewards. As a consequence, it is able to handle (2), namely, the exploitation vs. exploration
-dilemma.
+it is common to use a sparse reward function as long as it still guarantees convergence.

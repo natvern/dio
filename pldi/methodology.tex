@@ -2,14 +2,14 @@
 
 \subsection{Metrics}
 We compare our architecture incorporating \dio{} to a reinforcement learning architecture. 
-Precisely for our scenario presented in \textcolor{red}{SECTION}, we judge \emph{optimality}, i.e. the number of steps to reach the goal and 
+Precisely for our scenario, we judge \emph{optimality}, i.e. the number of steps to reach the goal and 
 \emph{safety}, i.e. ratio of successes to failures. Those metrics are analyzed during both training and deployement. 
-We gather the cumulative rewards and cumulative rewards as well as the total number of failures and success over 180k frames of training, and 1000 episodes of deployement. 
+We gather the cumulative rewards and cumulative rewards as well as the total number of failures and success over 180k frames of training, and 100 episodes of deployement. 
 
 \subsection{Settings} 
 Our above metrics and gathered for 8 different settings. We consider both $\alpha$, 0 (equivalent to rl alone), 0.5, 1, 3 and 9. 
-Similarly, we consider three settings for the number of obstacles: (1) minimal (1/20 of the board is covered by obstacles), (2) intermediate (1/10th) and finally, 
-(3) extreme (1/3rd). For each, we gather the metrics described above. 
+Similarly, we consider two settings for the number of obstacles: (1) minimal (1/20 of the board is covered by obstacles), and (2) intermediate (1/10th).
+For each, we gather the metrics described above. 
 
 \subsection{Gathered Results} 
 \paragraph{During Training.} For optimization purposes, training is done using multiprocessing reinforcement learning as indicated in figure~\ref{fig:multiprocess}. 
