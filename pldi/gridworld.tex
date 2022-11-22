@@ -58,11 +58,7 @@ Note that $Q$ will naturally be a function of $P_1, ..., P_n$.
 If there are $k$ rules with conclusions $Q_1 :: \gamma, ..., Q_k ::
 \gamma$, then it must be the case that $\sum_{i=0}^{k} Q_i = 1$.
 %, and $\varphi(i)$ corresponds to the conjunction of grounds facts of the possible world with probability $P_i$.
-The action is equivalent to our step semantics, thus, we enforce that
-a given action modifies the facts in some form. In practice, an action
-is the missing 
-clause to generate the next predicate.\giselle{I don't understand this
-sentence...}
+The action is equivalent to our step semantics. 
 In the gridworld example, we give the following. 
 
 \vspace{0.2cm}
@@ -80,7 +76,7 @@ In the gridworld example, we give the following.
   \AxiomC{timestep(T)}
   \LeftLabel{(2)}
   \RightLabel{(time)}
-  \BinaryInfC{0.25 :: obs(X + V*T, Y, V)}
+  \BinaryInfC{0.2 :: obs(X + V*T, Y, V)}
   \DisplayProof
 \end{center}
 \vspace{0.2cm}
@@ -88,8 +84,7 @@ In the gridworld example, we give the following.
 (1) considers the movement of the agent while (2) considers the movement of the obstacles. Note that (2) considers 
 a uniform distribution over the movement of the obstacle, since every
 obstacle has a uniform probability of moving
-up/down/left/right.\giselle{Or staying in place, so technically,
-shouldn't the probability be 0.2?} 
+up/down/left/right or staying in place.
 We could do the same for (1) by considering the probability of an action failing. In our case, we assume the movement is deterministic and no failure over the movement 
 of the agent happens.
 

@@ -45,9 +45,7 @@ It does not mean that our solution is specific to it, rather it can be generaliz
     \captionof{figure}{\dio{}+RL architecture}
     \label{fig:diorl}
   \end{minipage}
-\end{figure}\giselle{There are some labels missing in
-Figure~\ref{fig:basicrl}, and I think an arrow from the scenario box
-to the RL box in Figure~\ref{fig:diorl}.}
+\end{figure}
 
 The diagram in Figure \ref{fig:basicrl} describes the basic routine of RL in more detail. The environment defined by the scenario sends the current state 
 to the \emph{Proximal Policy Optimization} algorithm. The agent chooses an action from the action space and sends it to the environment. This action affects the environment stepping it to some next state. 
@@ -57,8 +55,7 @@ agent receives the reward from its previous action which it uses to improve its 
 The architecture in Figure \ref{fig:diorl} introduces \dio{} in the feedback loop. It is kept independent of the RL module. Precisely, when the scenario is query-ed for the reward and 
 the resulting next state of a (state, action) pair, rather than
 computing the reward using the reward function, the latter is able to
-query \dio{}. The result of this query is $J$\giselle{Is this $A$ in
-the figure?}: a numerical value 
+query \dio{}. The result of this query is $A$: a numerical value 
 we defined as $r_\dio{}$, the reward given by \dio{} to the (state, action) pair. More on how this reward is computed in \ref{sec:comreward}.
  
 
@@ -202,7 +199,9 @@ The accumulated reward of the steps should at most equal that of the terminal st
   r_{\dio{}} = \dfrac{r'_{\dio{}}}{S} \qquad \text{ and } \qquad
   R = r_{rl} + \alpha r_{\dio{}}
 \]
-\giselle{Define S}
+
+$S$ is the size of the observation space. In particular, since the reward is normalized as a cost of a step, thus, 
+always allowing terminal states to have more value. 
 
 Note that the final reward from \dio{} is added considering some $\alpha$. This is precisely for comparison purposes, i.e. how much value should we give the logic programming module 
 to inform a step. 

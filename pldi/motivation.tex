@@ -5,8 +5,9 @@ Reinforcement Learning is a method of learning that maps situations to
 actions in order to maximize its rewards
 \cite{sutton2018reinforcement}. Rewards are numerical values
 associated to a state and action. Precisely, one defines a reward
-function\giselle{Isn't the reward function from state to reward?} 
-$R : (S \times A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
+function $R : (S \times A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space.
+This function is equivalent to $R' : S \rightarrow mathbb{R}$ where the queried state is the one resulting from a given (state, action) pair. 
+Those can be used interchangeably. More precisely, in the case we describe, the state refers to the current configuration
 of the environment and the action refers to the action chosen by the RL agent. By defining this reward function and the scenario of the problem the agent is trying to solve, 
 reinforcement learning has the advantage of not requiring a prior dataset. Indeed, the agent is not told what to do, but rather 
 learns from the effect of its actions on the environment. 
