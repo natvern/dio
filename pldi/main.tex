@@ -205,8 +205,8 @@
   %
   %% Conclusions
   Although the improvements are minimal, they are promising as the architecture 
-  we present allows for a seamless translation between a programming language 
-  and a numerical reward function. 
+  we present allows for a seamless translation between a declarative
+  programming language and a numerical reward function. 
 
   %% Future Work
   Our results need further investigation in more
@@ -340,10 +340,12 @@ representation within the RL algorithm.
 \section{Conclusions}
 
 In conclusion, as RL faces the issues of reward shaping, meta-learning and the exploration-exploitation dilemma, domain knowledge might offer a way of improving reinforcement learning methods to ensure better 
-safety. \dio{} architecture offers a seamless way to translate from a domain-dependent language, i.e. prolog, to a numerical value that can inform a reinforcement learning agent. 
+safety. The \dio{} architecture offers a seamless way to translate from a domain-dependent language, i.e. prolog, to a numerical value that can inform a reinforcement learning agent. 
 Our architecture was tested on a simple gridworld with dynamic obstacles. 
-Our results show that some weights to \dio{} allowed less crashes during training and resulted in better policies. Although, those improvements are minimal, 
-they need further investigation in more complex settings to truly conclude. Those weights do not have 'apparent' optimal whether in the minimal or intermediate setting, and should be investigated further, as otherwise, they become 
+Our results show that some weights to \dio{} allowed less crashes
+during training and resulted in better policies. Although those improvements are minimal, 
+they need further investigation in more complex settings to truly
+conclude. Those weights do not have an `apparent' optimal whether in the minimal or intermediate setting, and should be investigated further, as otherwise, they become 
 another hyperparameter that the AI programmer needs to bruteforce and experiment on. 
 
 \newpage

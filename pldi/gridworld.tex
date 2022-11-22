@@ -19,15 +19,19 @@ and free squares. Note that this observed environment is from the point of the v
 of the agent and does not represent the entire grid. 
 The action space is, 
 \begin{equation*}
-  A_t = \{ right: 0, up: 1, down: 2, left: 3 \}
+  A_t = \{ \text{right}: 0, \text{up}: 1, \text{down}: 2, \text{left}: 3 \}
 \end{equation*}
 Finally, the reward is a straightforward one that reward $1$ for reaching the goal, $-1$ for failing to do so, either by colliding with an obstacle, 
-or exhausting its battery (maximum number of steps). Furthermore, for every step the agent takes, it has to spend the 'cost' of living, which is $-\dfrac{1}{n}$, where $n$ is the size of board.
+or exhausting its battery (maximum number of steps). Furthermore, for
+every step the agent takes, it has to spend the \emph{cost of living},
+which is $-1/n$, where $n$ is the size of board.
 
 
 \subsection{Domain Specific Rules}
-The rules are defined as a ProbLog~\cite{problog}: a probabilistic prolog that allows us to capture 
-the stochasticity of the environment, as we previously introduced in \ref{sec:problog}. Precisely, we want to consider the erratic movements of the obstacles, considering 
+
+The rules are defined in ProbLog~\cite{problog}: a probabilistic prolog that allows us to capture 
+the stochasticity of the environment, as we previously introduced in
+Section~\ref{sec:problog}. Precisely, we want to consider the erratic movements of the obstacles, considering 
 we do not have previous knowledge on the distribution of their given movement. We assume a uniform distribution and define the following. 
 The rules of \dio{} deriving a predicate $\gamma$ take the following form: 
 
@@ -54,8 +58,12 @@ Note that $Q$ will naturally be a function of $P_1, ..., P_n$.
 If there are $k$ rules with conclusions $Q_1 :: \gamma, ..., Q_k ::
 \gamma$, then it must be the case that $\sum_{i=0}^{k} Q_i = 1$.
 %, and $\varphi(i)$ corresponds to the conjunction of grounds facts of the possible world with probability $P_i$.
-The action is equivalent to our step semantics, thus, we enforce that a given action modifies the facts in some form. In practice, an action is the missing 
-clause to generate the next predicate. In the gridworld example, we give the following. 
+The action is equivalent to our step semantics, thus, we enforce that
+a given action modifies the facts in some form. In practice, an action
+is the missing 
+clause to generate the next predicate.\giselle{I don't understand this
+sentence...}
+In the gridworld example, we give the following. 
 
 \vspace{0.2cm}
 \begin{center}
@@ -78,7 +86,10 @@ clause to generate the next predicate. In the gridworld example, we give the fol
 \vspace{0.2cm}
 
 (1) considers the movement of the agent while (2) considers the movement of the obstacles. Note that (2) considers 
-a uniform distribution over the movement of the obstacle, since every obstacle has a uniform probability of moving up/down/left/right. 
+a uniform distribution over the movement of the obstacle, since every
+obstacle has a uniform probability of moving
+up/down/left/right.\giselle{Or staying in place, so technically,
+shouldn't the probability be 0.2?} 
 We could do the same for (1) by considering the probability of an action failing. In our case, we assume the movement is deterministic and no failure over the movement 
 of the agent happens.
 
@@ -89,9 +100,9 @@ Our world knowledge base covers the agent, the obstacles and the timestep. We co
 generated at every timestep while the former considers only the facts that remain true in every world, thus include the timestep, since we always
 move by 1-unit, and the speed, since the agent and the obtacles are defined to only move by 1-box every time. Given that our knowledge base $Kb$ is defined by, 
 \[
-    C = \{speed(1), timestep(1) \}     
+    C = \{\text{speed}(1), \text{timestep}(1) \}     
     \qquad
-    D = \{atPos(X, Y), obs(X,Y,1)\}
+    D = \{\text{atPos}(X, Y), \text{obs}(X,Y,1)\}
     \qquad
     Kb = C \cup D
 \]
@@ -102,14 +113,19 @@ Thus, in the gridworld example, we consider one possible norm, (1) \textit{crash
 the obstacle and the agent choosing to move to the same square. 
 
 \[
-    \infer{P_1 \times P_2 :: maybecrash}{P_1::atPos(X,Y), P_2::obs(X,Y,\_)
-      & \ldots}
+    \infer{P_1 \times P_2 :: \text{crash}}{
+      P_1::\text{atPos}(X,Y)
+      &
+      P_2::\text{obs}(X,Y,\_)
+      & 
+      \ldots}
 \] 
 
-Note that the final $P$ associated to our label, is precisely $Pr[L \mid (s_t, a_t)]$. 
+Note that the final $P$ associated to our label is exactly $Pr[L \mid (s_t, a_t)]$. 
 
 \subsection{Translation Unit}
-The translation unit is the bridge between \dio{} and RL. Precisely, it handles both feeding 
+
+The translation unit is the bridge between \dio{} and RL. It handles both feeding 
 the world facts to \dio{} and translates the feedback given to a numerical value, through 
 a given function. First, the \dio{}/RL loop is given in Algorithm 1. 
 
@@ -134,7 +150,7 @@ a given function. First, the \dio{}/RL loop is given in Algorithm 1.
 
 Note that the translation unit first updates the knowledge base from \dio{} side. 
 Given this update, it is possible to query \dio{} over the labels and their associated probabilities. Precisely, 
-the \emph{getFeedback} procedure computes $r'_{\dio{}}$ the expectated value over the possible worlds. 
+the \emph{getFeedback} procedure computes $r'_{\dio{}}$ the expected value over the possible worlds. 
 
 \begin{algorithm}[H]
   \caption{Inference of Judgment $r'_{\dio{}}$}

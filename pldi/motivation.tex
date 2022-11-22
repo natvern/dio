@@ -3,7 +3,9 @@
 %% Before beginning, let's explain what reinforcement learning is
 Reinforcement Learning is a method of learning that maps situations to
 actions in order to maximize its rewards
-\cite{sutton2018reinforcement}. Rewards are numerical values associated to a state and action. Precisely, one defines a reward function 
+\cite{sutton2018reinforcement}. Rewards are numerical values
+associated to a state and action. Precisely, one defines a reward
+function\giselle{Isn't the reward function from state to reward?} 
 $R : (S \times A) \rightarrow \mathbb{R}$ where $S$ defines the state space and $A$ the action space. Note that a state refers to the current configuration
 of the environment and the action refers to the action chosen by the RL agent. By defining this reward function and the scenario of the problem the agent is trying to solve, 
 reinforcement learning has the advantage of not requiring a prior dataset. Indeed, the agent is not told what to do, but rather 
@@ -69,9 +71,10 @@ A sparse reward function defined as a \emph{goal-reward representation} is one w
 for entering a goal state, while a dense reward function is defined as an \emph{action-penalty representation}, precisely, one 
 where the agent is penalized for every action it executes. \cite{Koenig1996} shows that a denser reward structure improves performance. 
 %
-%% That's not all! A good reward function can guide exploration and exploitation as necessary 
+%% That's not all! A good reward function can guide exploration and
+%% exploitation as necessary :) 
 Moreover, an informed reward function is able to sufficiently deter the exploration of 
-undesirable states while encourae the exploitation of desirable ones, continuously adapting to 
+undesirable states while encourage the exploitation of desirable ones, continuously adapting to 
 acquire knowledge and resolving the conflict when necessary. Precisely, an informed reward function 
 can tackle the \emph{exploration vs. exploitation dilemma}, a central challenge in RL~\cite{Kaelbling1996ReinforcementLA}. 
 %
@@ -90,5 +93,5 @@ However, most RL agents can only stay in simulation because the trial-and-error 
 Thus, there exists a need for \textit{shaping rewards} instead.
 %
 %% As a result, people can only use those 'sparse' reward structure
-Unfortunately, due to the lack of systematic method to build a denser reward function, 
+Unfortunately, due to the lack of systematic methods to build a denser reward function, 
 it is common to use a sparse reward function as long as it still guarantees convergence.

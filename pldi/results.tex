@@ -36,11 +36,13 @@ The results will proceed by an analysis of the metrics discussed previously.
   In the intermediate setting, some alphas reach a plateau much earlier than RL by itself. 
   Precisely, in the intermediate case, alpha 1 is the first to reach a plateau, while alpha 3 and alpha 9 fail to ever reach one. 
   Note that the number of episodes are different for each setting because all have been trained over 250k frames, so the less episodes ran, 
-  the quicker the agent learnt to not crash and thus can exhaust its frames 'living' rather than accumulate episodes of failures. 
+  the quicker the agent learnt to not crash and thus can exhaust its
+  frames `living' rather than accumulate episodes of failures. 
   In both the minimal setting, the one that has the least number of episodes is 3.0 while in the intermediate case, that is alpha 1.0.
 
 \subsection{Failures during Training}
-\begin{figure}[H]
+
+  \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{figures/sfe.png}
     \caption{Overall failures during Training}
@@ -52,7 +54,7 @@ The results will proceed by an analysis of the metrics discussed previously.
   %
   During training, some alphas allows us to ensure more safety to the agent, as in minimize its crashes. As the agent fails less, it is able to increase its cumulative rewards earlier. 
   We are left with the question of evaluating performance during deployement to see if this added safety takes away from the learned policy, either in terms of average frames to reach the target, or 
-  more failures during deployement. We also see that different alphas behave very differently with no 'apparent' evidence as to which is optimal. 
+  more failures during deployement. We also see that different alphas behave very differently with no apparent evidence as to which is optimal. 
 
   \subsection{Policy during Deployement}
 
@@ -118,9 +120,10 @@ The results will proceed by an analysis of the metrics discussed previously.
 
 
   \section{Discussion}
-  Our above results show us that there is no apparent difference over alphas during deployement, except that some result in 'worse' safety outcomes, i.e. crashing more than RL by itself.  
+  Our above results show us that there is no apparent difference over
+  alphas during deployement, except that some result in `worse' safety outcomes, i.e. crashing more than RL by itself.  
   However, during training, several alphas, allow us to minimize failures, and thus might allow us to train agents in the real world where safety is important. 
-  For 'good' alphas, there does not seem to a loss in optimality of policy, rather some allow the agent to behave better than RL by itself, especially given the average reward per episode. 
+  For `good' alphas, there does not seem to be a loss in optimality of policy, rather some allow the agent to behave better than RL by itself, especially given the average reward per episode. 
   To confirm those results, it would be interesting to extrapolate the alphas for more obstacles, where learning has to be done faster OR increase the number of frames to train, to allow all alphas 
   to reach a plateau and thus compare optimality in terms of average frames, i.e. how quickly does the agent reach the goal. 
 
